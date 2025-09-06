@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Trung tâm phục vụ Hành chính công Phường Tây Nha Trang</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --red:#c52222;
+  --accent:#0b63d6;
+  --bg:#f4f8fb;
+  --card:#fff;
+  --muted:#6b7280;
+  --maxw:1200px;
+  --shadow: 0 12px 36px rgba(10,30,80,0.06);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Roboto,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:#0b1720}
+a{color:inherit}
+header.app-header{
+  position:sticky;top:0;left:0;right:0;z-index:1200;
+  display:flex;align-items:center;padding:14px 20px;background:var(--red);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.12);
+}
+header .logo-wrap{margin-left:20px;flex:0 0 auto;margin-right:12px}
+.logo{height:56px;width:56px;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.logo img{width:100%;height:100%;object-fit:contain;display:block}
+.header-title{display:flex;flex-direction:column;line-height:1}
+.header-title .line1{font-weight:700;font-size:18px;letter-spacing:0.2px}
+.header-title .line2{font-weight:500;font-size:14px;color:rgba(255,255,255,0.92);margin-top:4px}
+.header-spacer{flex:1}
+.container{max-width:var(--maxw);margin:18px auto;padding:18px}
+.home-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{
+  background:var(--card);border-radius:12px;padding:18px;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(10,30,80,0.09)}
+.card .emoji{font-size:28px}
+.card h3{margin:8px 0 0 0}
+.card p{margin:8px 0 0;color:var(--muted)}
+.section{display:none;opacity:0;transform:translateY(8px);transition:all .36s cubic-bezier(.2,.9,.2,1);min-height:60vh}
+.section.active{display:block;opacity:1;transform:translateY(0)}
+.page-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.back-btn{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:8px;color:var(--accent);cursor:pointer}
+.hotline-card{background:linear-gradient(180deg,#fff,#fbfdff);padding:18px;border-radius:10px;box-shadow:var(--shadow)}
+.hotline-number{font-size:32px;font-weight:800;color:#b91c1c}
+.hotline-meta{color:var(--muted);margin-top:6px}
+.survey-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:760px){ .survey-grid{grid-template-columns:1fr} }
+.criterion{border:1px solid #eef4fb;padding:10px;border-radius:8px;background:#fff}
+.radio-row{display:flex;gap:8px;align-items:center}
+.table-card{background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow)}
+.table-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.table-controls .search{flex:1;min-width:160px;padding:8px;border-radius:8px;border:1px solid #e6eef7}
+.table-controls select{padding:8px;border-radius:8px;border:1px solid #e6eef7}
+.table-responsive{overflow:auto;border-radius:8px;border:1px solid #f0f4fb}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:10px;border-bottom:1px solid #f3f6fb;text-align:left}
+.table th{background:linear-gradient(90deg,var(--accent),#0680e8);color:#fff}
+.pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:10px}
+.pager button{padding:6px 10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);background:#fff;cursor:pointer}
+.chat-toggle{position:fixed;right:18px;bottom:18px;z-index:1600}
+.chat-toggle button{width:64px;height:64px;border-radius:50%;border:none;background:linear-gradient(180deg,var(--accent),#0a4fb0);color:#fff;font-size:26px;box-shadow:0 14px 36px rgba(10,57,130,0.26);cursor:pointer}
+.chat-panel{position:fixed;right:18px;bottom:96px;width:360px;max-height:72vh;background:var(--card);border-radius:12px;box-shadow:0 18px 60px rgba(9,30,66,0.12);overflow:hidden;display:flex;flex-direction:column;z-index:1600;transition:all .28s ease}
+.chat-panel.hidden{opacity:0;visibility:hidden;transform:translateY(8px) scale(.98)}
+.chat-header{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid #eef2f7;background:linear-gradient(90deg,#eef7ff,#fff)}
+.ch-avatar{width:44px;height:44px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center}
+.chat-body{padding:12px;overflow:auto;flex:1;background:linear-gradient(180deg,#fbfdff,#ffffff)}
+.msg{display:flex;gap:10px;margin-bottom:10px;align-items:flex-end}
+.msg.bot{justify-content:flex-start}
+.msg.user{justify-content:flex-end}
+.bubble{max-width:78%;padding:10px 12px;border-radius:12px;background:#eef8ff;color:#07285a}
+.bubble.user{background:#e6eefc;color:#042047}
+.chat-footer{display:flex;gap:8px;padding:10px;border-top:1px solid #eef6ff}
+.chat-footer input{flex:1;padding:10px;border-radius:8px;border:1px solid #e6eef7}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:94%;max-width:720px;background:#fff;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,0.22);padding:12px;z-index:1800;display:none}
+.modal .list{max-height:320px;overflow:auto;margin-top:10px}
+@media(max-width:480px){
+  header .header-title .line1{font-size:16px}
+  .chat-panel{width:92%;right:4%}
+  .table-controls{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+<body>
+
+<header class="app-header" role="banner">
+  <div class="logo-wrap" aria-hidden="false">
+    <div class="logo">
+      <img src="logo-hcc.png" alt="Logo Trung tâm" onerror="this.style.display='none'">
+    </div>
+  </div>
+  <div class="header-title" role="heading" aria-level="1">
+    <div class="line1">TRUNG TÂM PHỤC VỤ HÀNH CHÍNH CÔNG PHƯỜNG TÂY NHA TRANG</div>
+    <div class="line2">Hành chính phục vụ</div>
+  </div>
+  <div class="header-spacer" aria-hidden="true"></div>
+</header>
+
+<main class="container" id="app">
+  <section id="home" class="section active" aria-labelledby="home-title">
+    <h2 id="home-title">Chọn nội dung</h2>
+    <p class="small" style="margin-top:6px;color:var(--muted)">Chọn 1 nội dung để vào trang riêng. Chatbot góc dưới phải để hỏi trợ lý ngay.</p>
+    <div style="margin-top:18px" class="home-cards" role="list">
+      <div class="card" role="listitem" onclick="navigate('hotline')">
+        <div class="emoji">📞</div>
+        <h3>Đường dây nóng</h3>
+        <p>Thông tin liên hệ, hướng dẫn liên hệ khẩn cấp và hỗ trợ thủ tục.</p>
+      </div>
+      <div class="card" role="listitem" onclick="navigate('survey')">
+        <div class="emoji">📝</div>
+        <h3>Phiếu đánh giá</h3>
+        <p>10 Quầy.</p>
+      </div>
+      <div class="card" role="listitem" onclick="navigate('procedures')">
+        <div class="emoji">📁</div>
+        <h3>Hồ sơ mẫu</h3>
+        <p>Tra cứu thủ tục & biểu mẫu — lọc theo lĩnh vực và thủ tục.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hotline" class="section" aria-labelledby="hotline-title">
+    <div class="page-header">
+      <button class="back-btn" onclick="navigate('home')">← Trang chủ</button>
+      <h2 id="hotline-title">THÔNG TIN ĐƯỜNG DÂY NÓNG TIẾP NHẬN, XỬ LÝ PHẢN ÁNH KIẾN NGHỊ CỦA TỔ CHỨC, CÁ NHÂN VỀ QUY ĐỊNH HÀNH CHÍNH</h2>
+    </div>
+    <div class="hotline-card">
+      <div class="hotline-meta">Nếu gặp vướng mắc, khó khăn, đề nghị cá nhân, tổ chức, doanh nghiệp gửi phản ánh, kiến nghị theo đường dây nóng như sau:</div>
+      <div class="hotline-meta"> <strong>1. Trung tâm Phục vụ hành chính công phường Tây Nha Trang</strong></div>
+      <div class="hotline-number"><a href="tel:02583892377" target="_blank">0258.3.892.377</a></div>
+      <div class="hotline-meta">Địa chỉ: 480 Lương Định Của, Phường Tây Nha Trang, TP. Nha Trang, Khánh Hòa</div>
+      <div class="hotline-meta">Giờ làm việc: 7:00–11:30 và 13:30–17:30, Thứ Hai–Thứ Sáu và buổi sáng Thứ Bảy hàng tuần</div>
+      <div class="hotline-meta">• Cán bộ tiếp nhận phản ánh kiến nghị: Thảo</div>
+      <div class="hotline-meta">• Chủ tịch UBND phường: Ông Nguyễn Đình Anh Minh</div>
+      <div class="hotline-meta">• Lãnh đạo Trung tâm Phục vụ hành chính công: Ông Nguyễn Chí Danh, Phó Chủ tịch UBND - Giám đốc Trung tâm</div>
+      <div class="hotline-meta">• Ông Nguyễn Duy Thức, Phó Giám đốc Trung tâm Phục vụ hành chính công</div>
+      <div class="hotline-meta"><strong>2. Phòng Cải cách hành chính sở Nội vụ, tỉnh Khánh Hòa</strong></div>
+      <div class="hotline-meta">• Địa chỉ: 05 Pasreur, phường Nha Trang, tỉnh Khánh Hoà</div>
+      <div class="hotline-meta">• Điện thoại: <a href="tel:02583810440" target="_blank">0258.3810.440</a></div>
+      <div class="hotline-meta">• Email: <a href="mailto:cchc.snv@khanhshoa.gov.vn" target="_blank">cchc.snv@khanhshoa.gov.vn</a> hoặc <a href="mailto:caicachhanhchinhkh@gmail.com" target="_blank">caicachhanhchinhkh@gmail.com</a></div>
+      <div class="hotline-meta"><strong>3. Chuyên mục “Tiếp nhận, trả lời phản ánh kiến nghị”</strong></div>
+      <div class="hotline-meta">• <a href="http://cchc.snv@khanhhoa.gov.vn" target="_blank">Cổng Thông tin điện tử cải cách hành chính tỉnh Khánh Hòa</a></div>
+      <div class="hotline-meta">• Gửi qua Hệ thống tiếp nhận: <a href="https://doanhnghiep.chinhphu.vn" target="_blank">Doanh nghiệp</a> hoặc <a href="https://nguoidan.chinhphu.vn" target="_blank">Người dân</a></div>
+      <div class="hotline-meta">• Gửi đến cơ quan: Văn phòng UBND tỉnh Khánh Hòa, số 46 Trần Phú, phường Nha Trang</div>
+      <div class="hotline-meta">• Số điện thoại chuyên dùng: <a href="tel:02583822465" target="_blank">0258.3822.465</a></div>
+      <div class="hotline-meta">• Email: <a href="mailto:pkstthc.vpub@khanhhoa.gov.vn" target="_blank">pkstthc.vpub@khanhhoa.gov.vn</a></div>
+    </div>
+    <div style="margin-top:12px" class="card table-card">
+      <div class="small">Tìm nhanh</div>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <input id="hotline-q" class="search" placeholder="Ví dụ: Số điện thoại UBND tỉnh Khánh Hòa">
+        <button class="back-btn" onclick="hotlineSearch()">Tìm</button>
+        <button class="back-btn" onclick="document.getElementById('hotline-result').innerText=''">Xóa</button>
+      </div>
+      <div id="hotline-result" style="margin-top:10px;padding:10px;border-radius:8px;background:#fbfdff;border:1px solid #eef6ff;min-height:50px;color:#08306b">Kết quả hiển thị tại đây...</div>
+    </div>
+  </section>
+
+  <section id="survey" class="section" aria-labelledby="survey-title">
+    <div class="page-header">
+      <button class="back-btn" onclick="navigate('home')">← Trang chủ</button>
+      <h2 id="survey-title">Phiếu đánh giá - 10 Quầy</h2>
+    </div>
+    <div class="card">
+      <p class="small">Chọn điểm cho từng Mức độ (1 = Không hài lòng, 2 = Hài lòng, 3 = Rất hài lòng). Dữ liệu lưu local trên trình duyệt.</p>
+      <div id="survey-form" style="margin-top:10px"></div>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <input id="sv-name" class="search" placeholder="Họ tên (bắt buộc)">
+        <input id="sv-phone" class="search" placeholder="SĐT (bắt buộc)">
+        <input id="sv-date" class="search" type="date" title="Ngày đánh giá">
+        <button class="back-btn" id="save-survey">Lưu & Gửi</button>
+        <button class="back-btn" id="view-surveys">Xem danh sách</button>
+      </div>
+      <div id="surveys-list" style="margin-top:12px;display:none"></div>
+    </div>
+  </section>
+
+  <section id="procedures" class="section" aria-labelledby="procedures-title">
+    <div class="page-header">
+      <button class="back-btn" onclick="navigate('home')">← Trang chủ</button>
+      <h2 id="procedures-title">Hồ sơ mẫu - Tra cứu</h2>
+    </div>
+    <div class="table-card">
+      <div class="table-controls">
+        <input id="filter-field" class="search" placeholder="Tìm lĩnh vực (gõ sẽ lọc)" title="Lĩnh vực">
+        <input id="filter-key" class="search" placeholder="Tìm thủ tục (gõ sẽ lọc)" title="Tên thủ tục">
+        <label style="white-space:nowrap">Hiển thị:
+          <select id="rowsPerPage">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+          </select> / trang
+        </label>
+      </div>
+      <div class="table-responsive">
+        <table class="table" id="procedures-table" aria-describedby="procedures-title">
+          <thead>
+            <tr><th>STT</th><th>Tên thủ tục</th><th>Lĩnh vực</th><th>Nộp hồ sơ Trực tuyến</th><th>Hồ sơ mẫu</th></tr>
+          </thead>
+          <tbody id="procedures-tbody"></tbody>
+        </table>
+      </div>
+      <div class="pager" style="margin-top:10px">
+        <div class="small" id="pager-info"></div>
+        <div style="flex:1"></div>
+        <button class="pager-prev" onclick="prevPage()">⟨</button>
+        <div id="pager-pages" style="display:flex;gap:6px;align-items:center"></div>
+        <button class="pager-next" onclick="nextPage()">⟩</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="chat-toggle" aria-hidden="false">
+  <button id="chatToggle" title="Mở trợ lý ảo">💬</button>
+</div>
+
+<div id="chatPanel" class="chat-panel hidden" aria-hidden="true" role="dialog" aria-label="Trợ lý ảo">
+  <div class="chat-header">
+    <div id="chatRobot" style="cursor:pointer">🤖</div>
+    <div style="flex:1">
+      <div style="font-weight:700;color:var(--accent)">Trợ lý ảo Trung tâm PVHCC phường</div>
+      <div class="small">Hỏi về thủ tục, biểu mẫu, giờ làm việc</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="back-btn" id="clearChat">Xóa lịch sử</button>
+      <button class="back-btn" id="closeChat">Đóng</button>
+    </div>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-footer">
+    <input id="chatInput" placeholder='Ví dụ: "Làm căn cước công dân ở đâu?"'>
+    <button id="chatSend" class="back-btn">Gửi</button>
+  </div>
+</div>
+
+<div id="qaModal" class="modal" role="dialog" aria-label="Quản lý Q&A">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <strong>Thêm/Quản lý Q&A (lưu cục bộ)</strong>
+    <button class="back-btn" id="closeQa">Đóng</button>
+  </div>
+  <div style="margin-top:10px;display:flex;gap:8px">
+    <input id="qaQ" class="search" placeholder="Câu hỏi (từ khóa)">
+    <input id="qaA" class="search" placeholder="Trả lời (tiếng Việt)">
+    <button class="back-btn" id="addQaBtn">Thêm</button>
+  </div>
+  <div class="list" id="qaList"></div>
+  <div style="margin-top:12px;padding:8px;border:1px solid #eef4fb;border-radius:8px;background:#fbfdff">
+    <strong>Cấu hình GPT API (tùy chọn)</strong>
+    <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <input id="gptApiKey" class="search" placeholder="API Key" style="flex:1">
+      <select id="gptModel" class="search">
+        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+        <option value="gpt-4">gpt-4</option>
+        <option value="gpt-4o">gpt-4o</option>
+      </select>
+      <button class="back-btn" id="saveGptConfig">Lưu</button>
+    </div>
+  </div>
+  <div style="margin-top:10px;padding:8px;border:1px solid #eef4fb;border-radius:8px;background:#fbfdff">
+    <strong>Kết nối Google Sheets</strong>
+    <div class="small" style="margin-top:6px">Dán URL Web App của Google Apps Script để ghi phiếu khảo sát trực tiếp vào Google Sheets.</div>
+    <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <input id="appsScriptUrlInput" class="search" placeholder="https://script.google.com/macros/s/XXXXX/exec" style="flex:1">
+      <button class="back-btn" id="saveAppsScriptUrl">Lưu</button>
+    </div>
+    <div class="small" style="margin-top:6px;color:#6b7280">Gợi ý triển khai: Apps Script nhận POST (no-cors) với JSON và lưu vào Sheet. Không cần bật xác thực.</div>
+  </div>
+
+  <div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end"><button class="back-btn" id="exportQa">Xuất Q&A</button></div>
+</div>
+
+<script>
+/* Procedures data and pagination */
+const procedures = [
+  { id: 1, name: "Thủ tục xác nhận thông tin hộ tịch", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002516&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 2, name: "Liên thông thủ tục hành chính về đăng ký khai sinh, đăng ký thường trú, cấp thẻ bảo hiểm y tế cho trẻ em dưới 6 tuổi", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://lienthong.dichvucong.gov.vn/#/ke-khai/2.000986", sampleLink: "" },
+  { id: 3, name: "Liên thông các thủ tục hành chính về đăng ký khai sinh, cấp Thẻ bảo hiểm y tế cho trẻ em dưới 6 tuổi", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001023&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 4, name: "Thủ tục đăng ký khai sinh", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001193&id_tinh_thanh=13456", sampleLink: "https://drive.google.com/file/d/1Ay7SgKk3gH5pdtqoaX59lW08_G4MPGLR/view?usp=drive_link" },
+  { id: 5, name: "Thủ tục đăng ký kết hôn", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000894&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 6, name: "Thủ tục đăng ký nhận cha, mẹ, con", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001022&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 7, name: "Thủ tục đăng ký khai sinh kết hợp đăng ký nhận cha, mẹ, con", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000689&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 8, name: "Thủ tục đăng ký khai tử", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000656&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 9, name: "Thủ tục đăng ký khai sinh lưu động", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003583&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 10, name: "Thủ tục đăng ký kết hôn lưu động", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000593&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 11, name: "Thủ tục đăng ký khai tử lưu động", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000419&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 12, name: "Thủ tục đăng ký giám hộ", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004837&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 13, name: "Thủ tục đăng ký chấm dứt giám hộ", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004845&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 14, name: "Thủ tục thay đổi, cải chính, bổ sung thông tin hộ tịch, xác định lại dân tộc", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004873&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 15, name: "Thủ tục cấp Giấy xác nhận tình trạng hôn nhân", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004884&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 16, name: "Thủ tục đăng ký lại khai sinh", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004772&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 17, name: "Thủ tục đăng ký khai sinh cho người đã có hồ sơ, giấy tờ cá nhân", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004746&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 18, name: "Thủ tục đăng ký lại kết hôn", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005461&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 19, name: "Đăng ký lại khai tử", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000635&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 20, name: "Cấp bản sao Trích lục hộ tịch, bản sao Giấy khai sinh", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000528&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 21, name: "Thủ tục đăng ký khai sinh có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000806&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 22, name: "Thủ tục đăng ký kết hôn có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000779&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 23, name: "Thủ tục đăng ký nhận cha, mẹ, con có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001766&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 24, name: "Thủ tục đăng ký khai tử có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001695&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 25, name: "Thủ tục đăng ký khai sinh kết hợp đăng ký nhận cha, mẹ, con có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001669&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 26, name: "Thủ tục đăng ký giám hộ có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000756&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 27, name: "Thủ tục đăng ký chấm dứt giám hộ có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002189&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 28, name: "Thủ tục thay đổi, cải chính, bổ sung thông tin hộ tịch, xác định lại dân tộc có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000554&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 29, name: "Thủ tục ghi vào Sổ hộ tịch việc kết hôn của công dân Việt Nam đã được giải quyết tại cơ quan có thẩm quyền của nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000547&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 30, name: "Thủ tục ghi vào Sổ hộ tịch việc ly hôn, hủy việc kết hôn của công dân Việt Nam đã được giải quyết tại cơ quan có thẩm quyền của nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000522&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 31, name: "Thủ tục ghi vào Sổ hộ tịch việc hộ tịch khác của công dân Việt Nam đã được giải quyết tại cơ quan có thẩm quyền của nước ngoài (khai sinh; giám hộ; nhận cha, mẹ, con; xác định cha, mẹ, con; nuôi con nuôi; khai tử; thay đổi hộ tịch)", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000893&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 32, name: "Thủ tục đăng ký lại khai sinh có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000513&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 33, name: "Thủ tục đăng ký khai sinh có yếu tố nước ngoài cho người đã có hồ sơ, giấy tờ cá nhân", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000497&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 34, name: "Thủ tục đăng ký lại kết hôn có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000322&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 35, name: "Thủ tục đăng ký lại khai tử có yếu tố nước ngoài", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000323&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 36, name: "Đăng ký chấm dứt giám sát việc giám hộ", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012753&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 37, name: "Đăng ký giám sát việc giám hộ", field: "Hộ tịch (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012796&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 38, name: "Cung cấp thông tin, dữ liệu đất đai.", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012812&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 39, name: "Đăng ký đất đai, tài sản gắn liền với đất, cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất lần đầu đối với tổ chức đang sử dụng đất", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012818&id_tinh_thanh=13456", sampleLink: "https://drive.google.com/file/d/16sf2OJz4HE5glQiHL07N2xD0Wr-LCE7i/view?usp=drive_link" },
+  { id: 40, name: "Đính chính Giấy chứng nhận đã cấp lần đầu có sai sót", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013962&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 41, name: "Hòa giải tranh chấp đất đai", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013967&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 42, name: "Thu hồi Giấy chứng nhận đã cấp lần đầu không đúng quy định của pháp luật đất đai do người sử dụng đất, chủ sở hữu tài sản gắn liền với đất phát hiện và cấp lại Giấy chứng nhận sau khi thu hồi", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013950&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 43, name: "Xác định lại diện tích đất ở của hộ gia đình, cá nhân đã được cấp Giấy chứng nhận trước ngày 01 tháng 7 năm 2004", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013952&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 44, name: "Ghi nợ tiền sử dụng đất của hộ gia đình, cá nhân trong trường hợp được bố trí tái định cư", field: "Tài chính đất đai (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013978&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 45, name: "Khấu trừ kinh phí bồi thường, hỗ trợ, tái định cư", field: "Tài chính đất đai (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013979&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 46, name: "Thanh toán, xóa nợ tiền sử dụng đất đối với hộ gia đình, cá nhân được ghi nợ", field: "Tài chính đất đai (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013965&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 47, name: "Giao đất, cho thuê đất, chuyển mục đích sử dụng đất đối với trường hợp giao đất, cho thuê đất không đấu giá quyền sử dụng đất, không đấu thầu lựa chọn nhà đầu tư thực hiện dự án có sử dụng đất; trường hợp giao đất, cho thuê đất thông qua đấu thầu lựa chọn nhà đầu tư thực hiện dự án có sử dụng đất; giao đất và giao rừng; cho thuê đất và cho thuê rừng, gia hạn sử dụng đất khi hết thời hạn sử dụng đất", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013953&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 48, name: "Giao đất ở có thu tiền sử dụng đất không thông qua đấu giá, không đấu thầu lựa chọn nhà đầu tư thực hiện dự án có sử dụng đất đối với cá nhân là cán bộ, công chức, viên chức, sĩ quan tại ngũ, quân nhân chuyên nghiệp, công chức quốc phòng, công nhân và viên chức quốc phòng, sĩ quan, hạ sĩ quan, công nhân công an, người làm công tác cơ yếu và người làm công tác khác trong tổ chức cơ yếu hưởng lương từ ngân sách nhà nước mà chưa được giao đất ở, nhà ở; giáo viên, nhân viên y tế đang công tác tại các xã biên giới, hải đảo thuộc vùng có điều kiện kinh tế - xã hội khó khăn, vùng có điều kiện kinh tế - xã hội đặc biệt khó khăn nhưng chưa có đất ở, nhà ở tại nơi công tác hoặc chưa được hưởng chính sách hỗ trợ về nhà ở theo quy định của pháp luật về nhà ở; cá nhân thường trú tại xã mà không có đất ở và chưa được Nhà nước giao đất ở hoặc chưa được hưởng chính sách hỗ trợ về nhà ở theo quy định của pháp luật về nhà ở", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000286&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 49, name: "Giải quyết tranh chấp đất đai thuộc thẩm quyền của Chủ tịch Ủy ban nhân dân cấp xã", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000282&id_tinh_thanh=13456", sampleLink: "https://drive.google.com/file/d/16sf2OJz4HE5glQiHL07N2xD0Wr-LCE7i/view?usp=drive_link" },
+  { id: 50, name: "Chuyển hình thức giao đất, cho thuê đất.", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000477&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 51, name: "Điều chỉnh quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất do thay đổi căn cứ quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất; điều chỉnh thời hạn sử dụng đất của dự án đầu tư.", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001731&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 52, name: "Đăng ký đất đai, tài sản gắn liền với đất, cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất lần đầu đối với hộ gia đình, cá nhân, cộng đồng dân cư, người gốc Việt Nam định cư ở nước ngoài", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001776&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 53, name: "Tặng cho quyền sử dụng đất cho Nhà nước hoặc cộng đồng dân cư hoặc mở rộng đường giao thông đối với trường hợp thửa đất chưa được cấp Giấy chứng nhận", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001699&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 54, name: "Sử dụng đất kết hợp đa mục đích, gia hạn phương án sử dụng đất kết hợp đa mục đích.", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001653&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 55, name: "Điều chỉnh quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất do sai sót về ranh giới, vị trí, diện tích, mục đích sử dụng giữa bản đồ quy hoạch, bản đồ địa chính, quyết định giao đất, cho thuê đất, cho phép chuyển mục đích sử dụng đất và số liệu bàn giao đất trên thực địa", field: "Đất đai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014027&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 56, name: "Tiếp nhận đối tượng bảo trợ xã hội có hoàn cảnh đặc biệt khó khăn vào cơ sở trợ giúp xã hội", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.014028&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 57, name: "Tiếp nhận đối tượng cần bảo vệ khẩn cấp vào cơ sở trợ giúp xã hội", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001639&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 58, name: "Dừng trợ giúp xã hội tại cơ sở trợ giúp xã hội", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001035&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 59, name: "Hỗ trợ chi phí mai táng cho đối tượng bảo trợ xã hội", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001283&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 60, name: "Thực hiện, điều chỉnh, thôi hưởng trợ cấp xã hội hàng tháng, hỗ trợ kinh phí chăm sóc, nuôi dưỡng hàng tháng", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001270&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 61, name: "Đăng ký hoạt động đối với cơ sở trợ giúp xã hội dưới 10 đối tượng có hoàn cảnh khó khăn", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001261&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 62, name: "Xác định, xác định lại mức độ khuyết tật và cấp Giấy xác nhận khuyết tật", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000620&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 63, name: "Đổi, cấp lại Giấy xác nhận khuyết tật", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000615&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 64, name: "Thực hiện, điều chỉnh, thôi hưởng trợ cấp hưu trí xã hội", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001240&id_tinh_thanh=13456", sampleLink: "https://drive.google.com/file/d/10P0U_csNbctsOrEBrLpNprI-kGWqGW8c/view?usp=drive_link" },
+  { id: 65, name: "Hỗ trợ chi phí mai táng đối với đối tượng hưởng trợ cấp hưu trí xã hội", field: "Bảo trợ xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000633&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 66, name: "Đăng ký lại phương tiện trong trường hợp chuyển quyền sở hữu phương tiện nhưng không thay đổi cơ quan đăng ký phương tiện", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000629&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 67, name: "Giải thể trường tiểu học (theo đề nghị của tổ chức, cá nhân đề nghị thành lập trường tiểu học)", field: "Giáo dục tiểu học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001279&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 68, name: "Thủ tục chứng thực hợp đồng, giao dịch liên quan đến tài sản là động sản, quyền sử dụng đất, nhà ở", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000181&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 69, name: "Phê duyệt đối tượng được hỗ trợ phí bảo hiểm nông nghiệp", field: "Bảo hiểm (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000162&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 70, name: "Cấp Giấy chứng nhận đủ điều kiện cửa hàng bán lẻ LPG chai", field: "Kinh doanh khí (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000150&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 71, name: "Cấp lại Giấy chứng nhận đủ điều kiện cửa hàng bán lẻ LPG chai", field: "Kinh doanh khí (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003658&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 72, name: "Cấp điều chỉnh Giấy chứng nhận đủ điều kiện cửa hàng bán lẻ LPG chai", field: "Kinh doanh khí (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001711&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 73, name: "Cấp Giấy phép bán lẻ rượu", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003930&id_tinh_thanh=13456", sampleLink: "https://drive.google.com/file/d/12HQul7qTw6LylxBMBdd7MKQ_EGIc29ua/view?usp=sharing" },
+  { id: 74, name: "Cấp sửa đổi, bổ sung Giấy phép bán lẻ rượu", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001659&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 75, name: "Cấp lại Cấp Giấy phép bán lẻ rượu", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004088&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 76, name: "Cấp Giấy phép sản xuất rượu thủ công nhằm mục đích kinh doanh", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004047&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 77, name: "Cấp sửa đổi, bổ sung Giấy phép sản xuất rượu thủ công nhằm mục đích kinh doanh", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004036&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 78, name: "Cấp lại Giấy phép sản xuất rượu thủ công nhằm mục đích kinh doanh", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003970&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 79, name: "Cấp Giấy phép bán lẻ sản phẩm thuốc lá", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.001921", sampleLink: "https://drive.google.com/file/d/13oDXfsGU0iWhw6oNNnxq13V7g2jFrhmX/view?usp=drive_link" },
+  { id: 80, name: "Cấp sửa đổi, bổ sung Giấy phép bán lẻ sản phẩm thuốc lá", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.005280", sampleLink: "" },
+  { id: 81, name: "Cấp lại Giấy phép bán lẻ sản phẩm thuốc lá", field: "Lưu thông hàng hóa trong nước (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002123&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 82, name: "Công bố lại hoạt động bến thủy nội địa", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005277&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 83, name: "Đăng ký lại phương tiện trong trường hợp phương tiện thay đổi tên, tính năng kỹ thuật", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005378&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 84, name: "Cấp lại Giấy chứng nhận đăng ký phương tiện", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005010&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 85, name: "Xóa đăng ký phương tiện", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004901&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 86, name: "Đăng ký phương tiện lần đầu đối với phương tiện chưa khai thác trên đường thủy nội địa", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001973&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 87, name: "Đăng ký phương tiện lần đầu đối với phương tiện đang khai thác trên đường thủy nội địa", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004982&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 88, name: "Đăng ký lại phương tiện trong trường hợp chuyển từ cơ quan đăng ký khác sang cơ quan đăng ký phương tiện thủy nội địa", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004979&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 89, name: "Đăng ký lại phương tiện trong trường hợp chuyển quyền sở hữu phương tiện đồng thời thay đổi cơ quan đăng ký phương tiện", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001958&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 90, name: "Chấp thuận vị trí, quy mô, kích thước, phương án tổ chức thi công biển quảng cáo, biển thông tin cổ động, tuyên truyền chính trị; chấp thuận xây dựng, lắp đặt công trình hạ tầng, công trình hạ tầng kỹ thuật sử dụng chung trong phạm vi bảo vệ kết cấu hạ tầng đường bộ; chấp thuận gia cường công trình đường bộ khi cần thiết để cho phép xe quá khổ giới hạn, xe quá tải trọng, xe bánh xích lưu hành trên đường bộ", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.001612", sampleLink: "" },
+  { id: 91, name: "Đăng ký thành lập hợp tác xã, liên hiệp hợp tác xã; đăng ký chuyển đổi tổ hợp tác thành hợp tác xã; đăng ký khi hợp tác xã, liên hiệp hợp tác xã chia, tách, hợp nhất", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.000720", sampleLink: "" },
+  { id: 92, name: "Đăng ký hoạt động chi nhánh, văn phòng đại diện, thông báo địa điểm kinh doanh", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.001570", sampleLink: "" },
+  { id: 93, name: "Đăng ký thay đổi nội dung đăng ký hợp tác xã, liên hiệp hợp tác xã; Đăng ký thay đổi nội dung đối với trường hợp hợp tác xã, liên hiệp hợp tác xã bị tách, nhận sáp nhập", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.001266", sampleLink: "" },
+  { id: 94, name: "Đăng ký thay đổi nội dung đăng ký hoạt động của chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.000575", sampleLink: "" },
+  { id: 95, name: "Chấm dứt hoạt động chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001622&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 96, name: "Cấp đổi Giấy chứng nhận đăng ký hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003702&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 97, name: "Cấp lại Giấy chứng nhận đăng ký hợp tác xã, Giấy chứng nhận đăng ký hoạt động chi nhánh, văn phòng đại diện, Giấy chứng nhận đăng ký địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001842&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 98, name: "Đăng ký giải thể hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004552&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 99, name: "Thông báo thay đổi nội dung đăng ký hợp tác xã, liên hiệp hợp tác xã; Thông báo thay đổi nội dung đăng ký đối với hợp tác xã, liên hiệp hợp tác xã bị tách, nhận sáp nhập", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004563&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 100, name: "Thông báo về việc thành lập doanh nghiệp của hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001157&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 101, name: "Đăng ký thành lập hộ kinh doanh", field: "Thành lập và hoạt động doanh nghiệp (hộ kinh doanh) (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001396&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 102, name: "Đăng ký thay đổi nội dung đăng ký hộ kinh doanh", field: "Thành lập và hoạt động doanh nghiệp (hộ kinh doanh) (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001257&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 103, name: "Tạm ngừng kinh doanh, tiếp tục kinh doanh trước thời hạn đã thông báo của hộ kinh doanh", field: "Thành lập và hoạt động doanh nghiệp (hộ kinh doanh) (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005377&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 104, name: "Chấm dứt hoạt động hộ kinh doanh", field: "Thành lập và hoạt động doanh nghiệp (hộ kinh doanh) (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001662&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 105, name: "Cấp lại Giấy chứng nhận đăng ký hộ kinh doanh, Cấp đổi sang Giấy chứng nhận đăng ký hộ kinh doanh", field: "Thành lập và hoạt động doanh nghiệp (hộ kinh doanh) (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002165&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 106, name: "Hỗ trợ ăn trưa đối với trẻ em mẫu giáo", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001263&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 107, name: "Thuyên chuyển đối tượng học bổ túc trung học cơ sở", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001255&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 108, name: "Chuyển trường đối với học sinh tiểu học", field: "Giáo dục tiểu học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000908&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 109, name: "Hỗ trợ học tập đối với trẻ mẫu giáo, học sinh tiểu học, học sinh trung học cơ sở, sinh viên các dân tộc thiểu số rất ít người", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000913&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 110, name: "Cho phép trường tiểu học hoạt động giáo dục", field: "Giáo dục tiểu học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000927&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 111, name: "Cho phép trường tiểu học hoạt động giáo dục trở lại", field: "Giáo dục tiểu học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000942&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 112, name: "Sáp nhập, chia, tách trường tiểu học", field: "Giáo dục tiểu học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001019&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 113, name: "Cấp Chứng nhận trường mầm non đạt kiểm định chất lượng giáo dục", field: "Kiểm định chất lượng giáo dục (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001016&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 114, name: "Trợ cấp một lần đối với thanh niên xung phong đã hoàn thành nhiệm vụ trong kháng chiến", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001406&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 115, name: "Trợ cấp hàng tháng đối với thanh niên xung phong đã hoàn thành nhiệm vụ trong kháng chiến", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001009&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 116, name: "Giải quyết trợ cấp một lần đối với người có thành tích tham gia kháng chiến đã được tặng Bằng khen của Thủ tướng Chính phủ, Bằng khen của Chủ tịch Hội đồng Bộ trưởng hoặc Bằng khen của Bộ trưởng, Thủ trưởng cơ quan ngang bộ, Thủ trưởng cơ quan thuộc Chính phủ, Bằng khen của Chủ tịch Ủy ban nhân dân tỉnh, thành phố trực thuộc Trung ương", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000992&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 117, name: "Chấm dứt việc chăm sóc thay thế cho trẻ em", field: "Trẻ em (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001008&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 118, name: "Áp dụng các biện pháp can thiệp khẩn cấp hoặc tạm thời cách ly trẻ em khỏi môi trường hoặc người gây tổn hại cho trẻ em", field: "Trẻ em (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.001714&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 119, name: "Công nhận trường mầm non đạt chuẩn Quốc gia", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.005090&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 120, name: "Công nhận trường trung học đạt chuẩn Quốc gia", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003622&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 121, name: "Công nhận trường tiểu học đạt chuẩn quốc gia", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006390&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 122, name: "Cấp Chứng nhận trường trung học đạt kiểm định chất lượng giáo dục", field: "Kiểm định chất lượng giáo dục (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003596&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 123, name: "Cấp Chứng nhận trường tiểu học đạt kiểm định chất lượng giáo dục", field: "Kiểm định chất lượng giáo dục (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003956&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 124, name: "Hỗ trợ học văn hóa, học nghề, trợ cấp khó khăn ban đầu cho nạn nhân", field: "Phòng, chống tệ nạn xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004498&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 125, name: "Thông báo tạm ngừng kinh doanh/ tiếp tục kinh doanh trở lại đối với hợp tác xã, liên hiệp hợp tác xã, chi nhánh, văn phòng đại diện, địa điểm kinh doanh", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004478&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 126, name: "Xác nhận Hợp đồng tiếp cận nguồn gen và chia sẻ lợi ích (Cấp Xã)", field: "Bảo tồn thiên nhiên và Đa dạng sinh học (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001627&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 127, name: "Đăng ký khai thác, sử dụng nước dưới đất", field: "Tài nguyên nước (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001947&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 128, name: "Giải quyết yêu cầu bồi thường tại cơ quan trực tiếp quản lý người thi hành công vụ gây thiệt hại (cấp xã)", field: "Bồi thường nhà nước (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001944&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 129, name: "Đăng ký việc nuôi con nuôi trong nước", field: "Nuôi con nuôi (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004941&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 130, name: "Đăng ký lại việc nuôi con nuôi trong nước", field: "Nuôi con nuôi (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.004964&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 131, name: "Thủ tục cấp bản sao từ sổ gốc", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003471&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 132, name: "Chứng thực bản sao từ bản chính giấy tờ, văn bản do cơ quan, tổ chức có thẩm quyền của Việt Nam; cơ quan, tổ chức có thẩm quyền của nước ngoài; cơ quan, tổ chức có thẩm quyền của Việt Nam liên kết với cơ quan, tổ chức có thẩm quyền của nước ngoài cấp hoặc chứng nhận", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003347&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 133, name: "Thủ tục chứng thực chữ ký trong các giấy tờ, văn bản (áp dụng cho cả trường hợp chứng thực điểm chỉ và trường hợp người yêu cầu chứng thực không thể ký, không thể điểm chỉ được)", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.003434&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 134, name: "Chứng thực việc sửa đổi, bổ sung, hủy bỏ hợp đồng, giao dịch", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001942&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 135, name: "Thủ tục sửa lỗi sai sót trong hợp đồng, giao dịch", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001960&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 136, name: "Thủ tục cấp bản sao có chứng thực từ bản chính hợp đồng, giao dịch đã được chứng thực", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002228&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 137, name: "Thủ tục chứng thực di chúc", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "", sampleLink: "" },
+  { id: 138, name: "Thủ tục chứng thực văn bản từ chối nhận di sản", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008004&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 139, name: "Thủ tục chứng thực văn bản thỏa thuận phân chia di sản mà di sản là động sản, quyền sử dụng đất, nhà ở", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.007919&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 140, name: "Thủ tục chứng thực văn bản khai nhận di sản mà di sản là động sản, quyền sửa dụng đất, nhà ở", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002284&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 141, name: "Chứng thực chữ ký người dịch mà người dịch là cộng tác viên dịch thuật của Ủy ban nhân dân cấp xã", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.001218", sampleLink: "" },
+  { id: 142, name: "Thủ tục chứng thực chữ ký người dịch mà người dịch không phải là cộng tác viên dịch thuật", field: "Chứng thực (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.001217", sampleLink: "" },
+  { id: 143, name: "Cấp học bổng và hỗ trợ kinh phí mua phương tiện, đồ dùng học tập dùng riêng cho người khuyết tật học tại các cơ sở giáo dục", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001215&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 144, name: "Xét tuyển sinh vào trường phổ thông dân tộc nội trú", field: "Thi, tuyển sinh (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001214&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 145, name: "Thủ tục thông báo tổ chức lễ hội cấp xã", field: "Văn hóa (Bộ Văn hóa, Thể thao và Du lịch)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001212&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 146, name: "Thủ tục công nhận câu lạc bộ thể thao cơ sở", field: "Thể dục thể thao (Bộ Văn hóa, Thể thao và Du lịch)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006391&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 147, name: "Cho phép trường mẫu giáo, trường mầm non, nhà trẻ hoạt động giáo dục", field: "Giáo dục mầm non (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000206&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 148, name: "Phê duyệt kế hoạch khuyến nông địa phương (cấp xã)", field: "Nông nghiệp (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008710&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 149, name: "Hỗ trợ đầu tư xây dựng phát triển thủy lợi nhỏ, thuỷ lợi nội đồng và tưới tiên tiến, tiết kiệm nước (Đối với nguồn vốn hỗ trợ trực tiếp, ngân sách địa phương và nguồn vốn hợp pháp khác của địa phương phân bổ dự toán cho UBND cấp xã thực hiện)", field: "Thủy lợi (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008711&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 150, name: "Công nhận và giao quyền quản lý cho tổ chức cộng đồng (thuộc địa bàn quản lý)", field: "Thủy sản (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008712&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 151, name: "Sửa đổi, bổ sung nội dung quyết định công nhận và giao quyền quản lý cho tổ chức cộng đồng (thuộc địa bàn quản lý)", field: "Thủy sản (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008724&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 152, name: "Công bố mở cảng cá loại III", field: "Thủy sản (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006444&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 153, name: "Phê duyệt, công bố công khai quy trình vận hành đối với công trình thủy lợi lớn và công trình thủy lợi vừa do UBND cấp tỉnh phân cấp.", field: "Thủy lợi (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008725&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 154, name: "Thẩm định, phê duyệt phương án ứng phó với tình huống khẩn cấp thuộc thẩm quyền của UBND cấp xã", field: "Thủy lợi (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.006445&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 155, name: "Thẩm định, phê duyệt phương án ứng phó thiên tai cho công trình, vùng hạ du đập trong quá trình thi công thuộc thẩm quyền của UBND cấp xã", field: "Thủy lợi (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009049&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 156, name: "Phê duyệt kế hoạch hỗ trợ, can thiệp đối với trẻ em bị xâm hại hoặc có nguy cơ bị bạo lực, bóc lột, bỏ rơi và trẻ em có hoàn cảnh đặc biệt", field: "Trẻ em (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009050&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 157, name: "Thông báo nhận chăm sóc thay thế cho trẻ em đối với cá nhân, người đại diện gia đình nhận chăm sóc thay thế là người thân thích của trẻ em", field: "Trẻ em (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009052&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 158, name: "Đăng ký nhận chăm sóc thay thế cho trẻ em đối với cá nhân, người đại diện gia đình nhận chăm sóc thay thế không phải là người thân thích của trẻ em", field: "Trẻ em (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009048&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 159, name: "Giải quyết chế độ trợ cấp một lần đối với người được cử làm chuyên gia sang giúp Lào, Căm-pu-chi-a", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009051&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 160, name: "Phê duyệt đề cương, kết  quả kiểm định an toàn  đập, hồ chứa thủy lợi thuộc thẩm quyền của Chủ tịch UBND cấp xã", field: "Thủy lợi (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009053&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 161, name: "Phê duyệt, công bố công khai quy trình vận hành hồ chứa thủy lợi thuộc thẩm quyền của Chủ tịch UBND cấp xã.", field: "Thủy lợi (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009054&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 162, name: "Hỗ trợ dự án liên kết (cấp xã)", field: "Kinh tế hợp tác và Phát triển nông thôn (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008951&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 163, name: "Chuyển trẻ em đang được chăm sóc thay thế tại cơ sở trợ giúp xã hội đến cá nhân, gia đình nhận chăm sóc thay thế", field: "Trẻ em (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.008950&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 164, name: "Cấp chính sách nội trú cho học sinh, sinh viên tham gia chương trình đào tạo trình độ cao đẳng, trung cấp tại các cơ sở giáo dục nghề nghiệp tư thục hoặc cơ sở giáo dục có vốn đầu tư nước ngoài", field: "Giáo dục nghề nghiệp (G07-LĐ06) (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002363&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 165, name: "Thủ tục thôi làm hòa giải viên (cấp xã)", field: "Phổ biến giáo dục pháp luật (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009447&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 166, name: "Thủ tục thanh toán thù lao cho hòa giải viên", field: "Phổ biến giáo dục pháp luật (Bộ Tư pháp)", onlineLink: "", sampleLink: "" },
+  { id: 167, name: "Thông báo chấm dứt hoạt động của tổ hợp tác", field: "Thành lập và hoạt động của tổ hợp tác (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009444&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 168, name: "Thông báo thành lập/thay đổi tổ hợp tác", field: "Thành lập và hoạt động của tổ hợp tác (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.009452", sampleLink: "" },
+  { id: 169, name: "Chuyển đổi cơ cấu cây trồng, vật nuôi trên đất trồng lúa", field: "Trồng trọt (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.009453", sampleLink: "" },
+  { id: 170, name: "Thẩm định thiết kế, dự toán công trình lâm sinh hoặc thẩm định điều chỉnh thiết kế, dự toán công trình lâm sinh sử dụng vốn đầu tư công", field: "Lâm nghiệp (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.009455", sampleLink: "" },
+  { id: 171, name: "Cấp chính sách nội trú cho học sinh, sinh viên tham gia chương trình đào tạo trình độ cao đẳng, trung cấp tại các cơ sở giáo dục nghề nghiệp công lập trực thuộc xã", field: "Giáo dục nghề nghiệp (G07-LĐ06) (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.009465&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 172, name: "Giải quyết chế độ mai táng phí đối với cựu chiến binh", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000182&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 173, name: "Giải quyết chế độ mai táng phí đối với thanh niên xung phong thời kỳ chống Pháp", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010092&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 174, name: "Công bố mở, cho phép hoạt động tại vùng nước khác không thuộc vùng nước trên tuyến đường thủy nội địa, vùng nước cảng biển hoặc khu vực hàng hải, được đánh dấu, xác định vị trí bằng phao hoặc cờ hiệu có màu sắc dễ quan sát", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010091&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 175, name: "Đóng, không cho phép hoạt động tại vùng nước khác không thuộc vùng nước trên tuyến đường thủy nội địa, vùng nước cảng biển hoặc khu vực hàng hải, được đánh dấu, xác định vị trí bằng phao hoặc cờ hiệu có màu sắc dễ quan sát", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010803&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 176, name: "Đăng ký phương tiện hoạt động vui chơi, giải trí dưới nước lần đầu", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010804&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 177, name: "Đăng ký lại phương tiện hoạt động vui chơi, giải trí dưới nước", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010805&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 178, name: "Cấp lại Giấy chứng nhận đăng ký phương tiện hoạt động vui chơi, giải trí dưới nước", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010810&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 179, name: "Xóa đăng ký phương tiện hoạt động vui chơi, giải trí dưới nước", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010811&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 180, name: "Đăng ký lại phương tiện trong trường hợp chủ phương tiện thay đổi trụ sở hoặc nơi đăng ký hộ khẩu thường trú của chủ phương tiện sang đơn vị hành chính cấp tỉnh khác", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010812&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 181, name: "Thẩm định, phê duyệt phương án ứng phó thiên tai cho công trình vùng hạ du đập thủy điện thuộc thẩm quyền phê duyệt của Ủy ban nhân dân cấp xã", field: "An toàn đập, hồ chứa thuỷ điện (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010816&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 182, name: "Cấp giấy phép sử dụng tạm thời một phần hè phố, lòng đường để trông, giữ xe có thu phí", field: "Hạ tầng kỹ thuật (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010817&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 183, name: "Cấp giấy phép sử dụng tạm thời một phần hè phố không vào mục đích giao thông để thực hiện: tuyên truyền chủ trương, chính sách của Đảng và pháp luật của nhà nước; điểm trông, giữ xe phục vụ hoạt động văn hóa, thể thao, diễu hành, lễ hội; điểm trung chuyển vật liệu, phế thải xây dựng để phục vụ thi công công trình của hộ gia đình", field: "Hạ tầng kỹ thuật (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010820&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 184, name: "Cấp giấy phép sử dụng tạm thời một phần lòng đường không vào mục đích giao thông đối với: Điểm trông, giữ xe ô tô phục vụ các hoạt động văn hóa, thể thao, diễu hành, lễ hội; điểm trung chuyển rác thải sinh hoạt của doanh nghiệp vệ sinh môi trường đô thị", field: "Hạ tầng kỹ thuật (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010825&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 185, name: "Chuyển đổi nhà trẻ, trường mẫu giáo, trường mầm non tư thục do nhà đầu tư trong nước đầu tư sang nhà trẻ, trường mẫu giáo, trường mầm non tư thục hoạt động không vì lợi nhuận", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010830&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 186, name: "Xét, cấp học bổng chính sách", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010819&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 187, name: "Cho phép trường mẫu giáo, trường mầm non, nhà trẻ hoạt động giáo dục trở lại", field: "Giáo dục mầm non (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010821&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 188, name: "Chuyển đổi trường tiểu học tư thục, trường trung học cơ sở tư thục và trường phổ thông tư thục có nhiều cấp học có cấp học cao nhất là trung học cơ sở do nhà đầu tư trong nước đầu tư sang trường phổ thông tư thục hoạt động không vì lợi nhuận", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010824&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 189, name: "Sáp nhập, chia, tách trường mẫu giáo, trường mầm non, nhà trẻ", field: "Giáo dục mầm non (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010829&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 190, name: "Cấp giấy phép thi công công trình thiết yếu trong phạm vi đất dành cho đường bộ của hệ thống đường đô thị, đường huyện, đường xã đang khai thác", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002481&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 191, name: "Thủ tục cấp giấy phép thi công cấp nước sinh hoạt trong phạm vi đất dành cho đường bộ của hệ thống đường đô thị, đường huyện, đường xã đang khai thác", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002482&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 192, name: "Cấp phép thi công nút giao đấu nối đường nhánh vào đường đô thị, đường huyện", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002483&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 193, name: "Chấp thuận xây dựng công trình thiết yếu trong phạm vi đất dành cho đường bộ của hệ thống đường đô thị, đường huyện, đường xã đang khai thác", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010940&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 194, name: "Cấp phép thi công công trình đường bộ trong phạm vi đất dành cho đường bộ của hệ thống đường đô thị, đường huyện, đường xã đang khai thác", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010938&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 195, name: "Cấp phép thi công nút giao đấu nối tạm có thời hạn vào đường đô thị, đường huyện, đường xã đang khai thác", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010939&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 196, name: "Gia hạn giấy phép thi công (cấp huyện)", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.010941&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 197, name: "Hỗ trợ đối với giáo viên mầm non làm việc tại cơ sở giáo dục mầm non dân lập, tư thục ở địa bàn có khu công nghiệp", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011606&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 198, name: "Trợ cấp đối với trẻ em mầm non là con công nhân, người lao động làm việc tại khu công nghiệp", field: "Giáo dục và Đào tạo thuộc hệ thống giáo dục quốc dân (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011607&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 199, name: "Ghi vào Sổ đăng ký nuôi con nuôi việc nuôi con nuôi đã được giải quyết tại cơ quan có thẩm quyền của nước ngoài", field: "Nuôi con nuôi (Bộ Tư pháp)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011608&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 200, name: "Công bố đóng cảng, bến thủy nội địa", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.011609&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 201, name: "Công bố hoạt động bến thủy nội địa", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000250&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 202, name: "Gia hạn hoạt động cảng, bến thủy nội địa", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.012222", sampleLink: "" },
+  { id: 203, name: "Thỏa thuận thông số kỹ thuật xây dựng bến thủy nội địa", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=1.012223", sampleLink: "" },
+  { id: 204, name: "Thỏa thuận thông số kỹ thuật xây dựng bến khách ngang sông, bến thủy nội địa phục vụ thi công công trình chính", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002620&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 205, name: "Công bố hoạt động bến khách ngang sông, bến thủy nội địa phục vụ thi công công trình chính", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012568&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 206, name: "Chấp thuận phương án bảo đảm an toàn giao thông", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012569&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 207, name: "Tuyển sinh trung học cơ sở", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012592&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 208, name: "Thủ tục giải quyết khiếu nại lần đầu tại cấp xã", field: "Giải quyết khiếu nại (Thanh tra Chính phủ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012591&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 209, name: "Trợ cấp tiền tuất, tai nạn (đối với trường hợp tai nạn suy giảm khả năng lao động từ 5% trở lên) cho lực lượng xung kích phòng chống thiên tai cấp xã chưa tham gia bảo hiểm xã hội", field: "Quản lý Đê điều và Phòng, chống thiên tai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012590&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 210, name: "Hỗ trợ khám chữa bệnh, trợ cấp tai nạn cho lực lượng xung kích phòng chống thiên tai cấp xã trong trường hợp chưa tham gia bảo hiểm y tế, bảo hiểm xã hội", field: "Quản lý Đê điều và Phòng, chống thiên tai (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012582&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 211, name: "Tham vấn trong đánh giá tác động môi trường (cấp xã) (1.010736)", field: "Môi trường (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012585&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 212, name: "Giải quyết chế độ trợ cấp thờ cúng liệt sĩ.", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012584&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 213, name: "Giải quyết chế độ ưu đãi đối với trường hợp tặng hoặc truy tặng danh hiệu vinh dự nhà nước “Bà mẹ Việt Nam anh hùng\"", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012694&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 214, name: "Giải quyết chế độ trợ cấp ưu đãi đối với thân nhân liệt sĩ", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002639&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 215, name: "Giải quyết chế độ ưu đãi đối với vợ hoặc chồng liệt sĩ lấy chồng hoặc vợ khác", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002640&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 216, name: "Giải quyết chế độ ưu đãi đối với Anh hùng lực lượng vũ trang nhân dân, Anh hùng lao động trong thời kỳ kháng chiến hiện không công tác trong quân đội, công an", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002641&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 217, name: "Công nhận đối với người bị thương trong chiến tranh không thuộc quân đội, công an", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002642&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 218, name: "Cấp tiền mua phương tiện trợ giúp, dụng cụ chỉnh hình, phương tiện, thiết bị phục hồi chức năng đối với trường hợp đang sống tại gia đình hoặc đang được nuôi dưỡng tập trung tại các cơ sở nuôi dưỡng, điều dưỡng do địa phương quản lý", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002644&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 219, name: "Tiếp nhận người có công vào cơ sở nuôi dưỡng, điều dưỡng người có công do tỉnh quản lý", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002645&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 220, name: "Công nhận và giải quyết chế độ ưu đãi người hoạt động kháng chiến bị nhiễm chất độc hóa học", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002646&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 221, name: "Công nhận và giải quyết chế độ con đẻ của người hoạt động kháng chiến bị nhiễm chất độc hóa học", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002649&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 222, name: "Công nhận và giải quyết chế độ người hoạt động cách mạng, kháng chiến, bảo vệ tổ quốc, làm nghĩa vụ quốc tế bị địch bắt tù, đày", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.002635", sampleLink: "" },
+  { id: 223, name: "Giải quyết chế độ người có công giúp đỡ cách mạng.", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-nganh-doc.html?ma_thu_tuc=2.002636", sampleLink: "" },
+  { id: 224, name: "Bổ sung tình hình thân nhân trong hồ sơ liệt sĩ.", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002637&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 225, name: "Di chuyển hài cốt liệt sĩ đang an táng ngoài nghĩa trang liệt sĩ về an táng tại nghĩa trang liệt sĩ theo nguyện vọng của đại diện thân nhân hoặc người hưởng trợ cấp thờ cúng liệt sĩ", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002638&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 226, name: "Cấp bổ sung hoặc cấp lại giấy chứng nhận người có công do ngành Lao động - Thương binh và Xã hội quản lý và giấy chứng nhận thân nhân liệt sĩ", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002643&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 227, name: "Công nhận và giải quyết chế độ ưu đãi người hoạt động cách mạng.", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002648&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 228, name: "Giải quyết chế độ người hoạt động kháng chiến giải phóng dân tộc, bảo vệ tổ quốc và làm nghĩa vụ quốc tế", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002650&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 229, name: "Giải quyết chế độ hỗ trợ để theo học đến trình độ đại học tại các cơ sở giáo dục thuộc hệ thống giáo dục quốc dân", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012836&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 230, name: "Hưởng trợ cấp khi người có công đang hưởng trợ cấp ưu đãi từ trần", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.002668&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 231, name: "Di chuyển hài cốt liệt sĩ đang an táng tại nghĩa trang liệt sĩ đi nơi khác theo nguyện vọng của đại diện thân nhân hoặc người hưởng trợ cấp thờ cúng liệt sĩ", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012888&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 232, name: "Cấp giấy xác nhận thân nhân của người có công", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000307&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 233, name: "Chuyển trường đối với học sinh trung học cơ sở.", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000308&id_tinh_thanh=13456", sampleLink: "https://drive.google.com/file/d/1vVnE2Mlu-iKeZKaCAPjRZ1oMeZA339KE/view?usp=drive_link" },
+  { id: 234, name: "Tiếp nhận học sinh trung học cơ sở Việt Nam về nước", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000309&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 235, name: "Tiếp nhận học sinh trung học cơ sở người nước ngoài", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012974&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 236, name: "Công bố cơ sở cai nghiện ma túy tự nguyện, cơ sở cai nghiện ma túy công lập đủ điều kiện cung cấp dịch vụ cai nghiện ma túy tự nguyện tại gia đình, cộng đồng", field: "Phòng, chống tệ nạn xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000326&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 237, name: "Công bố tổ chức, cá nhân đủ điều kiện cung cấp dịch vụ cai nghiện ma túy tự nguyện tại gia đình, cộng đồng", field: "Phòng, chống tệ nạn xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013232&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 238, name: "Công bố lại tổ chức, cá nhân cung cấp dịch vụ cai nghiện ma túy tự nguyện tại gia đình, cộng đồng", field: "Phòng, chống tệ nạn xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013229&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 239, name: "Đăng ký cai nghiện ma túy tự nguyện", field: "Phòng, chống tệ nạn xã hội (Bộ Y tế)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013226&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 240, name: "Thủ tục tiếp công dân tại cấp xã", field: "Tiếp công dân (Thanh tra Chính phủ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013227&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 241, name: "Thủ tục xử lý đơn tại cấp xã", field: "Xử lý đơn thư (Thanh tra Chính phủ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013228&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 242, name: "Cấp Bằng “Tổ quốc ghi công”", field: "Người có công (Bộ Nội vụ)", onlineLink: "", sampleLink: "" },
+  { id: 243, name: "Cấp Bằng “Tổ quốc ghi công” đối với người hy sinh thuộc các trường hợp quy định tại Điều 14 Pháp lệnh nhưng chưa được cấp Bằng “Tổ quốc ghi công” mà thân nhân đã được giải quyết chế độ ưu đãi từ ngày 01 tháng 01 năm 1995 đến ngày 30 tháng 9 năm 2006", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013274&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 244, name: "Tổ chức phát động học tập tấm gương trong phạm vi cả nước đối với trường hợp hy sinh, bị thương quy định tại điểm k khoản 1 Điều 14 và điểm k khoản 1 Điều 23 Pháp lệnh", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.000314&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 245, name: "Tiếp nhận người có công vào cơ sở nuôi dưỡng, điều dưỡng người có công do Bộ Nội vụ quản lý", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000410&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 246, name: "Cấp Bằng “Tổ quốc ghi công” đối với người hy sinh hoặc mất tích trong chiến tranh", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013750&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 247, name: "Cấp lại Bằng “Tổ quốc ghi công”", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013749&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 248, name: "Cấp Bằng “Tổ quốc ghi công” đối với người hy sinh nhưng chưa được cấp Bằng “Tổ quốc ghi công” mà thân nhân đã được giải quyết chế độ ưu đãi từ ngày 31 tháng 12 năm 1994 trở về trước", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013796&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 249, name: "Cấp đổi Bằng “Tổ quốc ghi công”", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013797&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 250, name: "Công nhận và giải quyết chế độ ưu đãi người hoạt động cách mạng", field: "Người có công (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013798&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 251, name: "Phê duyệt Phương án khai thác gỗ, thực vật rừng ngoài gỗ loài thông thường thuộc thẩm quyền giải quyết của Ủy ban nhân dân cấp xã", field: "Lâm nghiệp (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013795&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 252, name: "Công nhận hộ nghèo, hộ cận nghèo; hộ thoát nghèo, hộ thoát cận nghèo định kỳ hằng năm", field: "Giảm nghèo (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013794&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 253, name: "Công nhận hộ nghèo, hộ cận nghèo thường xuyên hằng năm", field: "Giảm nghèo (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013792&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 254, name: "Công nhận hộ thoát nghèo, hộ thoát cận nghèo thường xuyên hằng năm", field: "Giảm nghèo (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013791&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 255, name: "Công nhận hộ làm nông nghiệp, lâm nghiệp, ngư nghiệp và diêm nghiệp có mức sống trung bình", field: "Giảm nghèo (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013793&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 256, name: "Phê duyệt hoặc điều chỉnh phương án quản lý rừng bền vững của chủ rừng là hộ gia đình, cá nhân, cộng đồng dân cư hoặc hộ gia đình cá nhân liên kết thành nhóm hộ, tổ hợp tác trường hợp có tổ chức các hoạt động du lịch sinh thái", field: "Lâm nghiệp (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013711&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 257, name: "Công nhận người có uy tín", field: "Công tác dân tộc (Dân tộc và Tôn giáo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013702&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 258, name: "Đưa ra khỏi danh sách và thay thế, bổ sung người có uy tín", field: "Công tác dân tộc (Dân tộc và Tôn giáo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013703&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 259, name: "Thủ tục xét tuyển Viên chức (85/2023/NĐ-CP)", field: "Công chức, viên chức (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013704&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 260, name: "Thủ tục tiếp nhận vào viên chức không giữ chức vụ quản lý", field: "Công chức, viên chức (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013706&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 261, name: "Thủ tục thi tuyển Viên Chức (Nghị định số 85/2023/NĐ-CP)", field: "Công chức, viên chức (Bộ Nội vụ)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013708&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 262, name: "Thông báo về việc thực hiện hoạt động bán hàng không tại địa điểm giao dịch thường xuyên", field: "bảo vệ quyền lợi người tiêu dùng (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013709&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 263, name: "Hỗ trợ tín dụng đầu tư trồng rừng gỗ lớn đối với chủ rừng là hộ gia đình, cá nhân", field: "Lâm nghiệp (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013707&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 264, name: "Giải quyết chế độ, chính sách cho người tham gia lực lượng tham gia bảo vệ an ninh, trật tự ở cơ sở chưa tham gia bảo hiểm y tế mà bị ốm đau, bị tai nạn, bị thương khi thực hiện nhiệm vụ", field: "Chính sách (Bộ Công an)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013713&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 265, name: "Giải quyết chế độ, chính sách cho người tham gia lực lượng tham gia bảo vệ an ninh, trật tự ở cơ sở chưa tham gia bảo hiểm xã hội mà bị tai nạn, chết khi thực hiện nhiệm vụ", field: "Chính sách (Bộ Công an)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013715&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 266, name: "Tuyển chọn Tổ viên Tổ bảo vệ an ninh, trật tự", field: "Tổ chức, cán bộ (Bộ Công an)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013712&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 267, name: "Giao tài sản kết cấu hạ tầng chợ do cấp xã quản lý", field: "Tài sản kết cấu hạ tầng chợ do Nhà nước đầu tư, quản lý (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013717&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 268, name: "Thu hồi tài sản kết cấu hạ tầng chợ", field: "Tài sản kết cấu hạ tầng chợ do Nhà nước đầu tư, quản lý (Bộ Công Thương)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013714&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 269, name: "THỦ TỤC ĐĂNG KÝ HOẠT ĐỘNG TÍN NGƯỠNG (CẤP XÃ)", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013716&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 270, name: "THỦ TỤC ĐĂNG KÝ BỔ SUNG HOẠT ĐỘNG TÍN NGƯỠNG (CẤP XÃ)", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.001384&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 271, name: "THỦ TỤC ĐĂNG KÝ SINH HOẠT TÔN GIÁO TẬP TRUNG (CẤP XÃ)", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000441&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 272, name: "THỦ TỤC ĐỀ NGHỊ THAY ĐỔI ĐỊA ĐIỂM SINH HOẠT TÔN GIÁO TẬP TRUNG ĐẾN ĐỊA BÀN XÃ KHÁC (CẤP XÃ)", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000439&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 273, name: "THỦ TỤC ĐĂNG KÝ THAY ĐỔI NGƯỜI ĐẠI DIỆN CỦA NHÓM SINH HOẠT TÔN GIÁO TẬP TRUNG (CẤP XÃ)", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000440&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 274, name: "THỦ TỤC ĐỀ NGHỊ THAY ĐỔI ĐỊA ĐIỂM SINH HOẠT TÔN GIÁO TẬP TRUNG TRONG ĐỊA BÀN MỘT XÃ (CÁP XÃ)", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000442&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 275, name: "Quyết định chuyển mục đích sử dụng rừng sang mục đích khác đối với cá nhân", field: "Kiểm lâm (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000443&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 276, name: "Quyết định thu hồi rừng đối với hộ gia đình, cá nhân và cộng đồng dân cư tự nguyện trả lại rừng", field: "Kiểm lâm (Bộ Nông nghiệp và Môi trường)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=3.000465&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 277, name: "Đăng ký thay đổi nội dung đăng ký tổ hợp tác", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013061&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 278, name: "Hiệu đính, cập nhật, bổ sung thông tin đăng ký tổ hợp tác", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.013768&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 279, name: "Thông báo tạm ngừng kinh doanh, tiếp tục kinh doanh trở lại đối với tổ hợp tác", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=1.012970&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 280, name: "Chấm dứt hoạt động tổ hợp tác", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "https://dichvucong.gov.vn/p/home/dvc-chi-tiet-thu-tuc-hanh-chinh.html?ma_thu_tuc=2.000424&id_tinh_thanh=13456", sampleLink: "" },
+  { id: 281, name: "Dừng thực hiện thủ tục đăng ký tổ hợp tác", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Dừng thực hiện thủ tục đăng ký tổ hợp tác", sampleLink: "" },
+  { id: 282, name: "Dừng thực hiện thủ tục giải thể hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Dừng thực hiện thủ tục giải thể hợp tác xã, liên hiệp hợp tác xã", sampleLink: "" },
+  { id: 283, name: "Thông báo lập chi nhánh, văn phòng đại diện ở nước ngoài", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Thông báo lập chi nhánh, văn phòng đại diện ở nước ngoài", sampleLink: "" },
+  { id: 284, name: "Thông báo bổ sung, cập nhật thông tin trong hồ sơ đăng ký hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Thông báo bổ sung, cập nhật thông tin trong hồ sơ đăng ký hợp tác xã, liên hiệp hợp tác xã", sampleLink: "" },
+  { id: 285, name: "Đề nghị thay đổi tên tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã, chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã do xâm phạm quyền sở hữu công nghiệp", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Đề nghị thay đổi tên tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã, chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã do xâm phạm quyền sở hữu công nghiệp", sampleLink: "" },
+  { id: 286, name: "Đề nghị thu hồi Giấy chứng nhận đăng ký tổ hợp tác, Giấy chứng nhận đăng ký hợp tác xã, Giấy chứng nhận đăng ký chi nhánh, văn phòng đại diện đối với trường hợp nội dung kê khai trong hồ sơ đăng ký thành lập là giả mạo", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Đề nghị thu hồi Giấy chứng nhận đăng ký tổ hợp tác, Giấy chứng nhận đăng ký hợp tác xã, Giấy chứng nhận đăng ký chi nhánh, văn phòng đại diện đối với trường hợp nội dung kê khai trong hồ sơ đăng ký thành lập là giả mạo", sampleLink: "" },
+  { id: 287, name: "Đăng ký thành lập tổ hợp tác; đăng ký tổ hợp tác trong trường hợp đã được thành lập trước ngày Luật Hợp tác xã có hiệu lực thi hành, thuộc đối tượng phải đăng ký theo quy định tại khoản 2 Điều 107 Luật Hợp tác xã 2023", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Đăng ký thành lập tổ hợp tác; đăng ký tổ hợp tác trong trường hợp đã được thành lập trước ngày Luật Hợp tác xã có hiệu lực thi hành, thuộc đối tượng phải đăng ký theo quy định tại khoản 2 Điều 107 Luật Hợp tác xã 2023", sampleLink: "" },
+  { id: 288, name: "Cấp lại Giấy chứng nhận đăng ký tổ hợp tác do bị mất, cháy, rách, nát hoặc bị tiêu hủy", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Cấp lại Giấy chứng nhận đăng ký tổ hợp tác do bị mất, cháy, rách, nát hoặc bị tiêu hủy", sampleLink: "" },
+  { id: 289, name: "Dừng thực hiện thủ tục đăng ký hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Dừng thực hiện thủ tục đăng ký hợp tác xã, liên hiệp hợp tác xã", sampleLink: "" },
+  { id: 290, name: "Hiệu đính, cập nhật, bổ sung thông tin đăng ký hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Hiệu đính, cập nhật, bổ sung thông tin đăng ký hợp tác xã, liên hiệp hợp tác xã", sampleLink: "" },
+  { id: 291, name: "Hiệu đính, cập nhật, bổ sung thông tin đăng ký chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã", field: "Thành lập và hoạt động của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Hiệu đính, cập nhật, bổ sung thông tin đăng ký chi nhánh, văn phòng đại diện, địa điểm kinh doanh của hợp tác xã, liên hiệp hợp tác xã", sampleLink: "" },
+  { id: 292, name: "Hỗ trợ chi phí về vật tư phối giống nhân tạo gia súc gồm tinh đông lạnh, Nitơ lỏng, găng tay và dụng cụ dẫn tinh để phối giống cho trâu, bò cái; chi phí về liều tinh để thực hiện phối giống cho lợn nái, công cho người làm dịch vụ phối giống nhân tạo gia súc (trâu, bò)", field: "Chăn nuôi (Bộ Nông nghiệp và Môi trường)", onlineLink: "Hỗ trợ chi phí về vật tư phối giống nhân tạo gia súc gồm tinh đông lạnh, Nitơ lỏng, găng tay và dụng cụ dẫn tinh để phối giống cho trâu, bò cái; chi phí về liều tinh để thực hiện phối giống cho lợn nái, công cho người làm dịch vụ phối giống nhân tạo gia súc (trâu, bò)", sampleLink: "" },
+  { id: 293, name: "Phê duyệt hỗ trợ kinh phí đào tạo, tập huấn để chuyển đổi từ chăn nuôi sang các nghề khác; chi phí cho cá nhân được đào tạo về kỹ thuật phối giống nhân tạo gia súc (trâu, bò); chi phí mua bình chứa Nitơ lỏng bảo quản tinh cho người làm dịch vụ phối giống nhân tạo gia súc (trâu, bò) đối với các chính sách sử dụng vốn sự nghiệp nguồn ngân sách nhà nước", field: "Chăn nuôi (Bộ Nông nghiệp và Môi trường)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 294, name: "Đăng ký nhu cầu hỗ trợ của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã", field: "Hỗ trợ tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã (Bộ Tài chính)", onlineLink: "Đăng ký nhu cầu hỗ trợ của tổ hợp tác, hợp tác xã, liên hiệp hợp tác xã", sampleLink: "" },
+  { id: 295, name: "Công nhận Ban quản trị nhà chung cư", field: "Nhà ở và công sở (Bộ Xây dựng)", onlineLink: "Công nhận Ban quản trị nhà chung cư", sampleLink: "" },
+  { id: 296, name: "Lập biên bản kiểm tra hiện trường xác định nguyên nhân, mức độ thiệt hại rừng trồng", field: "Lâm nghiệp (Bộ Nông nghiệp và Môi trường)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 297, name: "Thủ tục khai, nộp phí bảo vệ môi trường đối với khí thải", field: "Quản lý thuế, phí, lệ phí và thu khác của ngân sách nhà nước (Bộ Tài chính)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 298, name: "Sáp nhập, chia, tách trung tâm học tập cộng đồng", field: "Giáo dục thường xuyên (Bộ Giáo dục và Đào tạo)", onlineLink: "Sáp nhập, chia, tách trung tâm học tập cộng đồng", sampleLink: "" },
+  { id: 299, name: "Giải thể trung tâm học tập cộng đồng (theo đề nghị của tổ chức, cá nhân thành lập trung tâm)", field: "Giáo dục thường xuyên (Bộ Giáo dục và Đào tạo)", onlineLink: "Giải thể trung tâm học tập cộng đồng (theo đề nghị của tổ chức, cá nhân thành lập trung tâm)", sampleLink: "" },
+  { id: 300, name: "Thành lập lớp dành cho người khuyết tật trong trường mầm non, trường tiểu học, trường trung học cơ sở và trung tâm giáo dục thường xuyên, trung tâm giáo dục nghề nghiệp - giáo dục thường xuyên thực hiện các chương trình xóa mù chữ và chương trình giáo dục thường xuyên cấp trung học cơ sở", field: "Các cơ sở giáo dục khác (Bộ Giáo dục và Đào tạo)", onlineLink: "Thành lập lớp dành cho người khuyết tật trong trường mầm non, trường tiểu học, trường trung học cơ sở và trung tâm giáo dục thường xuyên, trung tâm giáo dục nghề nghiệp - giáo dục thường xuyên thực hiện các chương trình xóa mù chữ và chương trình giáo dục thường xuyên cấp trung học cơ sở", sampleLink: "" },
+  { id: 301, name: "Giải thể trường mẫu giáo, trường mầm non, nhà trẻ", field: "Giáo dục mầm non (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 302, name: "Cho phép trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở hoạt động giáo dục", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 303, name: "Thành lập hoặc cho phép thành lập trường mẫu giáo, trường mầm non, nhà trẻ", field: "Giáo dục mầm non (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 304, name: "Thành lập hoặc cho phép thành lập trường tiểu học", field: "Giáo dục tiểu học (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 305, name: "Thành lập hoặc cho phép thành lập trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 306, name: "Giải thể trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở (Theo đề nghị của tổ chức, cá nhân thành lập trường)", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 307, name: "Thành lập hoặc cho phép thành lập cơ sở giáo dục mầm non độc lập", field: "Các cơ sở giáo dục khác (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 308, name: "Cho phép cơ sở giáo dục mầm non độc lập hoạt động trở lại", field: "Các cơ sở giáo dục khác (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 309, name: "Cho phép trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở hoạt động giáo dục trở lại", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 310, name: "Sáp nhập, chia, tách trường trung học cơ sở, trường phổ thông có nhiều cấp học có cấp học cao nhất là trung học cơ sở", field: "Giáo dục trung học (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 311, name: "Cho phép cơ sở giáo dục khác thực hiện chương trình giáo dục phổ thông cấp tiểu học", field: "Các cơ sở giáo dục khác (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 312, name: "Sáp nhập, chia, tách cơ sở giáo dục mầm non độc lập", field: "Các cơ sở giáo dục khác (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 313, name: "Giải thể cơ sở giáo dục mầm non độc lập (theo đề nghị của tổ chức, cá nhân thành lập trường)", field: "Các cơ sở giáo dục khác (Bộ Giáo dục và Đào tạo)", onlineLink: "Giải thể cơ sở giáo dục mầm non độc lập (theo đề nghị của tổ chức, cá nhân thành lập trường)", sampleLink: "" },
+  { id: 314, name: "Thanh lý tài sản kết cấu hạ tầng thủy lợi; xử lý tài sản kết cấu hạ tầng thủy lợi trong trường hợp bị mất, hủy hoại", field: "Quản lý công sản (Bộ Tài chính)", onlineLink: "Thanh lý tài sản kết cấu hạ tầng thủy lợi; xử lý tài sản kết cấu hạ tầng thủy lợi trong trường hợp bị mất, hủy hoại", sampleLink: "" },
+  { id: 315, name: "Giao tài sản kết cấu hạ tầng thủy lợi", field: "Quản lý công sản (Bộ Tài chính)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 316, name: "Thanh toán chi phí liên quan đến xử lý tài sản kết cấu hạ tầng thủy lợi", field: "Quản lý công sản (Bộ Tài chính)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 317, name: "Cấp giấy phép di dời đối với công trình cấp III, cấp IV (Công trình không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", field: "Hoạt động xây dựng (Bộ Xây dựng)", onlineLink: "Cấp giấy phép di dời đối với công trình cấp III, cấp IV (Công trình không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", sampleLink: "" },
+  { id: 318, name: "Cấp giấy phép xây dựng sửa chữa, cải tạo đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ:", field: "Hoạt động xây dựng (Bộ Xây dựng)", onlineLink: "Cấp giấy phép xây dựng sửa chữa, cải tạo đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ:", sampleLink: "" },
+  { id: 319, name: "Cấp điều chỉnh giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", field: "Hoạt động xây dựng (Bộ Xây dựng)", onlineLink: "Cấp điều chỉnh giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", sampleLink: "" },
+  { id: 320, name: "Gia hạn giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Sửa chữa, cải tạo/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", field: "Hoạt động xây dựng (Bộ Xây dựng)", onlineLink: "Gia hạn giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Sửa chữa, cải tạo/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", sampleLink: "" },
+  { id: 321, name: "Cấp lại giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Sửa chữa, cải tạo/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", field: "Hoạt động xây dựng (Bộ Xây dựng)", onlineLink: "Cấp lại giấy phép xây dựng đối với công trình cấp III, cấp IV (công trình Không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Sửa chữa, cải tạo/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", sampleLink: "" },
+  { id: 322, name: "Cấp giấy phép xây dựng mới đối với công trình cấp III, cấp IV (Công trình không theo tuyến/Theo tuyến trong đô thị/Tín ngưỡng, tôn giáo/Tượng đài, tranh hoành tráng/Theo giai đoạn cho công trình không theo tuyến/Theo giai đoạn cho công trình theo tuyến trong đô thị/Dự án) và nhà ở riêng lẻ", field: "Hoạt động xây dựng (Bộ Xây dựng)", onlineLink: "", sampleLink: "" },
+  { id: 323, name: "Cấp phép sử dụng tạm thời lòng đường, vỉa hè vào mục đích khác", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "Cấp phép sử dụng tạm thời lòng đường, vỉa hè vào mục đích khác", sampleLink: "" },
+  { id: 324, name: "Chấp thuận vị trí đấu nối tạm vào đường bộ đang khai thác", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "Chấp thuận vị trí đấu nối tạm vào đường bộ đang khai thác", sampleLink: "" },
+  { id: 325, name: "Quyết định xác lập quyền sở hữu toàn dân đối với tài sản không có người thừa kế", field: "Quản lý công sản (Bộ Tài chính)", onlineLink: "Quyết định xác lập quyền sở hữu toàn dân đối với tài sản không có người thừa kế", sampleLink: "" },
+  { id: 326, name: "Thăm viếng mộ liệt sĩ.", field: "Người có công (Bộ Nội vụ)", onlineLink: "Thăm viếng mộ liệt sĩ.", sampleLink: "" },
+  { id: 327, name: "Giải quyết chế độ đối với quân nhân, cán bộ đi chiến trường B,C,K trong thời kỳ chống Mỹ cứu nước không có thân nhân phải trực tiếp nuôi dưỡng và quân nhân, cán bộ được đảng cử ở lại miền nam hoạt động sau hiệp định Giơnevơ năm 1954 đối với cán bộ dân, chính, đảng thuộc diện Trung ương quản lý", field: "Người có công (Bộ Nội vụ)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 328, name: "Xác nhận và giải quyết chế độ ưu đãi người có công với cách mạng và thân nhân", field: "Người có công (Bộ Nội vụ)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 329, name: "Giải quyết chế độ đối với quân nhân, cán bộ đi chiến trường B,C,K trong thời kỳ chống mỹ cứu nước không có thân nhân phải trực tiếp nuôi dưỡng và quân nhân, cán bộ được đảng cử ở lại miền nam hoạt động sau hiệp định Giơnevơ năm 1954 đối với cán bộ dân, chính, đảng", field: "Người có công (Bộ Nội vụ)", onlineLink: "Giải quyết chế độ đối với quân nhân, cán bộ đi chiến trường B,C,K trong thời kỳ chống mỹ cứu nước không có thân nhân phải trực tiếp nuôi dưỡng và quân nhân, cán bộ được đảng cử ở lại miền nam hoạt động sau hiệp định Giơnevơ năm 1954 đối với cán bộ dân, chính, đảng", sampleLink: "" },
+  { id: 330, name: "THỦ TỤC ĐỀ NGHỊ TỔ CHỨC ĐẠI HỘI CỦA TỔ CHỨC TÔN GIÁO, TỔ CHỨC TÔN GIÁO TRỰC THUỘC, TỔ CHỨC ĐƯỢC CẤP CHỨNG NHẬN ĐĂNG KÝ HOẠT ĐỘNG TÔN GIÁO CÓ ĐỊA BÀN HOẠT ĐỘNG Ở MỘT XÃ", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "THỦ TỤC ĐỀ NGHỊ TỔ CHỨC ĐẠI HỘI CỦA TỔ CHỨC TÔN GIÁO, TỔ CHỨC TÔN GIÁO TRỰC THUỘC, TỔ CHỨC ĐƯỢC CẤP CHỨNG NHẬN ĐĂNG KÝ HOẠT ĐỘNG TÔN GIÁO CÓ ĐỊA BÀN HOẠT ĐỘNG Ở MỘT XÃ", sampleLink: "" },
+  { id: 331, name: "THỦ TỤC ĐỀ NGHỊ TỔ CHỨC CUỘC LỄ NGOÀI CƠ SỞ TÔN GIÁO, ĐỊA ĐIỂM HỢP PHÁP ĐÃ ĐĂNG KÝ CÓ QUY MÔ TỔ CHỨC Ở MỘT XÃ", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "THỦ TỤC ĐỀ NGHỊ TỔ CHỨC CUỘC LỄ NGOÀI CƠ SỞ TÔN GIÁO, ĐỊA ĐIỂM HỢP PHÁP ĐÃ ĐĂNG KÝ CÓ QUY MÔ TỔ CHỨC Ở MỘT XÃ", sampleLink: "" },
+  { id: 332, name: "THỦ TỤC ĐỀ NGHỊ GIẢNG ĐẠO NGOÀI ĐỊA BÀN PHỤ TRÁCH, CƠ SỞ TÔN GIÁO, ĐỊA ĐIỂM HỢP PHÁP ĐÃ ĐĂNG KÝ CÓ QUY MÔ TỔ CHỨC TRONG MỘT XÃ", field: "Tín ngưỡng, tôn giáo (Dân tộc và Tôn giáo)", onlineLink: "THỦ TỤC ĐỀ NGHỊ GIẢNG ĐẠO NGOÀI ĐỊA BÀN PHỤ TRÁCH, CƠ SỞ TÔN GIÁO, ĐỊA ĐIỂM HỢP PHÁP ĐÃ ĐĂNG KÝ CÓ QUY MÔ TỔ CHỨC TRONG MỘT XÃ", sampleLink: "" },
+  { id: 333, name: "Thủ tục cấp lại giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng", field: "Phát thanh, truyền hình và thông tin điện tử (Bộ Văn hóa, Thể thao và Du lịch)", onlineLink: "Thủ tục cấp lại giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng", sampleLink: "" },
+  { id: 334, name: "Thủ tục giải quyết tố cáo tại cấp xã", field: "Giải quyết tố cáo (Thanh tra Chính phủ)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 335, name: "Thủ tục gia hạn giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng", field: "Phát thanh, truyền hình và thông tin điện tử (Bộ Văn hóa, Thể thao và Du lịch)", onlineLink: "Thủ tục gia hạn giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng", sampleLink: "" },
+  { id: 336, name: "Thủ tục cấp giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng", field: "Phát thanh, truyền hình và thông tin điện tử (Bộ Văn hóa, Thể thao và Du lịch)", onlineLink: "Thủ tục cấp giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng", sampleLink: "" },
+  { id: 337, name: "Thủ tục tiếp nhận hồ sơ đăng ký lễ hội quy mô cấp xã", field: "Văn hóa (Bộ Văn hóa, Thể thao và Du lịch)", onlineLink: "Thủ tục tiếp nhận hồ sơ đăng ký lễ hội quy mô cấp xã", sampleLink: "" },
+  { id: 338, name: "Thủ tục sửa đổi, bổ sung giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng", field: "Phát thanh, truyền hình và thông tin điện tử (Bộ Văn hóa, Thể thao và Du lịch)", onlineLink: "Thủ tục sửa đổi, bổ sung giấy chứng nhận đủ điều kiện hoạt động điểm cung cấp dịch vụ trò chơi điện tử công cộng", sampleLink: "" },
+  { id: 339, name: "Kê khai, thẩm định tờ khai phí bảo vệ môi trường đối với nước thải", field: "Quản lý thuế, phí, lệ phí và thu khác của ngân sách nhà nước (Bộ Tài chính)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 340, name: "Cấp giấy phép thành lập và công nhận điều lệ quỹ", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Cấp giấy phép thành lập và công nhận điều lệ quỹ", sampleLink: "" },
+  { id: 341, name: "Công nhận ban vận động thành lập hội", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Công nhận ban vận động thành lập hội", sampleLink: "" },
+  { id: 342, name: "Thành lập hội", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Thành lập hội", sampleLink: "" },
+  { id: 343, name: "Báo cáo tổ chức đại hội thành lập, đại hội nhiệm kỳ, đại hội bất thường của hội", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Báo cáo tổ chức đại hội thành lập, đại hội nhiệm kỳ, đại hội bất thường của hội", sampleLink: "" },
+  { id: 344, name: "Thông báo kết quả đại hội và phê duyệt đổi tên hội, phê duyệt điều lệ hội", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Thông báo kết quả đại hội và phê duyệt đổi tên hội, phê duyệt điều lệ hội", sampleLink: "" },
+  { id: 345, name: "Hội tự giải thể", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Hội tự giải thể", sampleLink: "" },
+  { id: 346, name: "Cho phép hội hoạt động trở lại sau khi bị đình chỉ có thời hạn", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Cho phép hội hoạt động trở lại sau khi bị đình chỉ có thời hạn", sampleLink: "" },
+  { id: 347, name: "Hỗ trợ chi phí y tế và thu nhập thực tế bị mất hoặc giảm sút cho người đang trực tiếp tham gia hoạt động chữ thập đỏ bị tai nạn dẫn đến thiệt hại về sức khỏe", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 348, name: "Chia, tách; sáp nhập; hợp nhất hội", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Chia, tách; sáp nhập; hợp nhất hội", sampleLink: "" },
+  { id: 349, name: "Công nhận điều lệ (sửa đổi, bổ sung) quỹ; đổi tên quỹ", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Công nhận điều lệ (sửa đổi, bổ sung) quỹ; đổi tên quỹ", sampleLink: "" },
+  { id: 350, name: "Cho phép quỹ hoạt động trở lại sau khi bị tạm đình chỉ hoạt động", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Cho phép quỹ hoạt động trở lại sau khi bị tạm đình chỉ hoạt động", sampleLink: "" },
+  { id: 351, name: "Công nhận quỹ đủ điều kiện hoạt động và công nhận thành viên hội đồng quản lý quỹ; công nhận thay đổi, bổ sung thành viên hội đồng quản lý quỹ", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Công nhận quỹ đủ điều kiện hoạt động và công nhận thành viên hội đồng quản lý quỹ; công nhận thay đổi, bổ sung thành viên hội đồng quản lý quỹ", sampleLink: "" },
+  { id: 352, name: "Quỹ tự giải thể", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Quỹ tự giải thể", sampleLink: "" },
+  { id: 353, name: "Cấp lại giấy phép thành lập và công nhận điều lệ quỹ", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Cấp lại giấy phép thành lập và công nhận điều lệ quỹ", sampleLink: "" },
+  { id: 354, name: "Hợp nhất, sáp nhập, chia, tách quỹ", field: "Quản lý nhà nước về hội, quỹ (Bộ Nội vụ)", onlineLink: "Hợp nhất, sáp nhập, chia, tách quỹ", sampleLink: "" },
+  { id: 355, name: "Phê duyệt phương án cắm mốc chỉ giới xác định phạm vi bảo vệ đập thủy điện", field: "An toàn đập, hồ chứa thuỷ điện (Bộ Công Thương)", onlineLink: "Phê duyệt phương án cắm mốc chỉ giới xác định phạm vi bảo vệ đập thủy điện", sampleLink: "" },
+  { id: 356, name: "Cấp Giấy chứng nhận sản phẩm công nghiệp nông thôn tiêu biểu cấp xã", field: "Công nghiệp địa phương (Bộ Công Thương)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 357, name: "Đăng ký hợp đồng lao động trực tiếp giao kết .", field: "Quản lý lao động ngoài nước (Bộ Nội vụ)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 358, name: "Trả lại khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", field: "Biển và hải đảo (Bộ Nông nghiệp và Môi trường)", onlineLink: "Trả lại khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", sampleLink: "" },
+  { id: 359, name: "Giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", field: "Biển và hải đảo (Bộ Nông nghiệp và Môi trường)", onlineLink: "Giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", sampleLink: "" },
+  { id: 360, name: "Gia hạn thời hạn giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", field: "Biển và hải đảo (Bộ Nông nghiệp và Môi trường)", onlineLink: "Gia hạn thời hạn giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", sampleLink: "" },
+  { id: 361, name: "Sửa đổi, bổ sung Quyết định giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", field: "Biển và hải đảo (Bộ Nông nghiệp và Môi trường)", onlineLink: "Sửa đổi, bổ sung Quyết định giao khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", sampleLink: "" },
+  { id: 362, name: "Công nhận khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", field: "Biển và hải đảo (Bộ Nông nghiệp và Môi trường)", onlineLink: "Công nhận khu vực biển cho cá nhân Việt Nam để nuôi trồng thủy sản", sampleLink: "" },
+  { id: 363, name: "Xác nhận trình báo đường thủy nội địa hoặc trình báo đường thủy nội địa bổ sung", field: "Hàng hải và đường thủy nội địa (Bộ Xây dựng)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 364, name: "Cấp bản sao văn bằng, chứng chỉ từ sổ gốc (tại cấp xã)", field: "Văn bằng, chứng chỉ (Bộ Giáo dục và Đào tạo)", onlineLink: "Cấp bản sao văn bằng, chứng chỉ từ sổ gốc (tại cấp tỉnh)", sampleLink: "" },
+  { id: 365, name: "Chỉnh sửa nội dung văn bằng, chứng chỉ (tại cấp xã)", field: "Văn bằng, chứng chỉ (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 366, name: "Cấp giấy phép thi công công trình trên đường bộ đang khai thác", field: "Đường bộ (Bộ Xây dựng)", onlineLink: "Cấp giấy phép thi công công trình trên đường bộ đang khai thác", sampleLink: "" },
+  { id: 367, name: "Phê duyệt phương án bảo vệ đập, hồ chứa nước trên địa bàn do Ủy ban nhân dân cấp tỉnh phân cấp", field: "Thủy lợi (Bộ Nông nghiệp và Môi trường)", onlineLink: "Phê duyệt phương án bảo vệ đập, hồ chứa nước trên địa bàn do Ủy ban nhân dân cấp tỉnh phân cấp", sampleLink: "" },
+  { id: 368, name: "Cho phép trung tâm học tập cộng đồng hoạt động trở lại", field: "Giáo dục thường xuyên (Bộ Giáo dục và Đào tạo)", onlineLink: "Cho phép trung tâm học tập cộng đồng hoạt động trở lại", sampleLink: "" },
+  { id: 369, name: "Thành lập hoặc cho phép thành lập trung tâm học tập cộng đồng", field: "Giáo dục thường xuyên (Bộ Giáo dục và Đào tạo)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 370, name: "Thủ tục thực hiện hỗ trợ khi hòa giải viên gặp tai nạn hoặc rủi ro ảnh hưởng đến sức khỏe, tính mạng trong khi thực hiện hoạt động hòa giải", field: "Phổ biến giáo dục pháp luật (Bộ Tư pháp)", onlineLink: "Thủ tục thực hiện hỗ trợ khi hòa giải viên gặp tai nạn hoặc rủi ro ảnh hưởng đến sức khỏe, tính mạng trong khi thực hiện hoạt động hòa giải", sampleLink: "" },
+  { id: 371, name: "Công nhận người lao động có thu nhập thấp", field: "Giảm nghèo (Bộ Nông nghiệp và Môi trường)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 372, name: "Thẩm định, phê duyệt hoặc điều chỉnh phương án nuôi, trồng phát triển, thu hoạch cây dược liệu trong rừng đối với chủ rừng là hộ gia đình, cá nhân, cộng đồng dân cư", field: "Lâm nghiệp (Bộ Nông nghiệp và Môi trường)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 373, name: "Thi tuyển công chức", field: "Công chức, viên chức (Bộ Nội vụ)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 374, name: "Tiếp nhận vào công chức không giữ chức vụ lãnh đạo, quản lý", field: "Công chức, viên chức (Bộ Nội vụ)", onlineLink: "Trực tiếp", sampleLink: "" },
+  { id: 375, name: "Tặng, truy tặng “Huy chương Thanh niên xung phong vẻ vang” cho cá nhân theo công trạng", field: "Thi đua - khen thưởng (Bộ Nội vụ)", onlineLink: "Trực tiếp", sampleLink: "" },
+];
+let procFiltered = procedures.slice();
+let currentPage = 1;
+let rowsPerPage = 5;
+
+/* SPA navigation */
+const sections = ['home','hotline','survey','procedures'];
+function navigate(key){
+  if(!sections.includes(key)) key='home';
+  sections.forEach(s=>{
+    const el = document.getElementById(s);
+    if(s===key){ el.classList.add('active'); el.classList.add('fade'); }
+    else { el.classList.remove('active'); el.classList.remove('fade'); }
+  });
+  history.pushState({page:key}, '', '#'+key);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+window.addEventListener('popstate', (e) => {
+  const p = (e.state && e.state.page) || location.hash.replace('#','') || 'home';
+  sections.forEach(s=>{ document.getElementById(s).classList.toggle('active', s===p); });
+});
+
+/* Init */
+document.addEventListener('DOMContentLoaded', () => {
+  const h = location.hash.replace('#','') || 'home';
+  navigate(h);
+  initSurvey();
+  initProcedures();
+  initChat();
+});
+
+/* Survey */
+const criteria = [
+  "Quầy số 1 - Lĩnh vực Đất đai Thẩm quyền Chi nhánh VPĐKĐĐ","Quầy số 2 - Thuế Đất Đai","Quầy số 3 - Lĩnh Vực đất đai Thẩm quyền UBND cấp xã","Quầy số 4 - Lĩnh vực Xây dựng Thẩm quyền UBND cấp xã",
+  "Quầy số 5 - Lĩnh vực Y tế, Giáo dục, Nội vụ/ Lĩnh vực công thương, các HS phi Địa giới","Quầy số 6 Lĩnh vực Bảo trợ xã hội, người có công","Quầy số 7 - Lĩnh vực Chứng thực","Quầy số 8 - Lĩnh vực Hộ tịch",
+  "Quầy số 9 - Lĩnh vực Đăng ký Kinh doanh","Quầy số 10 Văn thư",
+];
+const SURV_KEY = 'sumhop_surveys_v3';
+function initSurvey(){
+  const wrap = document.getElementById('survey-form');
+  wrap.innerHTML = '<div class="survey-grid">' + criteria.map((c,i)=>`
+    <div class="criterion"><h4>${i+1}. ${c}</h4>
+      <div class="radio-row">${[1,2,3].map(v=>`<label class="small"><input type="radio" name="crit${i}" value="${v}"> ${v}</label>`).join('')}</div>
+    </div>`).join('') + '</div><div style="margin-top:8px"><textarea id="sv-comment" rows="3" style="width:100%;padding:8px;border-radius:8px;border:1px solid #e6eef7" placeholder="Ý kiến (không bắt buộc)"></textarea></div>';
+  
+  // Thêm chú thích thang điểm và thay nhãn 1/2/3 -> kèm ý nghĩa
+  try {
+    // Chú thích
+    if (!document.getElementById('survey-legend')) {
+      const legend = document.createElement('div');
+      legend.id = 'survey-legend';
+      legend.className = 'small';
+      legend.style.cssText = 'margin:8px 0 14px;color:#6b7280';
+      legend.textContent = 'Chú thích: 1 - Không hài lòng   •   2 - Hài lòng   •   3 - Rất hài lòng';
+      wrap.prepend(legend);
+    }
+    // Đổi nhãn
+    const labelText = { '1':'1 - Không hài lòng', '2':'2 - Hài lòng', '3':'3 - Rất hài lòng' };
+    wrap.querySelectorAll('.radio-row label').forEach(function(lbl){
+      const input = lbl.querySelector('input');
+      if (!input) return;
+      const v = String(input.value);
+      // Giữ input, thay phần text
+      const oldInput = input;
+      lbl.innerHTML = '';
+      lbl.appendChild(oldInput);
+      lbl.append(document.createTextNode(' ' + (labelText[v] || v)));
+    });
+  } catch(e) {}
+if(!document.getElementById('sv-date').value) document.getElementById('sv-date').value = new Date().toISOString().slice(0,10);
+  document.getElementById('save-survey').addEventListener('click', ()=>{
+    const s = collectSurvey();
+    const v = validateSurvey(s);
+    if(!v.ok){ alert(v.msg); return; }
+    const arr = loadSurveys(); arr.push(s); localStorage.setItem(SURV_KEY, JSON.stringify(arr));
+    
+    const payload = {
+      fullname: s.name || "",
+      phone: s.phone || "",
+      date: s.date || "",
+      rating: (s.scores||[]).map(v => (v==null ? "" : v)).join(","),
+      note: s.comment || ""
+    };
+    fetch("https://script.google.com/macros/s/AKfycbzgvhrIBRPg9B4Xgs7OLkJ9GG9VVzKKvoghiai_eB75gnLEhX14juQBxoqYWRMXlwUf/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    })
+    .then(() => alert('Đã lưu & gửi đánh giá. Cảm ơn bạn!'))
+    .catch(() => alert('Không thể gửi lên Google Sheets. Dữ liệu đã lưu cục bộ.'));
+document.getElementById('sv-comment').value='';
+    document.getElementById('sv-name').value='';
+    document.getElementById('sv-phone').value='';
+    document.getElementById('sv-date').value = new Date().toISOString().slice(0,10);
+  });
+  document.getElementById('view-surveys').addEventListener('click', renderSurveyList);
+}
+function collectSurvey(){
+  const values=[];
+  for(let i=0;i<criteria.length;i++){
+    const rs = document.getElementsByName('crit'+i);
+    let val=null;
+    for(const r of rs) if(r.checked){ val = parseInt(r.value); break; }
+    values.push(val);
+  }
+  return { id:'s'+Date.now(), date:document.getElementById('sv-date').value || new Date().toISOString().slice(0,10), ts:new Date().toISOString(), name:document.getElementById('sv-name').value.trim(), phone:document.getElementById('sv-phone').value.trim(), comment:document.getElementById('sv-comment').value.trim(), scores:values };
+}
+function validateSurvey(s){ if(s.scores.every(v=>v===null)) return {ok:false,msg:'Vui lòng chọn ít nhất một tiêu chí.'}; return {ok:true}; }
+function loadSurveys(){ const s=localStorage.getItem(SURV_KEY); return s?JSON.parse(s):[]; }
+function renderSurveyList(){
+  const arr = loadSurveys().slice().reverse();
+  const wrap = document.getElementById('surveys-list');
+  if(!arr.length){ wrap.style.display='block'; wrap.innerHTML = '<div class="small">Chưa có đánh giá nào.</div>'; return; }
+  wrap.style.display='block';
+  wrap.innerHTML = `<div style="overflow:auto;max-height:360px"><table class="table"><thead><tr><th>Ngày</th><th>Họ tên</th><th>SĐT</th><th>Trung bình</th></tr></thead><tbody>${arr.map(s=>{ const nums = s.scores.filter(v=>v!==null); const avg = nums.length? (nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(2):'N/A'; return `<tr><td>${s.date}</td><td>${s.name||''}</td><td>${s.phone||''}</td><td>${avg}</td></tr>` }).join('')}</tbody></table></div><div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end"><button class="back-btn" onclick="exportSurveys()">Xuất</button><button class="back-btn" onclick="document.getElementById('surveys-list').style.display='none'">Đóng</button></div>`;
+}
+function exportSurveys(){
+  const arr = loadSurveys();
+  if(!arr.length){ alert('Không có dữ liệu.'); return; }
+  let csv = 'Ngày,Thời gian,Họ tên,SĐT,Ý kiến,' + criteria.map((c,i)=>`"C${i+1} - ${c}"`).join(',') + ',Trung bình\n';
+  arr.forEach(s=>{
+    const nums = s.scores.map(v=>v===null?'':v);
+    const numsForAvg = s.scores.filter(v=>v!==null);
+    const avg = numsForAvg.length? (numsForAvg.reduce((a,b)=>a+b,0)/numsForAvg.length).toFixed(2):'';
+    csv += `${s.date},${new Date(s.ts).toLocaleTimeString()},"${s.name||''}","${s.phone||''}","${s.comment||''}",${nums.join(',')},${avg}\n`;
+  });
+  const blob = new Blob([csv], {type:'text/csv'}); const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='surveys_export.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+
+/* Procedures */
+function initProcedures(){
+  document.getElementById('filter-field').addEventListener('input', ()=>{ currentPage=1; applyProcFilter(); });
+  document.getElementById('filter-key').addEventListener('input', ()=>{ currentPage=1; applyProcFilter(); });
+  document.getElementById('rowsPerPage').addEventListener('change', (e)=>{ rowsPerPage = parseInt(e.target.value); currentPage=1; renderProcedures(); });
+  applyProcFilter();
+}
+function applyProcFilter(){
+  const f = document.getElementById('filter-field').value.trim().toLowerCase();
+  const k = document.getElementById('filter-key').value.trim().toLowerCase();
+  procFiltered = procedures.filter(p=> (!f || p.field.toLowerCase().includes(f)) && (!k || p.name.toLowerCase().includes(k)) );
+  renderProcedures();
+}
+function renderProcedures(){
+  const tbody = document.getElementById('procedures-tbody');
+  tbody.innerHTML = '';
+  const start = (currentPage - 1) * rowsPerPage;
+  const end = start + rowsPerPage;
+  procFiltered.slice(start, end).forEach((p, index) => {
+    const onlineLink = p.onlineLink ? `<a href="${p.onlineLink}" target="_blank">Nộp trực tuyến</a>` : 'Nộp tại Trung tâm HCC';
+    const sampleLink = p.sampleLink ? `<a href="${p.sampleLink}" target="_blank">Xem</a>` : `<a href="tel:02583892377" target="_blank">Liên hệ Trung tâm</a>`;
+    tbody.innerHTML += `<tr><td>${start + index + 1}</td><td>${p.name}</td><td>${p.field}</td><td>${onlineLink}</td><td>${sampleLink}</td></tr>`;
+  });
+  document.getElementById('pager-info').innerText = `Hiển thị ${Math.min(end, procFiltered.length)} / ${procFiltered.length}`;
+}
+function prevPage(){ if(currentPage>1){ currentPage--; renderProcedures(); } }
+function nextPage(){ const totalPages = Math.max(1, Math.ceil(procFiltered.length / rowsPerPage)); if(currentPage<totalPages){ currentPage++; renderProcedures(); } }
+
+/* Hotline search */
+function hotlineSearch(){
+  const q = document.getElementById('hotline-q').value.trim().toLowerCase();
+  if(!q){ alert('Nhập từ khóa tìm kiếm'); return; }
+  if(q.includes('nha trang') || q.includes('khánh hòa')) {
+    document.getElementById('hotline-result').innerText = 'Số liên hệ UBND tỉnh Khánh Hòa: 0258.3822.465';
+    return;
+  }
+  document.getElementById('hotline-result').innerText = 'Không tìm thấy kết quả chính thức (demo).';
+}
+
+/* Chatbot */
+const QA_KEY = 'sumhop_qa_v1';
+const CHAT_KEY = 'sumhop_chat_v1';
+const defaultQA = [
+  {q:'làm căn cước công dân ở đâu', a:'Bạn có thể làm căn cước công dân, VNeID mức 2 tại Công an phường Tây Nha Trang, địa chỉ số 176 Thống Nhất.'},
+  {q:'giờ làm việc', a:'Giờ làm việc: 7:30–11:30 và 13:30–16:30, Thứ Hai–Thứ Sáu và sáng Thứ Bảy hàng tuần.'},
+  {q:'giấy tờ cần khi cấp giấy chứng nhận', a:'Thường gồm: CCCD/Hộ chiếu/VNeID, tờ khai theo mẫu và các tài liệu liên quan.'},
+  {q:'cấp giấy Vệ sinh an toàn thực phẩm', a:'Liên hệ Quầy số 5 để được hướng dẫn.'},
+  {q:'nộp hồ sơ ở đâu', a:'Nộp trực tiếp tại Trung tâm phục vụ hành chính công hoặc qua Cổng dịch vụ công Quốc gia.'},
+  {q:'lấy số hồ sơ', a:'Lấy số trực tiếp tại Trung tâm PVHCC hoặc qua hệ thống xếp hàng nếu có.'},
+  {q:'liên hệ phản ánh', a:'Gọi đường dây nóng hoặc gửi email/phản ánh trên hệ thống phản ánh kiến nghị.'},
+  {q:'tra cứu hồ sơ', a:'Truy cập cổng dịch vụ công quốc gia và nhập mã hồ sơ để tra cứu tiến trình.'},
+  {q:'xin giấy phép xây dựng', a:'Nộp hồ sơ tại bộ phận một cửa kèm theo bản vẽ và giấy tờ có liên quan.'},
+  {q:'thời gian xử lý hồ sơ', a:'Tùy thủ tục; nhiều thủ tục có quy định cụ thể (7, 15, 30 ngày).'},
+  {q:'Hi, Xin chào', a:'Hi, anh/chị cần tôi hỗ trợ nội dung gì.'},
+   {q:'Bạn có thể giúp tôi nội dung gì', a:'Tôi có thể giúp anh/chị tìm kiếm thủ tục hành chính, nộp hồ sơ trực tuyến và hướng dẫn mình khai thông tin trong trờ khai ạ.'},
+   {q:'thời gian xử lý hồ sơ', a:'Tùy thủ tục; nhiều thủ tục có quy định cụ thể (7, 15, 30 ngày).'},
+];
+function loadQA(){ const s=localStorage.getItem(QA_KEY); return s?JSON.parse(s):defaultQA.slice(); }
+function saveQA(a){ localStorage.setItem(QA_KEY, JSON.stringify(a)); }
+function loadChat(){ const s=localStorage.getItem(CHAT_KEY); return s?JSON.parse(s):[]; }
+function saveChat(a){ localStorage.setItem(CHAT_KEY, JSON.stringify(a)); }
+function initChat(){
+  const chatToggle = document.getElementById('chatToggle');
+  const chatPanel = document.getElementById('chatPanel');
+  chatToggle.addEventListener('click', ()=>{ chatPanel.classList.toggle('hidden'); const hidden = chatPanel.classList.contains('hidden'); chatPanel.setAttribute('aria-hidden', hidden?'true':'false'); if(!hidden) renderChat(); });
+  document.getElementById('closeChat').addEventListener('click', ()=>{ chatPanel.classList.add('hidden'); chatPanel.setAttribute('aria-hidden','true'); });
+  document.getElementById('clearChat').addEventListener('click', ()=>{ localStorage.removeItem(CHAT_KEY); renderChat(); });
+  document.getElementById('chatSend').addEventListener('click', sendChatMessage);
+  document.getElementById('chatInput').addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); sendChatMessage(); } });
+  document.getElementById('chatRobot').addEventListener('click', ()=>{ document.getElementById('qaModal').style.display='block'; renderQAList(); });
+  document.getElementById('closeQa').addEventListener('click', ()=>{ document.getElementById('qaModal').style.display='none'; });
+  document.getElementById('addQaBtn').addEventListener('click', addQaItem);
+  document.getElementById('exportQa').addEventListener('click', () => {
+    const qaList = loadQA();
+    if (!qaList.length) { alert('Không có dữ liệu Q&A.'); return; }
+    let csv = 'Câu hỏi,Câu trả lời\n';
+    qaList.forEach(qa => { csv += `"${qa.q.replace(/"/g,'""')}","${qa.a.replace(/"/g,'""')}"\n`; });
+    const blob = new Blob([csv], {type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'qa_export.csv';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+  document.getElementById('saveGptConfig').addEventListener('click', () => {
+    localStorage.setItem('gptApiKey', document.getElementById('gptApiKey').value.trim());
+    localStorage.setItem('gptModel', document.getElementById('gptModel').value);
+    alert('Đã lưu cấu hình GPT API.');
+  });
+  const appsInp = document.getElementById('appsScriptUrlInput');
+  const appsBtn = document.getElementById('saveAppsScriptUrl');
+  if (appsInp) { appsInp.value = localStorage.getItem('appsScriptUrl') || ''; }
+  if (appsBtn) {
+    appsBtn.addEventListener('click', () => {
+      const v = (appsInp.value || '').trim();
+      localStorage.setItem('appsScriptUrl', v);
+      alert('Đã lưu URL Google Apps Script.');
+    });
+  }
+
+  loadGptConfig();
+  renderQAList();
+  renderChat();
+}
+function renderChat(){
+  const body = document.getElementById('chatBody');
+  body.innerHTML = '';
+  const hist = loadChat();
+  if(!hist.length){ body.innerHTML = '<div class="small">Xin chào! Tôi là trợ lý ảo. Bạn có thể hỏi về thủ tục, biểu mẫu, giờ làm việc...</div>'; return; }
+  hist.forEach(m=>{
+    const d = document.createElement('div');
+    d.className = 'msg ' + (m.role==='user'?'user':'bot');
+    d.innerHTML = `<div class="bubble ${m.role==='user'?'user':''}">${escapeHtml(m.text)}<div class="time">${new Date(m.ts).toLocaleString()}</div></div>`;
+    body.appendChild(d);
+  });
+  body.scrollTop = body.scrollHeight;
+}
+async function sendChatMessage(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  const hist = loadChat(); hist.push({role:'user', text, ts:new Date().toISOString()}); saveChat(hist); renderChat();
+  input.value='';
+  const hist2 = loadChat(); hist2.push({role:'bot', text:'Đang tìm...'}); saveChat(hist2); renderChat();
+  const ans = await answerQuery(text);
+  const h = loadChat();
+  for(let i=h.length-1;i>=0;i--){ if(h[i].role==='bot'){ h[i].text = ans; break; } }
+  saveChat(h); renderChat();
+}
+async function answerQuery(q){
+  const norm = q.trim().toLowerCase();
+  const qa = loadQA();
+  let found = qa.find(x => x.q.trim().toLowerCase() === norm);
+  if(!found) found = qa.find(x => norm.includes(x.q.trim().toLowerCase()) || x.q.trim().toLowerCase().split(' ').some(t=> t && norm.includes(t)));
+  if(found) return found.a;
+  const results = procedures.filter(p => p.name.toLowerCase().includes(norm) || p.field.toLowerCase().includes(norm));
+  if (results.length) {
+    return 'Tìm thấy ' + results.length + ' thủ tục liên quan:<br>' + results.slice(0,5).map(p => {
+      let nameHL = p.name.replace(new RegExp('(' + norm + ')', 'ig'), '<mark>$1</mark>');
+      let fieldHL = p.field.replace(new RegExp('(' + norm + ')', 'ig'), '<mark>$1</mark>');
+      let link = p.sampleLink ? `<a href="${p.sampleLink}" target="_blank">Xem hồ sơ mẫu</a>` : '<a href="tel:02583892377" target="_blank">Liên hệ Trung tâm</a>';
+      return `${p.id}. ${nameHL} — ${fieldHL} (${link})`;
+    }).join('<br>');
+  }
+  return 'Xin lỗi, tôi chưa tìm thấy thông tin chính xác. Vui lòng mô tả rõ hơn hoặc gọi đường dây nóng <a href="tel:02583892377" target="_blank">0258.3.892.377</a>.';
+}
+function openQaModal(){ document.getElementById('qaModal').style.display='block'; renderQAList(); }
+function addQaItem(){
+  const q = document.getElementById('qaQ').value.trim();
+  const a = document.getElementById('qaA').value.trim();
+  if(!q||!a){ alert('Nhập câu hỏi và trả lời'); return; }
+  const arr = loadQA(); arr.unshift({q:aNormalize(q), a}); saveQA(arr); document.getElementById('qaQ').value=''; document.getElementById('qaA').value=''; renderQAList(); alert('Đã thêm Q&A (lưu cục bộ)');
+}
+function renderQAList(){
+  const wrap = document.getElementById('qaList'); const arr = loadQA();
+  wrap.innerHTML = arr.map((it,idx)=>`<div style="padding:8px;border-bottom:1px solid #f0f6ff;display:flex;justify-content:space-between;align-items:center"><div><strong>${escapeHtml(it.q)}</strong><div class="small" style="margin-top:6px">${escapeHtml(it.a)}</div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="back-btn" onclick="deleteQA(${idx})">Xóa</button><button class="back-btn" onclick="copyQA(${idx})">Sửa</button></div></div>`).join('');
+}
+function deleteQA(i){ const arr = loadQA(); arr.splice(i,1); saveQA(arr); renderQAList(); }
+function copyQA(i){ const arr = loadQA(); document.getElementById('qaQ').value = arr[i].q; document.getElementById('qaA').value = arr[i].a; }
+function aNormalize(s){ return s.trim().toLowerCase(); }
+function escapeHtml(s){ if(s===null||s===undefined) return ''; return String(s).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function loadGptConfig(){
+  document.getElementById('gptApiKey').value = localStorage.getItem('gptApiKey') || '';
+  document.getElementById('gptModel').value = localStorage.getItem('gptModel') || 'gpt-3.5-turbo';
+}
+
+
+function getAppsScriptUrl(){
+  // Ưu tiên URL lưu trong localStorage
+  const fromLocal = (localStorage.getItem('appsScriptUrl')||'').trim();
+  if (fromLocal) return fromLocal;
+  // Nếu chưa có, thử dò trong HTML (nếu người dùng có dán sẵn)
+  const m = (document.body.innerHTML.match(/https:\/\/script\.google\.com\/macros\/s\/[^"']+/) || [])[0];
+  if (m) return m;
+  // Mặc định (cần thay thế bằng Web App URL của Google Apps Script)
+  return 'https://script.google.com/macros/s/AKfycbzgvhrIBRPg9B4Xgs7OLkJ9GG9VVzKKvoghiai_eB75gnLEhX14juQBxoqYWRMXlwUf/exec';
+}
+
+//ChatGPT API integration (commented out)/
+  
+  async function callChatGPT(query) {
+    const apiKey = localStorage.getItem('https://script.google.com/macros/s/AKfycbxw5Rr-i5c6u-8Z950uoASTN4TlYvvo2Av9LlTT5e-ufk0MHLMoqkGEBQ5s53PCpezY/exec');
+    const model = localStorage.getItem('gptModel') || 'gpt-3.5-turbo';
+    if (!apiKey) return 'Chưa cấu hình API Key.';
+    try {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: [{ role: 'user', content: query }]
+        })
+      });
+      const data = await response.json();
+      return data.choices[0].message.content;
+    } catch (err) {
+      return 'Lỗi gọi API GPT: ' + err.message;
+    }
+  }
+</script>
+<script>
+(function() {
+  const form = document.getElementById("ratingForm");
+  if (!form) return;
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    // Try to infer group names for 10 quầy: rating1..rating10 or q1..q10
+    const allRadio = Array.from(document.querySelectorAll('input[type="radio"]'));
+    const groupNames = Array.from(new Set(allRadio.map(i => i.name))).filter(Boolean);
+
+    function pickName(i) {
+      const cands = groupNames.filter(n => n.toLowerCase().endsWith(String(i)) || n.toLowerCase() === ('rating' + i) || n.toLowerCase() === ('q' + i));
+      return cands[0] || ('rating' + i);
+    }
+
+    const ratings = [];
+    for (let i = 1; i <= 10; i++) {
+      const name = pickName(i);
+      const chosen = document.querySelector(`input[name="${name}"]:checked`);
+      ratings.push(chosen ? chosen.value : "");
+    }
+
+    const payload = {
+      fullname: (document.getElementById("name") || {}).value || "",
+      phone: (document.getElementById("phone") || {}).value || "",
+      date: (document.getElementById("date") || {}).value || "",
+      ratings: ratings,
+      rating: ratings.join(","),
+      note: (document.getElementById("note") || {}).value || ""
+    };
+
+    // Try to reuse an existing Apps Script URL in the page if present
+    const m = (document.body.innerHTML.match(/https:\/\/script\.google\.com\/macros\/s\/[^"']+/) || [])[0];
+    const url = getAppsScriptUrl();
+
+    fetch(url, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(function(){ 
+      alert("Đã lưu & gửi đánh giá. Cảm ơn bạn!");
+      try { form.reset(); } catch(_) {}
+    }).catch(function(){
+      alert("Không thể gửi lên Google Sheets. Vui lòng thử lại.");
+    });
+  }, { once: true });
+})();
+</script>
+</body>
+</html>
