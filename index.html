@@ -955,12 +955,21 @@ if(!document.getElementById('sv-date').value) document.getElementById('sv-date')
     const arr = loadSurveys(); arr.push(s); localStorage.setItem(SURV_KEY, JSON.stringify(arr));
     
     const payload = {
-      fullname: s.name || "",
-      phone: s.phone || "",
-      date: s.date || "",
-      rating: (s.scores||[]).map(v => (v==null ? "" : v)).join(","),
-      note: s.comment || ""
-    };
+  hoten: s.name || "",
+  sodienthoai: s.phone || "",
+  ngaydanhgia: s.date || "",
+  quay1: (s.scores||[])[0] || "",
+  quay2: (s.scores||[])[1] || "",
+  quay3: (s.scores||[])[2] || "",
+  quay4: (s.scores||[])[3] || "",
+  quay5: (s.scores||[])[4] || "",
+  quay6: (s.scores||[])[5] || "",
+  quay7: (s.scores||[])[6] || "",
+  quay8: (s.scores||[])[7] || "",
+  quay9: (s.scores||[])[8] || "",
+  quay10: (s.scores||[])[9] || "",
+  noidung: document.getElementById("sv-comment")?.value || s.comment || ""
+};
     fetch("https://script.google.com/macros/s/AKfycbxTtCO6-Q06WHaTE7HCy6bwtBg3igxMq9CHTiBZ_ntR6GgIasHNYHAmAYZIO_Gjfbm9Zw/exec", {
       method: "POST",
       mode: "no-cors",
