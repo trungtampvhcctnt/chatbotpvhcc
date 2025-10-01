@@ -193,6 +193,8 @@ header .logo-wrap{margin-left:20px;flex:0 0 auto;margin-right:12px}
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
           </select> / trang
         </label>
       </div>
@@ -959,7 +961,7 @@ if(!document.getElementById('sv-date').value) document.getElementById('sv-date')
       rating: (s.scores||[]).map(v => (v==null ? "" : v)).join(","),
       note: s.comment || ""
     };
-    fetch("https://script.google.com/macros/s/AKfycbzgvhrIBRPg9B4Xgs7OLkJ9GG9VVzKKvoghiai_eB75gnLEhX14juQBxoqYWRMXlwUf/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxTtCO6-Q06WHaTE7HCy6bwtBg3igxMq9CHTiBZ_ntR6GgIasHNYHAmAYZIO_Gjfbm9Zw/exec", {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -1184,13 +1186,13 @@ function getAppsScriptUrl(){
   const m = (document.body.innerHTML.match(/https:\/\/script\.google\.com\/macros\/s\/[^"']+/) || [])[0];
   if (m) return m;
   // Mặc định (cần thay thế bằng Web App URL của Google Apps Script)
-  return 'https://script.google.com/macros/s/AKfycbwZBK-N27nVZpqQAQ8FAq3J8EmTzFYaiTKw79uk_y_ECWfjpltfChbakQgPrqu-s_Xa/exec';
+  return 'https://script.google.com/macros/s/AKfycbxTtCO6-Q06WHaTE7HCy6bwtBg3igxMq9CHTiBZ_ntR6GgIasHNYHAmAYZIO_Gjfbm9Zw/exec';
 }
 
 //ChatGPT API integration (commented out)/
   
   async function callChatGPT(query) {
-    const apiKey = localStorage.getItem('https://script.google.com/macros/s/AKfycbwZBK-N27nVZpqQAQ8FAq3J8EmTzFYaiTKw79uk_y_ECWfjpltfChbakQgPrqu-s_Xa/exec');
+    const apiKey = localStorage.getItem('https://script.google.com/macros/s/AKfycbxTtCO6-Q06WHaTE7HCy6bwtBg3igxMq9CHTiBZ_ntR6GgIasHNYHAmAYZIO_Gjfbm9Zw/exec');
     const model = localStorage.getItem('gptModel') || 'gpt-3.5-turbo';
     if (!apiKey) return 'Chưa cấu hình API Key.';
     try {
