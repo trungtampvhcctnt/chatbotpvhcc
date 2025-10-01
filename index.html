@@ -172,6 +172,8 @@ header .logo-wrap{margin-left:20px;flex:0 0 auto;margin-right:12px}
         <input id="sv-name" class="search" placeholder="Họ tên (bắt buộc)">
         <input id="sv-phone" class="search" placeholder="SĐT (bắt buộc)">
         <input id="sv-date" class="search" type="date" title="Ngày đánh giá">
+        <textarea id="sv-comment" class="search" placeholder="Ý kiến (không bắt buộc)" 
+          style="width:100%;height:80px"></textarea>
         <button class="back-btn" id="save-survey">Lưu & Gửi</button>
         <button class="back-btn" id="view-surveys">Xem danh sách</button>
       </div>
@@ -1264,6 +1266,55 @@ function getAppsScriptUrl(){
     });
   }, { once: true });
 })();
+</script>
+  <script>
+const scriptURL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE"; // thay link Web App của bạn
+
+document.getElementById("save-survey").addEventListener("click", async () => {
+  const hoten = document.getElementById("sv-name").value.trim();
+  const sodienthoai = document.getElementById("sv-phone").value.trim();
+  const ngaydanhgia = document.getElementById("sv-date").value;
+  const noidung = document.getElementById("sv-comment").value.trim();
+
+  // Lấy điểm 10 quầy (giả sử trong #survey-form có radio name="quay1"... "quay10")
+  const quays = {};
+  for (let i = 1; i <= 10; i++) {
+    const checked = document.querySelector(`input[name="quay${i}"]:checked`);
+    quays[`quay${i}`] = checked ? checked.value : "";
+  }
+
+  if (!hoten || !sodienthoai) {
+    alert("Vui lòng nhập Họ tên và SĐT!");
+    return;
+  }
+
+  const data = { hoten, sodienthoai, ngaydanhgia, ...quays, noidung };
+
+  try {
+    const res = await fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"}
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      alert("Gửi đánh giá thành công!");
+      // reset form
+      document.getElementById("sv-name").value = "";
+      document.getElementById("sv-phone").value = "";
+      document.getElementById("sv-date").value = "";
+      document.getElementById("sv-comment").value = "";
+      for (let i = 1; i <= 10; i++) {
+        const checked = document.querySelector(`input[name="quay${i}"]:checked`);
+        if (checked) checked.checked = false;
+      }
+    } else {
+      alert("Có lỗi khi gửi: " + result.message);
+    }
+  } catch (err) {
+    alert("Kết nối thất bại: " + err);
+  }
+});
 </script>
 </body>
 </html>
