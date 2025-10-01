@@ -1211,55 +1211,31 @@ function getAppsScriptUrl(){
   }
 </script>
 <script>
-(function() {
-  const form = document.getElementById("ratingForm");
-  if (!form) return;
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+const scriptURL = "https://script.google.com/macros/s/AKfycbyAvh2rMCcekZtstZohPfh_93NdPz5WZa9xWCfjWN0/dev";
+const form = document.getElementById("feedbackForm");
 
-    // Try to infer group names for 10 quầy: rating1..rating10 or q1..q10
-    const allRadio = Array.from(document.querySelectorAll('input[type="radio"]'));
-    const groupNames = Array.from(new Set(allRadio.map(i => i.name))).filter(Boolean);
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
 
-    function pickName(i) {
-      const cands = groupNames.filter(n => n.toLowerCase().endsWith(String(i)) || n.toLowerCase() === ('rating' + i) || n.toLowerCase() === ('q' + i));
-      return cands[0] || ('rating' + i);
+  fetch(scriptURL, {
+    method: "POST",
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      alert("✅ Đã gửi đánh giá thành công!");
+      form.reset();
+    } else {
+      alert("⚠ Gửi đánh giá thất bại: phản hồi không OK");
+      console.error("Error response:", response);
     }
-
-    const ratings = [];
-    for (let i = 1; i <= 10; i++) {
-      const name = pickName(i);
-      const chosen = document.querySelector(`input[name="${name}"]:checked`);
-      ratings.push(chosen ? chosen.value : "");
-    }
-
-    const payload = {
-      fullname: (document.getElementById("name") || {}).value || "",
-      phone: (document.getElementById("phone") || {}).value || "",
-      date: (document.getElementById("date") || {}).value || "",
-      ratings: ratings,
-      rating: ratings.join(","),
-      note: (document.getElementById("note") || {}).value || ""
-    };
-
-    // Try to reuse an existing Apps Script URL in the page if present
-    const m = (document.body.innerHTML.match(/https:\/\/script\.google\.com\/macros\/s\/[^"']+/) || [])[0];
-    const url = getAppsScriptUrl();
-
-    fetch(url, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
-    }).then(function(){ 
-      alert("Đã lưu & gửi đánh giá. Cảm ơn bạn!");
-      try { form.reset(); } catch(_) {}
-    }).catch(function(){
-      alert("Không thể gửi lên Google Sheets. Vui lòng thử lại.");
-    });
-  }, { once: true });
-})();
+  })
+  .catch(error => {
+    console.error("Lỗi gửi đánh giá:", error);
+    alert("❌ Gửi đánh giá thất bại, xin thử lại sau.");
+  });
+});
 </script>
 </body>
 </html>
