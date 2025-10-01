@@ -166,7 +166,7 @@ header .logo-wrap{margin-left:20px;flex:0 0 auto;margin-right:12px}
       <h2 id="survey-title">Phiếu đánh giá - 10 Quầy</h2>
     </div>
     <div class="card">
-      <p class="small">Chọn điểm cho từng Mức độ (1 = Không hài lòng, 2 = Hài lòng, 3 = Rất hài lòng). Dữ liệu lưu local trên trình duyệt.</p>
+      <p class="small">Chọn điểm cho từng Mức độ (1 = Không hài lòng, 2 = Hài lòng, 3 = Rất hài lòng).</p>
       <div id="survey-form" style="margin-top:10px"></div>
       <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
         <input id="sv-name" class="search" placeholder="Họ tên (bắt buộc)">
@@ -1129,6 +1129,53 @@ const defaultQA = [
   {q:'Tôi có thể hẹn giờ nộp hồ sơ không', a:'Một số địa phương có hỗ trợ đặt lịch hẹn nộp hồ sơ trực tuyến.'},
   {q:'Hồ sơ trực tuyến có giá trị như hồ sơ giấy không', a:'Có, hồ sơ điện tử hợp lệ có giá trị pháp lý như hồ sơ giấy.'},
   {q:'Tôi cần hỗ trợ thêm thì liên hệ ở đâu', a:'Anh/chị có thể liên hệ Bộ phận Một cửa, đường dây nóng hoặc Cổng dịch vụ công.'},
+  {q:'Quầy số 3 tiếp nhận những thủ tục gì?', a:'Quầy số 3 phụ trách đất đai thuộc thẩm quyền cấp xã: cấp sổ đỏ lần đầu, chuyển mục đích sử dụng đất. Anh/chị lấy số thứ tự và đến Quầy số 3.'},
+{q:'Tôi chưa có sổ đỏ, muốn xin cấp lần đầu thì làm ở đâu?', a:'Anh/chị chuẩn bị hồ sơ cấp Giấy chứng nhận lần đầu và lấy số thứ tự đến Quầy số 3.'},
+{q:'Chuyển mục đích sử dụng đất làm ở quầy nào?', a:'Anh/chị nộp hồ sơ tại UBND cấp xã. Vui lòng lấy số thứ tự và đến Quầy số 3.'},
+{q:'Hồ sơ xin cấp sổ đỏ lần đầu gồm những gì?', a:'Đơn đề nghị, giấy tờ chứng minh quyền sử dụng đất, giấy tờ tùy thân. Anh/chị đến Quầy số 3.'},
+{q:'Thời gian cấp sổ đỏ lần đầu bao lâu?', a:'Thường từ 30 ngày làm việc. Anh/chị nộp hồ sơ tại Quầy số 3.'},
+{q:'Chuyển mục đích từ đất nông nghiệp sang đất ở cần làm gì?', a:'Anh/chị cần nộp đơn xin chuyển mục đích sử dụng đất, kèm sổ đỏ và giấy tờ liên quan. Vui lòng đến Quầy số 3.'},
+{q:'Xin xác nhận nguồn gốc đất tại xã thì đến đâu?', a:'Anh/chị lấy số thứ tự và đến Quầy số 3 để được xác nhận.'},
+{q:'Có thể nộp hồ sơ đất đai cấp xã qua mạng không?', a:'Một số địa phương hỗ trợ nộp trực tuyến, nhưng anh/chị vẫn cần lấy số và đến Quầy số 3 khi cần đối chiếu giấy tờ.'},
+{q:'Hồ sơ chuyển mục đích đất có phải đo vẽ bản đồ không?', a:'Có, trường hợp thay đổi ranh giới, diện tích sẽ cần đo đạc. Anh/chị lấy số thứ tự và đến Quầy số 3 để được hướng dẫn.'},
+{q:'Nếu xã trả hồ sơ đất đai thì xử lý thế nào?', a:'Anh/chị bổ sung theo yêu cầu rồi nộp lại. Hồ sơ được tiếp nhận tại Quầy số 3.'},
+{q:'Quầy số 3 tiếp nhận những thủ tục gì?', a:'Quầy số 3 phụ trách đất đai thuộc thẩm quyền cấp xã: cấp sổ đỏ lần đầu, chuyển mục đích sử dụng đất. Anh/chị lấy số thứ tự và đến Quầy số 3.'},
+{q:'Tôi chưa có sổ đỏ, muốn xin cấp lần đầu thì làm ở đâu?', a:'Anh/chị chuẩn bị hồ sơ cấp Giấy chứng nhận lần đầu và lấy số thứ tự đến Quầy số 3.'},
+{q:'Chuyển mục đích sử dụng đất làm ở quầy nào?', a:'Anh/chị nộp hồ sơ tại UBND cấp xã. Vui lòng lấy số thứ tự và đến Quầy số 3.'},
+{q:'Hồ sơ xin cấp sổ đỏ lần đầu gồm những gì?', a:'Đơn đề nghị, giấy tờ chứng minh quyền sử dụng đất, giấy tờ tùy thân. Anh/chị đến Quầy số 3.'},
+{q:'Thời gian cấp sổ đỏ lần đầu bao lâu?', a:'Thường từ 30 ngày làm việc. Anh/chị nộp hồ sơ tại Quầy số 3.'},
+{q:'Chuyển mục đích từ đất nông nghiệp sang đất ở cần làm gì?', a:'Anh/chị cần nộp đơn xin chuyển mục đích sử dụng đất, kèm sổ đỏ và giấy tờ liên quan. Vui lòng đến Quầy số 3.'},
+{q:'Xin xác nhận nguồn gốc đất tại xã thì đến đâu?', a:'Anh/chị lấy số thứ tự và đến Quầy số 3 để được xác nhận.'},
+{q:'Có thể nộp hồ sơ đất đai cấp xã qua mạng không?', a:'Một số địa phương hỗ trợ nộp trực tuyến, nhưng anh/chị vẫn cần lấy số và đến Quầy số 3 khi cần đối chiếu giấy tờ.'},
+{q:'Hồ sơ chuyển mục đích đất có phải đo vẽ bản đồ không?', a:'Có, trường hợp thay đổi ranh giới, diện tích sẽ cần đo đạc. Anh/chị lấy số thứ tự và đến Quầy số 3 để được hướng dẫn.'},
+{q:'Nếu xã trả hồ sơ đất đai thì xử lý thế nào?', a:'Anh/chị bổ sung theo yêu cầu rồi nộp lại. Hồ sơ được tiếp nhận tại Quầy số 3.'},
+{q:'Quầy số 4 giải quyết thủ tục gì?', a:'Quầy số 4 phụ trách lĩnh vực xây dựng thuộc thẩm quyền cấp xã. Anh/chị lấy số thứ tự và đến Quầy số 4 để làm thủ tục cấp phép xây dựng, sửa chữa, cải tạo.'},
+{q:'Xin phép xây dựng nhà ở riêng lẻ thì đến đâu?', a:'Anh/chị chuẩn bị hồ sơ và lấy số thứ tự đến Quầy số 4 để nộp hồ sơ xin cấp phép.'},
+{q:'Sửa chữa cải tạo nhà có cần giấy phép không?', a:'Nếu sửa chữa ảnh hưởng kết cấu hoặc mặt ngoài, cần giấy phép. Anh/chị đến Quầy số 4.'},
+{q:'Thời gian cấp phép xây dựng bao lâu?', a:'Khoảng 15 ngày làm việc kể từ khi hồ sơ hợp lệ. Hồ sơ tiếp nhận tại Quầy số 4.'},
+{q:'Hồ sơ xin phép xây dựng gồm gì?', a:'Đơn đề nghị, bản vẽ thiết kế, giấy tờ đất đai. Anh/chị lấy số thứ tự và đến Quầy số 4.'},
+{q:'Có bị phạt nếu xây dựng không phép không?', a:'Có, sẽ bị xử phạt theo quy định. Để tránh vi phạm, anh/chị cần đến Quầy số 4 để xin phép trước khi xây dựng.'},
+{q:'Quầy số 5 giải quyết những hồ sơ gì?', a:'Quầy số 5 phụ trách hộ tịch (kết hôn, xác nhận tình trạng hôn nhân), văn hóa, y tế, giáo dục, nội vụ, công thương. Anh/chị lấy số thứ tự và đến Quầy số 5.'},
+{q:'Đăng ký kết hôn làm ở đâu?', a:'Anh/chị chuẩn bị hồ sơ và đến Quầy số 5 để đăng ký kết hôn.'},
+{q:'Xác nhận tình trạng hôn nhân nộp ở đâu?', a:'Anh/chị lấy số thứ tự và đến Quầy số 5 để nộp hồ sơ xác nhận tình trạng hôn nhân.'},
+{q:'Hồ sơ y tế, giáo dục nộp ở đâu?', a:'Anh/chị đến Quầy số 5 để nộp hồ sơ thuộc lĩnh vực văn hóa, y tế, giáo dục, nội vụ, công thương.'},
+{q:'Quầy số 6 giải quyết thủ tục gì?', a:'Quầy số 6 phụ trách bảo trợ xã hội, người có công. Anh/chị lấy số thứ tự và đến Quầy số 6 để nộp hồ sơ trợ cấp xã hội hoặc chế độ người có công.'},
+{q:'Xin trợ cấp xã hội hàng tháng làm ở đâu?', a:'Anh/chị chuẩn bị hồ sơ và lấy số thứ tự đến Quầy số 6.'},
+{q:'Thủ tục người có công nộp ở đâu?', a:'Anh/chị lấy số thứ tự và đến Quầy số 6 để nộp hồ sơ hưởng chế độ.'},
+{q:'Quầy số 6 giải quyết thủ tục gì?', a:'Quầy số 6 phụ trách bảo trợ xã hội, người có công. Anh/chị lấy số thứ tự và đến Quầy số 6 để nộp hồ sơ trợ cấp xã hội hoặc chế độ người có công.'},
+{q:'Xin trợ cấp xã hội hàng tháng làm ở đâu?', a:'Anh/chị chuẩn bị hồ sơ và lấy số thứ tự đến Quầy số 6.'},
+{q:'Thủ tục người có công nộp ở đâu?', a:'Anh/chị lấy số thứ tự và đến Quầy số 6 để nộp hồ sơ hưởng chế độ.'},
+{q:'Quầy số 7 phụ trách thủ tục gì?', a:'Quầy số 7 tiếp nhận hồ sơ chứng thực: sao y bản chính, chứng thực chữ ký, giấy ủy quyền, sơ yếu lý lịch. Anh/chị lấy số thứ tự và đến Quầy số 7.'},
+{q:'Muốn sao y bản chính thì đến đâu?', a:'Anh/chị lấy số thứ tự và đến Quầy số 7 để sao y bản chính.'},
+{q:'Chứng thực chữ ký làm ở đâu?', a:'Anh/chị lấy số thứ tự và đến Quầy số 7 để chứng thực chữ ký.'},
+{q:'Có thể chứng thực giấy ủy quyền tại Bộ phận Một cửa không?', a:'Có, anh/chị lấy số thứ tự và đến Quầy số 7.'},
+{q:'Quầy số 8 giải quyết hồ sơ gì?', a:'Quầy số 8 phụ trách hộ tịch: khai sinh, khai tử, cải chính, trích lục hộ tịch. Anh/chị lấy số thứ tự và đến Quầy số 8.'},
+{q:'Đăng ký khai sinh cho con thì đến đâu?', a:'Anh/chị chuẩn bị giấy tờ cần thiết và đến Quầy số 8.'},
+{q:'Xin cấp bản sao trích lục khai sinh ở đâu?', a:'Anh/chị lấy số thứ tự và đến Quầy số 8 để xin trích lục hộ tịch.'},
+{q:'Quầy số 9 phụ trách thủ tục gì?', a:'Quầy số 9 tiếp nhận hồ sơ đăng ký kinh doanh, thay đổi thông tin, chấm dứt hoạt động. Anh/chị lấy số thứ tự và đến Quầy số 9.'},
+{q:'Muốn đăng ký hộ kinh doanh thì đến đâu?', a:'Anh/chị chuẩn bị hồ sơ và lấy số thứ tự đến Quầy số 9.'},
+{q:'Chấm dứt hộ kinh doanh thì làm ở đâu?', a:'Anh/chị nộp hồ sơ tại Quầy số 9 sau khi lấy số thứ tự.'},
+{q:'Thay đổi nội dung đăng ký kinh doanh thì đến quầy nào?', a:'Anh/chị lấy số thứ tự và đến Quầy số 9 để nộp hồ sơ thay đổi.'},
 ];
 function loadQA(){ const s=localStorage.getItem(QA_KEY); return s?JSON.parse(s):defaultQA.slice(); }
 function saveQA(a){ localStorage.setItem(QA_KEY, JSON.stringify(a)); }
