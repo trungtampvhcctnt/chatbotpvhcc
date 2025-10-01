@@ -132,10 +132,12 @@ header .logo-wrap{margin-left:20px;flex:0 0 auto;margin-right:12px}
       <div class="hotline-number"><a href="tel:02583892377" target="_blank">0258.3.892.377</a></div>
       <div class="hotline-meta">Địa chỉ: 480 Lương Định Của, Phường Tây Nha Trang, TP. Nha Trang, Khánh Hòa</div>
       <div class="hotline-meta">Giờ làm việc: 7:00–11:30 và 13:30–17:30, Thứ Hai–Thứ Sáu và buổi sáng Thứ Bảy hàng tuần</div>
-      <div class="hotline-meta">• Cán bộ tiếp nhận phản ánh kiến nghị: Thảo</div>
+      <div class="hotline-meta">• Cán bộ tiếp nhận phản ánh kiến nghị: Bà Luân Thị Bích Thảo</div>
       <div class="hotline-meta">• Chủ tịch UBND phường: Ông Nguyễn Đình Anh Minh</div>
-      <div class="hotline-meta">• Lãnh đạo Trung tâm Phục vụ hành chính công: Ông Nguyễn Chí Danh, Phó Chủ tịch UBND - Giám đốc Trung tâm</div>
-      <div class="hotline-meta">• Ông Nguyễn Duy Thức, Phó Giám đốc Trung tâm Phục vụ hành chính công</div>
+      <div class="hotline-meta">• Lãnh đạo Trung tâm Phục vụ hành chính công: </div>
+      <div class="hotline-meta">- Ông Nguyễn Chí Danh, Phó Chủ tịch UBND - Giám đốc Trung tâm</div>
+      <div class="hotline-meta">- Ông Nguyễn Duy Thức, Phó Giám đốc Trung tâm Phục vụ hành chính công</div>
+      <div class="hotline-meta">• Ông Lê Ngọc Hồi, Chuyên viên - Đầu mối phụ trách KSTTHC </div>
       <div class="hotline-meta"><strong>2. Phòng Cải cách hành chính sở Nội vụ, tỉnh Khánh Hòa</strong></div>
       <div class="hotline-meta">• Địa chỉ: 05 Pasreur, phường Nha Trang, tỉnh Khánh Hoà</div>
       <div class="hotline-meta">• Điện thoại: <a href="tel:02583810440" target="_blank">0258.3810.440</a></div>
@@ -1182,13 +1184,13 @@ function getAppsScriptUrl(){
   const m = (document.body.innerHTML.match(/https:\/\/script\.google\.com\/macros\/s\/[^"']+/) || [])[0];
   if (m) return m;
   // Mặc định (cần thay thế bằng Web App URL của Google Apps Script)
-  return 'https://script.google.com/macros/s/AKfycbzgvhrIBRPg9B4Xgs7OLkJ9GG9VVzKKvoghiai_eB75gnLEhX14juQBxoqYWRMXlwUf/exec';
+  return 'https://script.google.com/macros/s/AKfycbwZBK-N27nVZpqQAQ8FAq3J8EmTzFYaiTKw79uk_y_ECWfjpltfChbakQgPrqu-s_Xa/exec';
 }
 
 //ChatGPT API integration (commented out)/
   
   async function callChatGPT(query) {
-    const apiKey = localStorage.getItem('https://script.google.com/macros/s/AKfycbxw5Rr-i5c6u-8Z950uoASTN4TlYvvo2Av9LlTT5e-ufk0MHLMoqkGEBQ5s53PCpezY/exec');
+    const apiKey = localStorage.getItem('https://script.google.com/macros/s/AKfycbwZBK-N27nVZpqQAQ8FAq3J8EmTzFYaiTKw79uk_y_ECWfjpltfChbakQgPrqu-s_Xa/exec');
     const model = localStorage.getItem('gptModel') || 'gpt-3.5-turbo';
     if (!apiKey) return 'Chưa cấu hình API Key.';
     try {
@@ -1211,31 +1213,55 @@ function getAppsScriptUrl(){
   }
 </script>
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbyAvh2rMCcekZtstZohPfh_93NdPz5WZa9xWCfjWN0/dev";
-const form = document.getElementById("feedbackForm");
+(function() {
+  const form = document.getElementById("ratingForm");
+  if (!form) return;
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const formData = new FormData(form);
+    // Try to infer group names for 10 quầy: rating1..rating10 or q1..q10
+    const allRadio = Array.from(document.querySelectorAll('input[type="radio"]'));
+    const groupNames = Array.from(new Set(allRadio.map(i => i.name))).filter(Boolean);
 
-  fetch(scriptURL, {
-    method: "POST",
-    body: formData
-  })
-  .then(response => {
-    if (response.ok) {
-      alert("✅ Đã gửi đánh giá thành công!");
-      form.reset();
-    } else {
-      alert("⚠ Gửi đánh giá thất bại: phản hồi không OK");
-      console.error("Error response:", response);
+    function pickName(i) {
+      const cands = groupNames.filter(n => n.toLowerCase().endsWith(String(i)) || n.toLowerCase() === ('rating' + i) || n.toLowerCase() === ('q' + i));
+      return cands[0] || ('rating' + i);
     }
-  })
-  .catch(error => {
-    console.error("Lỗi gửi đánh giá:", error);
-    alert("❌ Gửi đánh giá thất bại, xin thử lại sau.");
-  });
-});
+
+    const ratings = [];
+    for (let i = 1; i <= 10; i++) {
+      const name = pickName(i);
+      const chosen = document.querySelector(`input[name="${name}"]:checked`);
+      ratings.push(chosen ? chosen.value : "");
+    }
+
+    const payload = {
+      fullname: (document.getElementById("name") || {}).value || "",
+      phone: (document.getElementById("phone") || {}).value || "",
+      date: (document.getElementById("date") || {}).value || "",
+      ratings: ratings,
+      rating: ratings.join(","),
+      note: (document.getElementById("note") || {}).value || ""
+    };
+
+    // Try to reuse an existing Apps Script URL in the page if present
+    const m = (document.body.innerHTML.match(/https:\/\/script\.google\.com\/macros\/s\/[^"']+/) || [])[0];
+    const url = getAppsScriptUrl();
+
+    fetch(url, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(function(){ 
+      alert("Đã lưu & gửi đánh giá. Cảm ơn bạn!");
+      try { form.reset(); } catch(_) {}
+    }).catch(function(){
+      alert("Không thể gửi lên Google Sheets. Vui lòng thử lại.");
+    });
+  }, { once: true });
+})();
 </script>
 </body>
 </html>
