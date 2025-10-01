@@ -172,8 +172,6 @@ header .logo-wrap{margin-left:20px;flex:0 0 auto;margin-right:12px}
         <input id="sv-name" class="search" placeholder="Họ tên (bắt buộc)">
         <input id="sv-phone" class="search" placeholder="SĐT (bắt buộc)">
         <input id="sv-date" class="search" type="date" title="Ngày đánh giá">
-        <textarea id="sv-comment" class="search" placeholder="Ý kiến (không bắt buộc)" 
-          style="width:100%;height:80px"></textarea>
         <button class="back-btn" id="save-survey">Lưu & Gửi</button>
         <button class="back-btn" id="view-surveys">Xem danh sách</button>
       </div>
@@ -1216,54 +1214,56 @@ function getAppsScriptUrl(){
     }
   }
 </script>
-  <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbxTtCO6-Q06WHaTE7HCy6bwtBg3igxMq9CHTiBZ_ntR6GgIasHNYHAmAYZIO_Gjfbm9Zw/exec"; // thay link Web App của bạn
+<script>
+(function() {
+  const form = document.getElementById("ratingForm");
+  if (!form) return;
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-document.getElementById("save-survey").addEventListener("click", async () => {
-  const hoten = document.getElementById("sv-name").value.trim();
-  const sodienthoai = document.getElementById("sv-phone").value.trim();
-  const ngaydanhgia = document.getElementById("sv-date").value;
-  const noidung = document.getElementById("sv-comment").value.trim();
+    // Try to infer group names for 10 quầy: rating1..rating10 or q1..q10
+    const allRadio = Array.from(document.querySelectorAll('input[type="radio"]'));
+    const groupNames = Array.from(new Set(allRadio.map(i => i.name))).filter(Boolean);
 
-  // Lấy điểm 10 quầy (giả sử trong #survey-form có radio name="quay1"... "quay10")
-  const quays = {};
-  for (let i = 1; i <= 10; i++) {
-    const checked = document.querySelector(`input[name="quay${i}"]:checked`);
-    quays[`quay${i}`] = checked ? checked.value : "";
-  }
-
-  if (!hoten || !sodienthoai) {
-    alert("Vui lòng nhập Họ tên và SĐT!");
-    return;
-  }
-
-  const data = { hoten, sodienthoai, ngaydanhgia, ...quays, noidung };
-
-  try {
-    const res = await fetch(scriptURL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {"Content-Type": "application/json"}
-    });
-    const result = await res.json();
-    if (result.status === "success") {
-      alert("Gửi đánh giá thành công!");
-      // reset form
-      document.getElementById("sv-name").value = "";
-      document.getElementById("sv-phone").value = "";
-      document.getElementById("sv-date").value = "";
-      document.getElementById("sv-comment").value = "";
-      for (let i = 1; i <= 10; i++) {
-        const checked = document.querySelector(`input[name="quay${i}"]:checked`);
-        if (checked) checked.checked = false;
-      }
-    } else {
-      alert("Có lỗi khi gửi: " + result.message);
+    function pickName(i) {
+      const cands = groupNames.filter(n => n.toLowerCase().endsWith(String(i)) || n.toLowerCase() === ('rating' + i) || n.toLowerCase() === ('q' + i));
+      return cands[0] || ('rating' + i);
     }
-  } catch (err) {
-    alert("Kết nối thất bại: " + err);
-  }
-});
+
+    const ratings = [];
+    for (let i = 1; i <= 10; i++) {
+      const name = pickName(i);
+      const chosen = document.querySelector(`input[name="${name}"]:checked`);
+      ratings.push(chosen ? chosen.value : "");
+    }
+
+    const payload = {
+      fullname: (document.getElementById("name") || {}).value || "",
+      phone: (document.getElementById("phone") || {}).value || "",
+      date: (document.getElementById("date") || {}).value || "",
+      ratings: ratings,
+      rating: ratings.join(","),
+      note: (document.getElementById("note") || {}).value || ""
+    };
+
+    // Try to reuse an existing Apps Script URL in the page if present
+    const m = (document.body.innerHTML.match(/https:\/\/script\.google\.com\/macros\/s\/[^"']+/) || [])[0];
+    const url = getAppsScriptUrl();
+
+    fetch(url, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(function(){ 
+      alert("Đã lưu & gửi đánh giá. Cảm ơn bạn!");
+      try { form.reset(); } catch(_) {}
+    }).catch(function(){
+      alert("Không thể gửi lên Google Sheets. Vui lòng thử lại.");
+    });
+  }, { once: true });
+})();
 </script>
 </body>
 </html>
