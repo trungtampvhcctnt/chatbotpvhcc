@@ -135,9 +135,9 @@ header .logo-wrap{margin-left:20px;flex:0 0 auto;margin-right:12px}
       <div class="hotline-meta">• Cán bộ tiếp nhận phản ánh kiến nghị: Bà Luân Thị Bích Thảo</div>
       <div class="hotline-meta">• Chủ tịch UBND phường: Ông Nguyễn Đình Anh Minh</div>
       <div class="hotline-meta">• Lãnh đạo Trung tâm Phục vụ hành chính công: </div>
-      <div class="hotline-meta">- Ông Nguyễn Chí Danh, Phó Chủ tịch UBND - Giám đốc Trung tâm</div>
-      <div class="hotline-meta">- Ông Nguyễn Duy Thức, Phó Giám đốc Trung tâm Phục vụ hành chính công</div>
-      <div class="hotline-meta">• Đầu mối phụ trách Kiểm soát TTHC: Ông Lê Ngọc Hồi, Chuyên viên</div>
+      <div class="hotline-meta">- Ông Nguyễn Chí Danh, Phó Chủ tịch UBND - Giám đốc Trung tâm - SĐT: 0903.575.931</div>
+      <div class="hotline-meta">- Ông Nguyễn Duy Thức, Phó Giám đốc Trung tâm Phục vụ hành chính công - SĐT: 0974.332.591</div>
+      <div class="hotline-meta">• Đầu mối phụ trách Kiểm soát TTHC: Ông Lê Ngọc Hồi, Chuyên viên - SĐT: 0987.449.659</div>
       <div class="hotline-meta"><strong>2. Phòng Cải cách hành chính sở Nội vụ, tỉnh Khánh Hòa</strong></div>
       <div class="hotline-meta">• Địa chỉ: 05 Pasreur, phường Nha Trang, tỉnh Khánh Hoà</div>
       <div class="hotline-meta">• Điện thoại: <a href="tel:02583810440" target="_blank">0258.3810.440</a></div>
@@ -1073,6 +1073,62 @@ const defaultQA = [
   {q:'Hi, Xin chào', a:'Hi, anh/chị cần tôi hỗ trợ nội dung gì.'},
    {q:'Bạn có thể giúp tôi nội dung gì', a:'Tôi có thể giúp anh/chị tìm kiếm thủ tục hành chính, nộp hồ sơ trực tuyến và hướng dẫn mình khai thông tin trong trờ khai ạ.'},
    {q:'thời gian xử lý hồ sơ', a:'Tùy thủ tục; nhiều thủ tục có quy định cụ thể (7, 15, 30 ngày).'},
+  {q:'Tôi có thể nộp hồ sơ bằng cách nào', a:'Anh/chị có thể nộp trực tiếp tại Bộ phận Một cửa, qua bưu chính công ích hoặc nộp trực tuyến trên Cổng dịch vụ công.'},
+  {q:'Cần chuẩn bị giấy tờ gì khi nộp hồ sơ', a:'Mỗi thủ tục có thành phần hồ sơ riêng, thường gồm: đơn/tờ khai theo mẫu, giấy tờ tùy thân và các tài liệu liên quan.'},
+  {q:'Làm thế nào để tra cứu tình trạng hồ sơ', a:'Anh/chị có thể tra cứu trực tuyến bằng mã hồ sơ trên Cổng dịch vụ công hoặc liên hệ Bộ phận Một cửa.'},
+  {q:'Nếu hồ sơ bị thiếu thì sao', a:'Cán bộ tiếp nhận sẽ hướng dẫn bổ sung, anh/chị có thể nộp bổ sung trực tiếp hoặc qua trực tuyến.'},
+  {q:'Có phải nộp lệ phí không', a:'Một số thủ tục có quy định phí, lệ phí. Thông tin sẽ được thông báo khi tiếp nhận hồ sơ.'},
+  {q:'Có thể ủy quyền cho người khác nộp hồ sơ không', a:'Được, nhưng phải có giấy ủy quyền hoặc văn bản ủy quyền hợp pháp.'},
+  {q:'Tôi có thể nhận kết quả bằng cách nào', a:'Nhận trực tiếp tại Bộ phận Một cửa, qua bưu điện hoặc tải bản điện tử nếu có hỗ trợ.'},
+  {q:'Nếu quá thời hạn chưa có kết quả thì sao', a:'Anh/chị có thể phản ánh qua đường dây nóng hoặc gửi kiến nghị trên Cổng dịch vụ công.'},
+
+  // Hộ tịch
+  {q:'Đăng ký khai sinh cần giấy tờ gì', a:'Cần giấy chứng sinh, giấy tờ tùy thân của cha/mẹ, và tờ khai đăng ký khai sinh.'},
+  {q:'Đăng ký kết hôn gồm những giấy tờ gì', a:'Cần CMND/CCCD, sổ hộ khẩu hoặc giấy tờ cư trú, và tờ khai đăng ký kết hôn.'},
+  {q:'Có thể đăng ký khai tử hộ không', a:'Người thân thích hoặc đại diện hợp pháp có thể làm thủ tục đăng ký khai tử.'},
+  {q:'Chứng thực bản sao từ bản chính có mất phí không', a:'Có, mức phí theo quy định của pháp luật về chứng thực.'},
+  {q:'Chứng thực chữ ký cần gì', a:'Chỉ cần giấy tờ tùy thân hợp lệ và văn bản cần chứng thực chữ ký.'},
+
+  // Đất đai
+  {q:'Làm sổ đỏ lần đầu cần hồ sơ gì', a:'Cần đơn đăng ký, giấy tờ về quyền sử dụng đất, chứng minh nhân dân, hộ khẩu và giấy tờ liên quan.'},
+  {q:'Tách thửa đất có mất phí không', a:'Có thu phí đo đạc, thẩm định và cấp Giấy chứng nhận theo quy định.'},
+  {q:'Thời gian cấp sổ đỏ bao lâu', a:'Thường từ 15–30 ngày làm việc kể từ ngày nhận đủ hồ sơ hợp lệ.'},
+  {q:'Chuyển nhượng quyền sử dụng đất cần hồ sơ gì', a:'Hợp đồng chuyển nhượng đã công chứng, Giấy chứng nhận quyền sử dụng đất, giấy tờ tùy thân.'},
+  {q:'Có thể làm thủ tục đất đai online không', a:'Một số thủ tục đã hỗ trợ nộp trực tuyến trên Cổng dịch vụ công.'},
+
+  // Xây dựng
+  {q:'Xin phép xây dựng nhà ở cần gì', a:'Đơn đề nghị cấp phép xây dựng, bản vẽ thiết kế, giấy tờ về quyền sử dụng đất.'},
+  {q:'Xây dựng không phép có bị phạt không', a:'Có, sẽ bị xử phạt hành chính và buộc khắc phục theo quy định.'},
+  {q:'Xin cấp phép sửa chữa cải tạo nhà có cần không', a:'Có, nếu sửa chữa làm thay đổi kết cấu hoặc mặt ngoài công trình.'},
+  {q:'Thời gian cấp phép xây dựng bao lâu', a:'Thường là 15 ngày làm việc kể từ ngày nhận đủ hồ sơ hợp lệ.'},
+
+  // Doanh nghiệp
+  {q:'Đăng ký kinh doanh ở đâu', a:'Nộp hồ sơ tại Phòng Đăng ký kinh doanh – Sở Kế hoạch và Đầu tư hoặc trực tuyến.'},
+  {q:'Đăng ký hộ kinh doanh cá thể cần gì', a:'Cần CMND/CCCD, đơn đăng ký hộ kinh doanh và hợp đồng thuê địa điểm (nếu có).'},
+  {q:'Thành lập công ty mất bao lâu', a:'Thường 3–5 ngày làm việc nếu hồ sơ đầy đủ, hợp lệ.'},
+  {q:'Có thể thay đổi ngành nghề kinh doanh không', a:'Có, doanh nghiệp nộp hồ sơ thay đổi tại Phòng Đăng ký kinh doanh.'},
+
+  // Bảo hiểm, lao động
+  {q:'Tham gia bảo hiểm xã hội tự nguyện thế nào', a:'Anh/chị đến cơ quan BHXH hoặc đăng ký trực tuyến trên Cổng BHXH Việt Nam.'},
+  {q:'Xin cấp lại sổ BHXH khi mất', a:'Nộp tờ khai tham gia, điều chỉnh thông tin BHXH và CMND/CCCD.'},
+  {q:'Xin cấp giấy phép lao động cho người nước ngoài ở đâu', a:'Nộp tại Sở Lao động - Thương binh và Xã hội nơi người lao động làm việc.'},
+
+  // Thường trú, tạm trú
+  {q:'Đăng ký thường trú cần gì', a:'Giấy tờ chứng minh chỗ ở hợp pháp, CMND/CCCD, sổ hộ khẩu.'},
+  {q:'Đăng ký tạm trú mất bao lâu', a:'Thường giải quyết trong 3 ngày làm việc kể từ khi nhận đủ hồ sơ.'},
+  {q:'Có thể khai báo tạm vắng online không', a:'Có, qua Cổng dịch vụ công quản lý cư trú.'},
+
+  // Khác
+  {q:'Thủ tục đổi căn cước công dân', a:'Đến Công an cấp huyện hoặc cấp tỉnh nơi cư trú, mang theo CMND/CCCD cũ và sổ hộ khẩu (nếu có).'},
+  {q:'Làm hộ chiếu cần gì', a:'Tờ khai, CMND/CCCD, sổ hộ khẩu hoặc giấy xác nhận cư trú.'},
+  {q:'Cấp giấy phép lái xe quốc tế ở đâu', a:'Nộp tại Tổng cục Đường bộ Việt Nam hoặc trực tuyến qua Cổng dịch vụ công.'},
+  {q:'Có hỗ trợ người khuyết tật làm thủ tục không', a:'Có, cán bộ sẽ hỗ trợ trực tiếp và ưu tiên xử lý hồ sơ cho người khuyết tật.'},
+  {q:'Có cần mang bản gốc giấy tờ không', a:'Có, để đối chiếu khi nộp hồ sơ hoặc chứng thực.'},
+  {q:'Nộp hồ sơ qua bưu điện thì nhận kết quả thế nào', a:'Kết quả sẽ được trả về qua bưu điện đến địa chỉ anh/chị đăng ký.'},
+  {q:'Có thể thanh toán lệ phí online không', a:'Có, nhiều thủ tục hỗ trợ thanh toán trực tuyến qua Cổng dịch vụ công.'},
+  {q:'Tôi có thể hẹn giờ nộp hồ sơ không', a:'Một số địa phương có hỗ trợ đặt lịch hẹn nộp hồ sơ trực tuyến.'},
+  {q:'Hồ sơ trực tuyến có giá trị như hồ sơ giấy không', a:'Có, hồ sơ điện tử hợp lệ có giá trị pháp lý như hồ sơ giấy.'},
+  {q:'Tôi cần hỗ trợ thêm thì liên hệ ở đâu', a:'Anh/chị có thể liên hệ Bộ phận Một cửa, đường dây nóng hoặc Cổng dịch vụ công.'},
 ];
 function loadQA(){ const s=localStorage.getItem(QA_KEY); return s?JSON.parse(s):defaultQA.slice(); }
 function saveQA(a){ localStorage.setItem(QA_KEY, JSON.stringify(a)); }
