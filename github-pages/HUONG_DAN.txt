@@ -1,0 +1,18 @@
+HƯỚNG DẪN TRIỂN KHAI GITHUB PAGES CHO TTPVHCC TÂY NHA TRANG
+============================================================
+
+1. Thư mục này chứa toàn bộ bản HTML tĩnh độc lập:
+   - index.html   : Trang chủ, tra cứu, Kiosk & Trợ lý ảo AI
+   - phieu.html   : Kiosk bốc số quầy điện tử
+   - ho-so.html   : Tra cứu tiến độ hồ sơ Một cửa
+   - duong-day.html: Danh bạ đường dây nóng
+   - chat-config.js: Động cơ xử lý dữ liệu và trợ lý ảo
+   - .nojekyll    : Cấu hình bắt buộc để GitHub Pages không lọc file
+
+2. Cách chạy trực tiếp:
+   - Mở file index.html bằng bất kỳ trình duyệt nào (Chrome, Edge, Safari, Firefox).
+   - Không cần cài đặt Node.js hay web server.
+
+3. Cách triển khai lên GitHub Pages:
+   - Đẩy toàn bộ nội dung thư mục này lên branch 'gh-pages' hoặc cấu hình GitHub Actions
+     với file .github/workflows/deploy.yml đã được tạo sẵn ở thư mục gốc.

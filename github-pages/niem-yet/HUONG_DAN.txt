@@ -1,0 +1,30 @@
+BẢNG NIÊM YẾT TTHC
+Trung tâm Phục vụ Hành chính công phường Tây Nha Trang
+
+Đây là bản sao giao diện 100% của https://dieuphoi.netlify.app/niemyet
+đã cấu hình sẵn cho Phường Tây Nha Trang, nguồn dữ liệu tỉnh Khánh Hoà
+(Cổng Dịch vụ công quốc gia / sheet điều phối của hệ thống gốc).
+
+CÁCH MỞ
+1. Cách nhanh nhất: mở trực tiếp trang gốc rồi bấm bánh răng (Cấu hình kiosk):
+   - Tỉnh/TP: Khánh Hoà
+   - Tên trung tâm: TRUNG TÂM PHỤC VỤ HÀNH CHÍNH CÔNG PHƯỜNG TÂY NHA TRANG
+   - Cấp thực hiện: Cấp Tỉnh + Cấp Xã
+   - Địa chỉ: Số 480 Lương Định Của, phường Tây Nha Trang, tỉnh Khánh Hòa
+   Link: https://dieuphoi.netlify.app/niemyet
+
+2. Chạy bản trong thư mục này (cần máy chủ web, không mở file://):
+   - Cài Python rồi chạy:  python3 -m http.server 8080
+   - Mở trình duyệt:       http://localhost:8080
+   Ứng dụng tự điền tên cơ quan, tỉnh Khánh Hoà, địa chỉ trụ sở.
+
+LƯU Ý
+- Dữ liệu TTHC được tải trực tuyến từ nguồn của dieuphoi.netlify.app
+  (Google Sheets + kho dữ liệu quốc gia trên GitHub). Cần có Internet.
+- Nút "Cấu hình" (bánh răng vàng) cho phép đổi tên, cấp niêm yết, SĐT, giờ làm việc.
+- Nút nửa đỏ/trắng đổi màu thẻ lĩnh vực (đỏ như ảnh mẫu / trắng).
+- Nút "Cấu hình" trên thanh công cụ dùng để ẩn/hiện từng lĩnh vực.
+- Lần đầu mở có thể mất 10–20 giây để tải dữ liệu quốc gia.
+
+Nguồn giao diện / dữ liệu: https://dieuphoi.netlify.app/niemyet
+Logo CCHC: kho ChippedTopaz/dieu-phoi
