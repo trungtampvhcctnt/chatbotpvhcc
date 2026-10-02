@@ -160,7 +160,7 @@ Cơ quan: ${db.centerInfo.name} (${db.centerInfo.shortName})
 Giờ làm việc: Sáng từ 7:00 đến 11:30; Chiều từ 13:30 đến 17:00 (Thứ 2 đến Thứ 6 hàng tuần; nghỉ Thứ 7, Chủ Nhật và ngày lễ, tết).
 Chủ tịch UBND phường: Ông Nguyễn Đình Anh Minh | Phụ trách TT: Ông Nguyễn Công Danh (Phó Chủ tịch)
 Cán bộ tiếp nhận phản ánh kiến nghị TTHC: Ông Lê Ngọc Hồi (0258.3.892.377)
-Kho biểu mẫu trực tuyến: [Bấm vào đây](https://dieuphoi.netlify.app/eforms/)
+Kho biểu mẫu trực tuyến: [Bấm vào đây](eform.html)
 
 DANH SÁCH 10 QUẦY TIẾP NHẬN BÁM SÁT BẢNG NIÊM YẾT VÀ BỘ/NGÀNH (BẮT BUỘC TRẢ LỜI ĐÚNG SỐ QUẦY, BỘ/NGÀNH, THỜI GIAN THEO CỔNG DVC QUỐC GIA VÀ ĐẦY ĐỦ THÀNH PHẦN HỒ SƠ):
 
@@ -277,7 +277,7 @@ QUY TẮC CỐT LÕI BẮT BUỘC TUÂN THỦ TRONG MỌI CÂU TRẢ LỜI CỦA
 5. THAY VÌ ĐỂ LINK DẠNG URL, HÃY DÙNG CHỮ "Bấm vào đây":
    Mọi liên kết nộp hồ sơ trực tuyến hoặc kho biểu mẫu BẮT BUỘC phải dùng định dạng markdown:
    - "Nộp hồ sơ trực tuyến: [Bấm vào đây](đường_dẫn)"
-   - "Kho biểu mẫu: [Bấm vào đây](https://dieuphoi.netlify.app/eforms/)"
+   - "Kho biểu mẫu: [Bấm vào đây](eform.html)"
    Khi người dân bấm vào chữ "Bấm vào đây" sẽ được điều hướng trực tiếp tới Cổng DVC tương ứng của Bộ/ngành!
 6. Giọng điệu chuẩn mực, ân cần, giải thích cặn kẽ, gạch đầu dòng rõ ràng, dễ hiểu.`;
 
@@ -346,7 +346,7 @@ QUY TẮC CỐT LÕI BẮT BUỘC TUÂN THỦ TRONG MỌI CÂU TRẢ LỜI CỦA
             `\n\n🔄 **Quy trình các bước giải quyết:**\n` +
             top.steps.map((st: string) => `- ${st}`).join('\n') +
             `\n\n🌐 **Nộp hồ sơ trực tuyến:** [Bấm vào đây](${onlineLink})\n` +
-            `📂 **Kho biểu mẫu điện tử:** [Bấm vào đây](https://dieuphoi.netlify.app/eforms/)\n\n` +
+            `📂 **Kho biểu mẫu điện tử:** [Bấm vào đây](eform.html)\n\n` +
             `Quý công dân có thể liên hệ Hotline **${db.centerInfo.hotline}** để được hướng dẫn thêm!`;
         } else if (message.toLowerCase().includes('địa chỉ') || message.toLowerCase().includes('ở đâu') || message.toLowerCase().includes('thời gian') || message.toLowerCase().includes('giờ làm việc')) {
           replyText = `**Thông tin Trung tâm Phục vụ Hành chính công phường Tây Nha Trang:**\n\n` +
@@ -356,7 +356,7 @@ QUY TẮC CỐT LÕI BẮT BUỘC TUÂN THỦ TRONG MỌI CÂU TRẢ LỜI CỦA
             `- 🚨 **Đường dây nóng phản ánh:** ${db.centerInfo.complaintHotline}\n` +
             `- ✉️ **Email:** ${db.centerInfo.email}\n` +
             `- 🌐 **Cổng DVC Quốc gia:** [Bấm vào đây](https://dichvucong.gov.vn)\n` +
-            `- 📂 **Kho biểu mẫu điện tử:** [Bấm vào đây](https://dieuphoi.netlify.app/eforms/)\n\n` +
+            `- 📂 **Kho biểu mẫu điện tử:** [Bấm vào đây](eform.html)\n\n` +
             `Trung tâm luôn sẵn sàng tiếp đón và phục vụ Quý công dân, tổ chức và doanh nghiệp!`;
         } else if (message.toLowerCase().includes('quầy') || message.toLowerCase().includes('bốc số') || message.toLowerCase().includes('số thứ tự')) {
           replyText = `**Tình hình phục vụ tại các quầy hôm nay tại TTPVHCC Tây Nha Trang:**\n\n` +

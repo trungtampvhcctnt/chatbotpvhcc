@@ -14,15 +14,20 @@ export const FormsModal: React.FC<FormsModalProps> = ({ isOpen, onClose, onAskCh
   const [searchTerm, setSearchTerm] = useState('');
   const [downloadedForm, setDownloadedForm] = useState<string | null>(null);
 
-  const formsList = proceduresData.forms || [
-    { name: "Đơn đề nghị cấp Giấy phép xây dựng nhà ở riêng lẻ (Mẫu 01)", category: "NHÀ Ở VÀ CÔNG SỞ", file: "Mau-01-GPXD.pdf", size: "245 KB" },
-    { name: "Đơn đăng ký biến động đất đai, tài sản gắn liền với đất (Mẫu 09/ĐK)", category: "ĐẤT ĐAI", file: "Mau-09-DK-Dat-dai.pdf", size: "320 KB" },
-    { name: "Tờ khai đăng ký kết hôn", category: "HỘ TỊCH", file: "To-khai-ket-hon.docx", size: "180 KB" },
-    { name: "Tờ khai đăng ký khai sinh", category: "HỘ TỊCH", file: "To-khai-khai-sinh.docx", size: "195 KB" },
-    { name: "Giấy đề nghị đăng ký Hộ kinh doanh cá thể", category: "ĐĂNG KÝ KINH DOANH", file: "Mau-HKD-01.docx", size: "210 KB" },
-    { name: "Đơn đề nghị cấp Giấy chứng nhận cơ sở đủ điều kiện ATTP", category: "AN TOÀN THỰC PHẨM", file: "Mau-ATTP-01.pdf", size: "280 KB" },
-    { name: "Tờ khai thông tin người khuyết tật hưởng trợ cấp xã hội", category: "BẢO TRỢ XÃ HỘI", file: "Mau-01-BTXH.docx", size: "175 KB" },
-    { name: "Đơn đề nghị cấp đổi Giấy chứng nhận quyền sử dụng đất (Mẫu 10/ĐK)", category: "ĐẤT ĐAI", file: "Mau-10-Cap-doi-GCN.pdf", size: "260 KB" }
+  const formsList = [
+    { name: "Tờ khai đăng ký khai sinh (Liên thông 3 trong 1 - Quầy 9)", category: "HỘ TỊCH", file: "To-khai-khai-sinh.docx", size: "195 KB", eformId: "ef_khaisinh" },
+    { name: "Tờ khai đăng ký khai tử (Quầy 9)", category: "HỘ TỊCH", file: "To-khai-khai-tu.docx", size: "185 KB", eformId: "ef_khaitu" },
+    { name: "Tờ khai đăng ký kết hôn (Quầy 6)", category: "HỘ TỊCH", file: "To-khai-ket-hon.docx", size: "180 KB", eformId: "ef_kethon" },
+    { name: "Tờ khai cấp Giấy xác nhận tình trạng hôn nhân / Độc thân (Quầy 8)", category: "HỘ TỊCH", file: "To-khai-xac-nhan-doc-than.docx", size: "175 KB", eformId: "ef_doc_than" },
+    { name: "Đơn đề nghị cấp Giấy phép xây dựng nhà ở riêng lẻ (Mẫu 01 - Quầy 4)", category: "XÂY DỰNG", file: "Mau-01-GPXD.pdf", size: "245 KB", eformId: "ef_gpxd" },
+    { name: "Đơn đăng ký biến động đất đai, tài sản gắn liền với đất (Mẫu 09/ĐK - Quầy 2)", category: "ĐẤT ĐAI", file: "Mau-09-DK-Dat-dai.pdf", size: "320 KB", eformId: "ef_biendong_dat" },
+    { name: "Đơn đăng ký, cấp Giấy chứng nhận quyền sử dụng đất lần đầu (Mẫu 04a/ĐK - Quầy 3)", category: "ĐẤT ĐAI", file: "Mau-04a-Cap-GCN-lan-dau.pdf", size: "290 KB", eformId: "ef_cap_gcn_landau" },
+    { name: "Giấy đề nghị đăng ký thành lập Hộ kinh doanh cá thể (Quầy 10)", category: "ĐĂNG KÝ KINH DOANH", file: "Mau-HKD-01.docx", size: "210 KB", eformId: "ef_dangky_hkd" },
+    { name: "Tờ khai Lệ phí trước bạ nhà, đất (Mẫu số 01/LPTB - Quầy 1)", category: "THUẾ ĐẤT ĐAI", file: "Mau-01-LPTB.pdf", size: "230 KB", eformId: "ef_thue_truocba" },
+    { name: "Đơn xin chuyển trường học sinh Tiểu học, THCS (Quầy 5)", category: "GIÁO DỤC", file: "Don-xin-chuyen-truong.docx", size: "160 KB", eformId: "ef_chuyentruong" },
+    { name: "Đơn đề nghị cấp Giấy chứng nhận cơ sở đủ điều kiện ATTP (Quầy 5)", category: "AN TOÀN THỰC PHẨM", file: "Mau-ATTP-01.pdf", size: "280 KB", eformId: "ef_attp" },
+    { name: "Tờ khai đề nghị trợ cấp xã hội hàng tháng theo NĐ 20/2021/NĐ-CP (Quầy 7)", category: "BẢO TRỢ XÃ HỘI", file: "Mau-Tro-cap-BTXH.docx", size: "220 KB", eformId: "ef_btxh" },
+    { name: "Giấy ủy quyền giải quyết thủ tục hành chính tại TTPVHCC", category: "THỦ TỤC CHUNG", file: "Giay-uy-quyen-TTHC.docx", size: "170 KB", eformId: "ef_uyquyen_tthc" }
   ];
 
   const filteredForms = formsList.filter(f => 
@@ -77,6 +82,23 @@ export const FormsModal: React.FC<FormsModalProps> = ({ isOpen, onClose, onAskCh
           >
             <X className="w-5 h-5" />
           </button>
+        </div>
+
+        {/* Banner E-Form */}
+        <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 text-xs text-amber-900 font-medium">
+            <span className="text-base">✍</span>
+            <span>Kho Biểu Mẫu Điện Tử E-Form: Nhập trực tuyến, in ấn và tải file Word (.doc) ngay!</span>
+          </div>
+          <a
+            href="eform.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors self-start sm:self-auto cursor-pointer shadow-xs"
+          >
+            <span>Mở Kho E-Form TTHC</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
         </div>
 
         {/* Search */}

@@ -53,10 +53,10 @@
 <meta name="netlify-deploy" content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=658e0c30-af50-4e92-8755-3dbd0d192949">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng niêm yết TTHC - TTPVHCC Phường Tây Nha Trang</title>
-    <link rel="icon" type="image/png" href="icons/logo-cchc.png">
+    <link rel="icon" type="image/png" href="icons/logo-cchc.png" onerror="this.onerror=null;this.href='logo-cchc.png';">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" onerror="this.onerror=null;this.href='style.css';">
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -294,7 +294,7 @@
                 <span style="font-weight: 600; font-size: 13px; opacity: 0.9;">— UBND phường Tây Nha Trang</span>
             </div>
             <div style="display: flex; gap: 8px;">
-                <a href="../eform.html" target="_blank" rel="noopener" style="background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 13px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Mở Kho E-Form</a>
+                <a href="https://dieuphoi.netlify.app/eforms/" target="_blank" rel="noopener" style="background: rgba(255,255,255,0.15); color: #fff; text-decoration: none; padding: 8px 12px; border-radius: 8px; font-weight: 700; font-size: 13px;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Mở tab mới</a>
                 <button onclick="NyApp.closeEformKiosk()" style="background: rgba(255,255,255,0.2); border: none; color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 18px;"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
@@ -417,9 +417,7 @@
 
     <!-- Nhúng Script thư viện -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <script src="js/constants.js"></script>
-    <script src="js/config.js"></script>
-    
+
     <!-- KHIÊN BẢO VỆ DOM TỐI THƯỢNG (Chống sập data-loader khi tìm thiếu thẻ HTML) -->
     <script>
         const origGetId = document.getElementById.bind(document);
@@ -427,11 +425,9 @@
         const origQuery = document.querySelector.bind(document);
         document.querySelector = function(sel) { return origQuery(sel) || document.createElement('div'); };
     </script>
-    
-    <!-- BÂY GIỜ GỌI DATA LOADER THOẢI MÁI MÀ KHÔNG SỢ SẬP -->
-    <script src="js/data-loader.js"></script>
+
+    <!-- Cấu hình mặc định Kiosk TTPVHCC Phường Tây Nha Trang -->
     <script>
-    /* Cấu hình mặc định Kiosk TTPVHCC Phường Tây Nha Trang */
     (function seedTayNhaTrangConfig() {
         var DEFAULTS = {
             nyAgencyName_V2: 'TRUNG TÂM PHỤC VỤ HÀNH CHÍNH CÔNG PHƯỜNG TÂY NHA TRANG',
@@ -443,18 +439,58 @@
             nyGridColorMode: 'red',
             nyDefaultAgency_V2: 'UBND phường Tây Nha Trang'
         };
-        nyStore.setItem('nyLevel_V2', DEFAULTS.nyLevel_V2);
-        nyStore.setItem('nyTime_V2', DEFAULTS.nyTime_V2);
-        nyStore.setItem('nyPhone_V2', DEFAULTS.nyPhone_V2);
-        nyStore.setItem('nyAddress_V2', DEFAULTS.nyAddress_V2);
-        nyStore.setItem('nyDefaultAgency_V2', DEFAULTS.nyDefaultAgency_V2);
-        nyStore.removeItem('nySelectedFields');
-        Object.keys(DEFAULTS).forEach(function (k) {
-            if (!nyStore.getItem(k)) nyStore.setItem(k, DEFAULTS[k]);
-        });
+        if (window.nyStore) {
+            nyStore.setItem('nyProvinceName_V2', DEFAULTS.nyProvinceName_V2);
+            nyStore.setItem('nyAgencyName_V2', DEFAULTS.nyAgencyName_V2);
+            nyStore.setItem('nyLevel_V2', DEFAULTS.nyLevel_V2);
+            nyStore.setItem('nyTime_V2', DEFAULTS.nyTime_V2);
+            nyStore.setItem('nyPhone_V2', DEFAULTS.nyPhone_V2);
+            nyStore.setItem('nyAddress_V2', DEFAULTS.nyAddress_V2);
+            nyStore.setItem('nyDefaultAgency_V2', DEFAULTS.nyDefaultAgency_V2);
+            nyStore.setItem('favProvince', 'Khánh Hoà');
+            nyStore.removeItem('nySelectedFields');
+            Object.keys(DEFAULTS).forEach(function (k) {
+                if (!nyStore.getItem(k)) nyStore.setItem(k, DEFAULTS[k]);
+            });
+        }
     })();
     </script>
-    <script src="js/niemyet.js"></script>
+
+    <!-- BỘ TẢI SCRIPT THÔNG MINH: Tự động thích ứng cả thư mục niem-yet/ và thư mục gốc GitHub Pages -->
+    <script>
+    (function loadScriptsResiliently() {
+        var isSub = window.location.pathname.indexOf('/niem-yet') !== -1;
+        var p1 = isSub ? 'js/' : '';
+        var p2 = isSub ? '' : 'js/';
+        var scripts = ['constants.js', 'config.js', 'data-loader.js', 'niemyet.js'];
+        var idx = 0;
+
+        function next() {
+            if (idx >= scripts.length) return;
+            var scriptName = scripts[idx++];
+            var s = document.createElement('script');
+            s.src = p1 + scriptName;
+            s.onload = function() {
+                next();
+            };
+            s.onerror = function() {
+                // Thử đường dẫn thay thế nếu tải trực tiếp ở thư mục gốc hoặc thư mục con
+                var fallback = document.createElement('script');
+                fallback.src = p2 + scriptName;
+                fallback.onload = function() {
+                    next();
+                };
+                fallback.onerror = function() {
+                    console.error('Không thể nạp tệp:', scriptName);
+                    next();
+                };
+                document.body.appendChild(fallback);
+            };
+            document.body.appendChild(s);
+        }
+        next();
+    })();
+    </script>
 
     <!-- HỘP THOẠI CẤU HÌNH LĨNH VỰC KIOSK -->
     <div id="nyConfigModalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(4px);">

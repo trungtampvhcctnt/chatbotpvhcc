@@ -110,40 +110,76 @@ jobs:
 Hệ thống Cổng Dịch vụ Hành chính công, Bốc số quầy điện tử, Tra cứu hồ sơ Một cửa và Trợ lý ảo AI thông minh Trung tâm Phục vụ Hành chính công Tây Nha Trang - Tỉnh Khánh Hòa.
 
 ## 🚀 Tính năng chính
-1. **Trang chủ & Kiosk điện tử:** Bảng số đang phục vụ tại các quầy theo thời gian thực.
-2. **Niêm yết Thủ tục hành chính (TTHC):** Đất đai, Xây dựng, Hộ tịch, Kinh doanh, Lao động, Căn cước VNeID.
-3. **Bốc số quầy trực tuyến:** Lấy số thứ tự điện tử có mã QR và thời gian dự kiến.
-4. **Tra cứu hồ sơ Một cửa:** Tiến độ 5 bước giải quyết hồ sơ (Mã hồ sơ mẫu: \`H74-260901-0028\`, \`KH-00129-2026\`).
-5. **Trợ lý ảo AI thông minh:** Hỗ trợ giải đáp thủ tục, tra cứu hồ sơ, có nút đóng/mở mượt mà và hỗ trợ cấu hình API tùy chọn.
-6. **Đường dây nóng & Phản ánh kiến nghị:** Danh bạ điện thoại các tổ hỗ trợ.
+1. **Trang chủ & Bảng niêm yết TTHC:** Tích hợp đầy đủ thư mục /niem-yet hiển thị toàn bộ thủ tục hành chính.
+2. **Kho biểu mẫu điện tử E-Form:** Kê khai trực tuyến, xem trước, in ấn và xuất file Word (.doc) 13 thủ tục.
+3. **Phiếu đánh giá 10 Quầy:** Đánh giá mức độ hài lòng của công dân.
+4. **Đường dây nóng:** Thông tin liên hệ các đồng chí lãnh đạo và cán bộ Một cửa.
+5. **Trợ lý ảo AI thông minh:** Bám sát 10 quầy, chuẩn thời gian Cổng DVCQG, tự động điều hướng link 'Bấm vào đây' đúng Bộ/ngành.
 
 ## 📦 Cách đưa lên GitHub Pages trong 1 phút:
-1. Tạo một repository mới trên GitHub (ví dụ: \`ttpvhcc-tay-nha-trang\`).
-2. Giải nén file ZIP này vào thư mục máy tính.
-3. Chạy các lệnh Git sau:
+1. Giải nén toàn bộ file ZIP này vào thư mục dự án trên máy tính.
+2. Chạy các lệnh Git sau:
 \`\`\`bash
 git init
 git add .
-git commit -m "Deploy TTPVHCC Tay Nha Trang"
+git commit -m "Deploy TTPVHCC Tay Nha Trang đầy đủ niem-yet và eform"
 git branch -M main
 git remote add origin https://github.com/TÊN_TÀI_KHOẢN/TÊN_REPO.git
-git push -u origin main
+git push -u origin main --force
 \`\`\`
-4. Vào **GitHub Repository > Settings > Pages**:
-   - **Source:** Chọn **GitHub Actions**.
-   - Hệ thống sẽ tự động chạy workflow và cung cấp đường link website: \`https://TÊN_TÀI_KHOẢN.github.io/TÊN_REPO/\`.
+3. Vào **GitHub Repository > Settings > Pages**:
+   - **Source:** Chọn **Deploy from a branch** (chọn branch \`main\` / thư mục \`/ (root)\`).
+   - Hoặc chọn **GitHub Actions** để tự động triển khai.
 `;
       zip.file('README.md', readmeContent);
 
-      // 4. Standalone HTML version in root and github-pages
-      const standaloneHtml = generateStandaloneHtml();
-      zip.file('index.html', standaloneHtml);
-      
+      // 4. procedures.json
+      zip.file('procedures.json', JSON.stringify(proceduresData, null, 2));
+
+      // 5. Fetch and add ALL real files into the root & github-pages folder
+      const filesToBundle = [
+        { path: 'index.html', isBinary: false },
+        { path: 'site.css', isBinary: false },
+        { path: 'site.js', isBinary: false },
+        { path: 'chat-config.js', isBinary: false },
+        { path: 'phieu.html', isBinary: false },
+        { path: 'duong-day.html', isBinary: false },
+        { path: 'eform.html', isBinary: false },
+        { path: 'logo-hcc.png', isBinary: true },
+        { path: 'robot.jpg', isBinary: true },
+        { path: 'niem-yet/index.html', isBinary: false },
+        { path: 'niem-yet/css/style.css', isBinary: false },
+        { path: 'niem-yet/icons/logo-cchc.png', isBinary: true },
+        { path: 'niem-yet/js/config.js', isBinary: false },
+        { path: 'niem-yet/js/data-loader.js', isBinary: false },
+        { path: 'niem-yet/js/constants.js', isBinary: false },
+        { path: 'niem-yet/js/niemyet.js', isBinary: false },
+        { path: 'niem-yet/HUONG_DAN.txt', isBinary: false }
+      ];
+
       const ghPagesDir = zip.folder('github-pages');
       if (ghPagesDir) {
-        ghPagesDir.file('index.html', standaloneHtml);
         ghPagesDir.file('.nojekyll', '');
         ghPagesDir.file('procedures.json', JSON.stringify(proceduresData, null, 2));
+      }
+
+      for (const item of filesToBundle) {
+        try {
+          const res = await fetch('/' + item.path);
+          if (res.ok) {
+            if (item.isBinary) {
+              const buffer = await res.arrayBuffer();
+              zip.file(item.path, buffer);
+              if (ghPagesDir) ghPagesDir.file(item.path, buffer);
+            } else {
+              const text = await res.text();
+              zip.file(item.path, text);
+              if (ghPagesDir) ghPagesDir.file(item.path, text);
+            }
+          }
+        } catch (e) {
+          console.warn('Could not fetch file for zip:', item.path, e);
+        }
       }
 
       // Generate the zip blob
