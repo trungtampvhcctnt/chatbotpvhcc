@@ -175,7 +175,17 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
                         </div>
                       </div>
 
-                      <div className="pt-2 flex flex-wrap gap-2">
+                      <div className="pt-2 flex flex-wrap gap-2 items-center">
+                        <a
+                          href={proc.onlineUrl || `https://dichvucong.khanhhoa.gov.vn/vi/nps/apply?MaTTHC=${proc.code}&vneid=1`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+                          title="Nộp trực tuyến hồ sơ thủ tục này"
+                        >
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          <span>Nộp hồ sơ trực tuyến [Bấm vào đây] ↗</span>
+                        </a>
                         <button
                           onClick={() => {
                             onClose();

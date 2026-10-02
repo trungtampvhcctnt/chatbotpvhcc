@@ -59,6 +59,31 @@ export async function handleApiRequest(req: any, res: any): Promise<boolean> {
     return true;
   }
 
+  // 2b. GET /api/export-zip
+  if (pathname === '/api/export-zip' && req.method === 'GET') {
+    const type = url.searchParams.get('type') || 'static';
+    const filename = type === 'full' 
+      ? 'ttpvhcc-tay-nha-trang-full-project.zip' 
+      : 'ttpvhcc-tay-nha-trang-static.zip';
+    const filePath = path.resolve(process.cwd(), 'public', filename);
+
+    if (fs.existsSync(filePath)) {
+      const stat = fs.statSync(filePath);
+      res.writeHead(200, {
+        'Content-Type': 'application/zip',
+        'Content-Length': stat.size,
+        'Content-Disposition': `attachment; filename="${filename}"`
+      });
+      const stream = fs.createReadStream(filePath);
+      stream.pipe(res);
+      return true;
+    } else {
+      res.statusCode = 404;
+      res.end('File not found');
+      return true;
+    }
+  }
+
   // 3. GET /api/counters
   if (pathname === '/api/counters' && req.method === 'GET') {
     const data = getProceduresData();

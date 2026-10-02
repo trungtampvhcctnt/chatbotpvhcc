@@ -178,6 +178,15 @@ const NyApp = {
 
             this.processAndRenderData();
 
+            let searchParam = urlParams.get('search') || urlParams.get('code') || urlParams.get('tthc');
+            if (searchParam) {
+                let searchInput = document.getElementById('ny-search-input');
+                if (searchInput) {
+                    searchInput.value = searchParam;
+                    this.filterData();
+                }
+            }
+
         } catch (e) {
             console.error(e);
             this.showError(e.message);

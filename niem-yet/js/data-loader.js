@@ -26,7 +26,7 @@ window.appData = {
     tacNghiepRieng: [],     // Danh mục link phần mềm đè theo tỉnh (Yêu cầu 4)
     huongDanData: [],       // BỔ SUNG DÒNG NÀY
     fullDatabase: [],       // Dữ liệu thủ tục tổng hợp
-    favoriteProvince: (window.nyStore ? window.nyStore.getItem('favProvince') : '') || '',
+    favoriteProvince: (window.nyStore ? (window.nyStore.getItem('favProvince') || window.nyStore.getItem('nyProvinceName_V2')) : '') || 'Khánh Hoà',
     isLoaded: false
 };
 

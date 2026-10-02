@@ -39,11 +39,51 @@ export const RobotAvatar: React.FC<RobotAvatarProps> = ({
         {/* Visor shine */}
         <path d="M33 39 Q 50 35 67 39" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeLinecap="round" />
 
-        {/* Friendly Glowing Eyes */}
-        <ellipse cx="40" cy="47" rx="4.5" ry="5.5" fill="#38bdf8" />
-        <ellipse cx="60" cy="47" rx="4.5" ry="5.5" fill="#38bdf8" />
-        <circle cx="41.5" cy="45" r="1.5" fill="#ffffff" />
-        <circle cx="61.5" cy="45" r="1.5" fill="#ffffff" />
+        {/* Friendly Glowing Eyes with Periodic Blinking Animation */}
+        <defs>
+          <style>{`
+            @keyframes aiSvgBlink {
+              0%, 80%, 86%, 92%, 100% {
+                transform: scaleY(1);
+                opacity: 1;
+              }
+              83%, 89% {
+                transform: scaleY(0.08);
+                opacity: 0.6;
+              }
+            }
+            @keyframes aiSvgGlow {
+              0%, 100% {
+                filter: drop-shadow(0 0 1.5px #38bdf8);
+              }
+              50% {
+                filter: drop-shadow(0 0 5px #7dd3fc);
+              }
+            }
+            .ai-svg-eyes-wrap {
+              animation: aiSvgGlow 3.5s ease-in-out infinite;
+            }
+            .ai-svg-eye-l {
+              transform-origin: 40px 47px;
+              animation: aiSvgBlink 4s ease-in-out infinite;
+            }
+            .ai-svg-eye-r {
+              transform-origin: 60px 47px;
+              animation: aiSvgBlink 4s ease-in-out infinite;
+            }
+          `}</style>
+        </defs>
+
+        <g className="ai-svg-eyes-wrap">
+          <g className="ai-svg-eye-l">
+            <ellipse cx="40" cy="47" rx="4.5" ry="5.5" fill="#38bdf8" />
+            <circle cx="41.5" cy="45" r="1.5" fill="#ffffff" />
+          </g>
+          <g className="ai-svg-eye-r">
+            <ellipse cx="60" cy="47" rx="4.5" ry="5.5" fill="#38bdf8" />
+            <circle cx="61.5" cy="45" r="1.5" fill="#ffffff" />
+          </g>
+        </g>
 
         {/* Cute Smile / mouth */}
         <path d="M46 54 Q 50 57 54 54" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" />

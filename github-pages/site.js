@@ -222,7 +222,7 @@
     "4. TUYỆT ĐỐI KHÔNG GHI LỆ PHÍ: Không ghi bất kỳ dòng nào về lệ phí, không nhắc tới số tiền phí hay lệ phí trong câu trả lời.\n" +
     "5. THAY VÌ ĐỂ LINK DẠNG URL, HÃY DÙNG CHỮ 'Bấm vào đây':\n" +
     "   Mọi liên kết nộp hồ sơ trực tuyến hoặc kho biểu mẫu BẮT BUỘC dùng định dạng markdown: [Bấm vào đây](đường_dẫn) để khi người dân bấm vào sẽ được điều hướng tới Cổng DVC tương ứng của Bộ/ngành!\n" +
-    "6. Giọng điệu chuẩn mực, ân cần, giải thích cặn kẽ, định dạng gạch đầu dòng rõ ràng, dễ hiểu.";
+    "6. Giọng điệu chuẩn mực, ân cần, giải thích cặn kẽ, định dạng gạch đầu dòng rõ ràng, dễ hiểu.");
 
   // Trả lời nhanh chuẩn xác bám sát số quầy và Bộ ngành
   function answerQuick(q) {
@@ -542,12 +542,24 @@
   var bubble = document.createElement("p");
   bubble.className = "think-bubble side-left";
   bubble.textContent = "Tôi là trợ lý ảo, hãy hỏi tôi khi bạn cần";
+  bubble.setAttribute("title", "Bấm để mở Trợ lý ảo AI");
+  bubble.addEventListener("click", function () {
+    setOpen(true);
+  });
 
   var fabBtn = document.createElement("button");
   fabBtn.className = "fab";
   fabBtn.type = "button";
-  fabBtn.setAttribute("aria-label", "Mở trợ lý ảo");
-  fabBtn.innerHTML = '<img src="robot.jpg" alt="Trợ lý ảo">';
+  fabBtn.setAttribute("aria-label", "Mở trợ lý ảo AI");
+  fabBtn.setAttribute("title", "Trợ lý ảo AI - Trung tâm PVHCC Tây Nha Trang");
+  fabBtn.innerHTML =
+    '<div class="fab-inner">' +
+      '<img src="robot.jpg" alt="Trợ lý ảo AI">' +
+      '<div class="fab-eye-layer">' +
+        '<span class="fab-eye"></span>' +
+        '<span class="fab-eye"></span>' +
+      '</div>' +
+    '</div>';
 
   fabWrap.appendChild(bubble);
   fabWrap.appendChild(fabBtn);
@@ -558,7 +570,10 @@
   chat.setAttribute("aria-label", "Trợ lý ảo TTPVHCC");
   chat.innerHTML =
     '<header>' +
-      '<img src="robot.jpg" alt="Trợ lý ảo">' +
+      '<div class="header-avatar-wrap">' +
+        '<img src="robot.jpg" alt="Trợ lý ảo">' +
+        '<div class="fab-eye-layer" style="top:34%;left:25%;width:50%"><span class="fab-eye" style="width:6px;height:6px"></span><span class="fab-eye" style="width:6px;height:6px"></span></div>' +
+      '</div>' +
       '<div class="grow"><strong>Trợ lý ảo Trung tâm PVHCC</strong><small>Kéo thanh này để di chuyển</small></div>' +
       '<button type="button" data-close class="chat-close-btn" aria-label="Đóng trợ lý ảo">✕ Đóng</button>' +
     '</header>' +
@@ -794,8 +809,37 @@
     }
   });
 
-  document.body.appendChild(fabWrap);
-  document.body.appendChild(chat);
-  placeFab();
-  render();
+  function initDOM() {
+    if (window.self !== window.top) {
+      // Bên trong iframe, không tạo nút trợ lý ảo nổi để tránh trùng lặp
+      return;
+    }
+    if (!document.body) {
+      document.addEventListener("DOMContentLoaded", initDOM);
+      return;
+    }
+    if (!document.body.contains(fabWrap)) {
+      document.body.appendChild(fabWrap);
+    }
+    if (!document.body.contains(chat)) {
+      document.body.appendChild(chat);
+    }
+    placeFab();
+    render();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDOM);
+  } else {
+    initDOM();
+  }
+
+  window.openHCChat = function(text) {
+    setOpen(true);
+    if (text) {
+      setTimeout(function() {
+        send(text);
+      }, 300);
+    }
+  };
 })();

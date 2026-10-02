@@ -328,14 +328,23 @@ export const Chatbot: React.FC<ChatbotProps> = ({
   // If closed completely, render speech bubble and robot avatar matching the screenshot
   if (!isOpen) {
     return (
-      <div className="fixed bottom-5 right-5 z-40 flex items-center gap-3">
+      <div 
+        className="fixed bottom-5 right-5 z-40 flex items-center gap-3 select-none"
+        style={{ animation: 'aiFloat 3.5s ease-in-out infinite' }}
+      >
+        <style>{`
+          @keyframes aiFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
+        `}</style>
         {/* Speech Bubble Tooltip matching screenshot */}
         <div 
           onClick={() => {
             setIsOpen(true);
             setIsMinimized(false);
           }}
-          className="cursor-pointer bg-white border border-amber-300 text-slate-800 text-xs sm:text-[13px] font-semibold px-3.5 py-2 rounded-2xl shadow-lg relative max-w-[210px] leading-tight select-none hover:shadow-xl transition-all animate-in fade-in slide-in-from-right-2 duration-300"
+          className="cursor-pointer bg-white border border-amber-300 text-slate-800 text-xs sm:text-[13px] font-semibold px-3.5 py-2 rounded-2xl shadow-lg relative max-w-[210px] leading-tight select-none hover:shadow-xl hover:scale-105 transition-all duration-200"
         >
           <span>Tôi là trợ lý ảo, hãy hỏi tôi khi bạn cần</span>
           {/* Bubble tail on right */}

@@ -15,8 +15,8 @@ window.HCC_AI_CONFIG = {
   // Bảng tra cứu đường dẫn nộp hồ sơ trực tuyến theo Bộ/Ngành và Quầy
   ministryLinks: {
     "quay_1": { name: "Tổng cục Thuế - Bộ Tài chính", url: "https://thuedientu.gdt.gov.vn" },
-    "quay_2": { name: "Cổng DVC Tỉnh Khánh Hòa (Sở TN&MT)", url: "https://dichvucong.khanhhoa.gov.vn" },
-    "quay_3": { name: "Cổng DVC Tỉnh Khánh Hòa (Bộ Nông nghiệp & Môi trường)", url: "https://dichvucong.khanhhoa.gov.vn" },
+    "quay_2": { name: "Cổng DVC Tỉnh Khánh Hòa (Sở TN&MT)", url: "https://dichvucong.gov.vn" },
+    "quay_3": { name: "Cổng DVC Tỉnh Khánh Hòa (Bộ Nông nghiệp & Môi trường)", url: "https://dichvucong.gov.vn" },
     "quay_4": { name: "Cổng DVC Bộ Xây dựng", url: "https://dvc.moc.gov.vn/vi/nps/apply" },
     "quay_5_yte": { name: "Cổng DVC Bộ Y tế", url: "https://dichvucong.moh.gov.vn" },
     "quay_5_gddt": { name: "Cổng DVC Bộ GD&ĐT", url: "https://dichvucong.moet.gov.vn" },
@@ -26,7 +26,7 @@ window.HCC_AI_CONFIG = {
     "quay_7": { name: "Cổng DVC Quốc gia (Bảo trợ xã hội)", url: "https://dichvucong.gov.vn" },
     "quay_8": { name: "Cổng DVC Bộ Tư pháp", url: "https://dichvucong.moj.gov.vn" },
     "quay_9": { name: "Cổng DVC Quốc gia (Liên thông khai sinh, khai tử)", url: "https://dichvucong.gov.vn" },
-    "quay_10": { name: "Cổng DVC Tỉnh Khánh Hòa (Bộ Tài chính - ĐKKD)", url: "https://dichvucong.khanhhoa.gov.vn" },
+    "quay_10": { name: "Cổng DVC Tỉnh Khánh Hòa (Bộ Tài chính - ĐKKD)", url: "https://dichvucong.gov.vn" },
     "eforms": { name: "Kho biểu mẫu điện tử UBND phường Tây Nha Trang", url: "eform.html" }
   },
 

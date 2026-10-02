@@ -666,26 +666,80 @@ git push -u origin main --force
                   </p>
                 </div>
 
-                <div className="pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-left">
+                  {/* Gói 1: Web tĩnh & GitHub Pages */}
+                  <div className="bg-white border-2 border-emerald-300 rounded-xl p-4 shadow-sm flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="bg-emerald-100 text-emerald-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full">
+                          KHUYÊN DÙNG (NHẸ & NHANH)
+                        </span>
+                        <span className="text-[11px] font-mono text-slate-500">~590 KB</span>
+                      </div>
+                      <h5 className="font-bold text-slate-900 text-sm">Gói Web Tĩnh & GitHub Pages</h5>
+                      <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
+                        Chạy ngay trực tiếp không cần cài đặt. Đầy đủ Cổng DVC, Bảng niêm yết TTHC, Trợ lý ảo AI, Kho 13 biểu mẫu E-Form, Đường dây nóng và Phiếu đánh giá.
+                      </p>
+                    </div>
+                    <div className="pt-3">
+                      <a
+                        href="/ttpvhcc-tay-nha-trang-static.zip"
+                        download="ttpvhcc-tay-nha-trang-static.zip"
+                        className="w-full inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-xs transition-all cursor-pointer text-center"
+                      >
+                        <Download className="w-4 h-4" />
+                        <span>Tải gói Web Tĩnh (.zip)</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Gói 2: Toàn bộ mã nguồn Full Project */}
+                  <div className="bg-white border-2 border-slate-300 rounded-xl p-4 shadow-sm flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="bg-indigo-100 text-indigo-800 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full">
+                          TOÀN BỘ MÃ NGUỒN
+                        </span>
+                        <span className="text-[11px] font-mono text-slate-500">~2.5 MB</span>
+                      </div>
+                      <h5 className="font-bold text-slate-900 text-sm">Full Source Code (React + Vite + Server)</h5>
+                      <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
+                        Chứa toàn bộ mã nguồn TypeScript, React components, API proxy backend Express, cấu hình Tailwind CSS và kho dữ liệu gốc.
+                      </p>
+                    </div>
+                    <div className="pt-3">
+                      <a
+                        href="/ttpvhcc-tay-nha-trang-full-project.zip"
+                        download="ttpvhcc-tay-nha-trang-full-project.zip"
+                        className="w-full inline-flex items-center justify-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-xs transition-all cursor-pointer text-center"
+                      >
+                        <Download className="w-4 h-4" />
+                        <span>Tải Full Source Code (.zip)</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-1">
                   <button
                     onClick={handleDownloadZip}
                     disabled={isGeneratingZip}
-                    className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 disabled:opacity-60 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer hover:shadow-lg active:scale-95"
+                    className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-900 active:bg-slate-950 disabled:opacity-60 text-white font-semibold text-xs px-4 py-2 rounded-lg transition-all cursor-pointer"
                   >
                     {isGeneratingZip ? (
                       <>
-                        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                        <span>Đang đóng gói file ZIP...</span>
+                        <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                        <span>Đang đóng gói file ZIP trực tiếp...</span>
                       </>
                     ) : zipSuccess ? (
                       <>
-                        <Check className="w-5 h-5 text-yellow-300" />
-                        <span>Đã tải xuống thành công!</span>
+                        <Check className="w-4 h-4 text-emerald-400" />
+                        <span>Đã tạo và tải file thành công!</span>
                       </>
                     ) : (
                       <>
-                        <Download className="w-5 h-5" />
-                        <span>Tải ngay gói ZIP (TTPVHCC-Tay-Nha-Trang.zip)</span>
+                        <Sparkles className="w-4 h-4 text-yellow-300" />
+                        <span>Hoặc tạo lại gói ZIP tùy biến ngay trong trình duyệt</span>
                       </>
                     )}
                   </button>
@@ -699,12 +753,13 @@ git push -u origin main --force
                 </div>
                 <div className="font-mono bg-white p-3 rounded-lg border border-slate-200 space-y-1 text-slate-800 text-[11px]">
                   <div>📦 TTPVHCC-Tay-Nha-Trang/</div>
-                  <div className="pl-4">├── 📄 index.html <span className="text-slate-400 font-sans">(Trang chủ & Kiosk & Trợ lý ảo AI chạy trên HTML)</span></div>
-                  <div className="pl-4">├── 📄 README.md <span className="text-slate-400 font-sans">(Tài liệu hướng dẫn triển khai)</span></div>
-                  <div className="pl-4">├── 📄 .nojekyll <span className="text-slate-400 font-sans">(Cấu hình tĩnh GitHub Pages)</span></div>
-                  <div className="pl-4">├── 📁 .github/workflows/</div>
-                  <div className="pl-8">└── 📄 deploy.yml <span className="text-slate-400 font-sans">(Workflow tự động build & deploy)</span></div>
-                  <div className="pl-4">└── 📁 github-pages/ <span className="text-slate-400 font-sans">(Thư mục deploy trực tiếp)</span></div>
+                  <div className="pl-4">├── 📄 index.html <span className="text-slate-400 font-sans">(Trang chủ Cổng DVC & Trợ lý ảo AI & Kiosk)</span></div>
+                  <div className="pl-4">├── 📄 eform.html <span className="text-slate-400 font-sans">(Kho 13 biểu mẫu điện tử E-Form)</span></div>
+                  <div className="pl-4">├── 📄 duong-day.html & phieu.html <span className="text-slate-400 font-sans">(Đường dây nóng & Phiếu đánh giá)</span></div>
+                  <div className="pl-4">├── 📄 site.css & site.js <span className="text-slate-400 font-sans">(CSS hoạt ảnh bồng bềnh + JS 10 quầy)</span></div>
+                  <div className="pl-4">├── 📁 niem-yet/ <span className="text-slate-400 font-sans">(Thư mục Bảng niêm yết TTHC đầy đủ)</span></div>
+                  <div className="pl-4">├── 📄 README.md & .nojekyll <span className="text-slate-400 font-sans">(Tài liệu & cấu hình GitHub Pages)</span></div>
+                  <div className="pl-4">└── 📁 .github/workflows/deploy.yml <span className="text-slate-400 font-sans">(Tự động deploy)</span></div>
                 </div>
               </div>
             </div>
