@@ -1,0 +1,6 @@
+{
+  "name": "TTPVHCC Tây Nha Trang - Cổng Dịch vụ công & Trợ lý ảo AI",
+  "description": "Hệ thống Cổng Dịch vụ Hành chính công, Bốc số quầy điện tử, Tra cứu hồ sơ Một cửa và Trợ lý ảo AI thông minh Trung tâm Phục vụ Hành chính công Tây Nha Trang - Tỉnh Khánh Hòa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
