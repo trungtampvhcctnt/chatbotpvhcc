@@ -1,12 +1,10 @@
 // ====================================================================
 // TRỢ LÝ ẢO TRUNG TÂM PHỤC VỤ HÀNH CHÍNH CÔNG PHƯỜNG TÂY NHA TRANG
-// Bản chuyên sâu: Bám sát Bảng niêm yết TTHC, các Bộ/ngành và 10 Quầy
-// Chuẩn hóa thời gian theo Cổng Dịch vụ công Quốc gia, Không ghi lệ phí
-// Tự động điều hướng Bộ/ngành bằng "Bấm vào đây"
+// Những câu trả lời chỉ mang tính chất tham khảo
 // ====================================================================
 (function () {
   var PHONE = "0258.3.892.377";
-  var GREET = "Xin chào! Tôi là Trợ lý ảo của Trung tâm Phục vụ hành chính công phường Tây Nha Trang. Tôi có thể hướng dẫn chi tiết thủ tục hồ sơ, đúng số quầy theo từng Bộ/ngành, thời gian giải quyết chuẩn xác và điều hướng nộp trực tuyến.";
+  var GREET = "Kính chào Ông/bà! Tôi là Trợ lý ảo của Trung tâm Phục vụ hành chính công phường Tây Nha Trang. Tôi sẵn sàng hỗ trợ giải đáp thành phần hồ sơ, thời gian giải quyết, số quầy tiếp nhận tại Bộ phận Một cửa (Quầy 1 đến Quầy 10) và hướng dẫn nộp hồ sơ trực tuyến.";
   var HINTS = [
     "Làm giấy khai sinh đến quầy nào?",
     "Thủ tục cấp Giấy phép xây dựng?",
@@ -119,7 +117,7 @@
     "Bạn là Trợ lý ảo AI chính thức của Trung tâm Phục vụ hành chính công phường Tây Nha Trang (UBND Phường Tây Nha Trang, Tỉnh Khánh Hòa).\n" +
     "CƠ CẤU VÀ PHÂN CÔNG CHÍNH XÁC THEO 10 QUẦY TIẾP NHẬN (BÁM SÁT BẢNG NIÊM YẾT VÀ BỘ/NGÀNH):\n\n" +
     "1. QUẦY SỐ 1 - Thuế đất đai:\n" +
-    "   - Cơ quan phụ trách: Cơ quan Thuế / Bộ Tài chính.\n" +
+    "   - Cơ quan phụ trách: Thuế cơ sở 2, Địa chỉ 15 đường 19/5 Khu đô thị Vĩnh Điềm Trung, phường Tây Nha Trang / Bộ Tài chính.\n" +
     "   - Lĩnh vực: Kê khai và nộp thuế thu nhập cá nhân chuyển nhượng BĐS, lệ phí trước bạ nhà đất, tiền sử dụng đất, thuế sử dụng đất phi nông nghiệp.\n" +
     "   - Thời hạn giải quyết: Không quá 03 ngày làm việc (kể từ ngày nhận đủ hồ sơ từ cơ quan Một cửa chuyển sang).\n" +
     "   - Thành phần hồ sơ: Tờ khai lệ phí trước bạ nhà, đất (Mẫu 01/LPTB); Tờ khai thuế thu nhập cá nhân (Mẫu 03/BĐS-TNCN); Bản sao hợp đồng chuyển nhượng, tặng cho hoặc văn bản thừa kế có công chứng/chứng thực; Bản sao Giấy chứng nhận quyền sử dụng đất; Giấy tờ chứng minh thuộc diện miễn thuế (nếu có); Bản sao CCCD / VNeID.\n" +
@@ -223,6 +221,16 @@
     "5. THAY VÌ ĐỂ LINK DẠNG URL, HÃY DÙNG CHỮ 'Bấm vào đây':\n" +
     "   Mọi liên kết nộp hồ sơ trực tuyến hoặc kho biểu mẫu BẮT BUỘC dùng định dạng markdown: [Bấm vào đây](đường_dẫn) để khi người dân bấm vào sẽ được điều hướng tới Cổng DVC tương ứng của Bộ/ngành!\n" +
     "6. Giọng điệu chuẩn mực, ân cần, giải thích cặn kẽ, định dạng gạch đầu dòng rõ ràng, dễ hiểu.");
+    "7. XỬ LÝ CÂU HỎI THUỘC CẤP PHƯỜNG NHƯNG NGOÀI DỮ LIỆU CÓ SẴN (hoặc hồ sơ có tranh chấp, cá biệt):\n" +
+    "   - TUYỆT ĐỐI KHÔNG tự bịa số quầy hoặc cam kết thời hạn giải quyết khi chưa rõ quy trình.\n" +
+    "   - Nêu rõ: 'Nội dung của Ông/Bà có tính chất đặc thù hoặc cần thẩm tra đối chiếu hồ sơ thực tế.'\n" +
+    "   - Hướng dẫn liên hệ đường dây nóng: 0258.3.892.377 (gặp đ/c Lê Ngọc Hồi) hoặc đến trực tiếp Hẻm 480 Lương Định Của để được chuyên viên hướng dẫn trực tiếp.\n" +
+    "8. XỬ LÝ CÂU HỎI KHÔNG THUỘC THẨM QUYỀN CỦA UBND PHƯỜNG:\n" +
+    "   - KHÔNG CHỈ ĐỊNH QUẦY TẠI PHƯỜNG đối với thủ tục thuộc cấp Tỉnh/Sở/Công an (như Hộ chiếu, GPLX, Đăng ký xe ô tô, Lý lịch tư pháp...).\n" +
+    "   - Nêu rõ cơ quan có thẩm quyền xử lý (Công an Tỉnh, Sở GTVT, Sở Tư pháp...).\n" +
+    "   - Hướng dẫn nộp trực tuyến qua Cổng DVC Quốc gia: [Bấm vào đây](https://dichvucong.gov.vn).\n" +
+    "9. XỬ LÝ CÂU HỎI LẠC ĐỀ / NGOÀI PHẠM VI HÀNH CHÍNH CÔNG:\n" +
+    "   - Nhã nhặn từ chối bằng văn phong hành chính: 'Tôi là Trợ lý ảo Dịch vụ công trực tuyến của UBND Phường Tây Nha Trang. Tôi chỉ có chức năng hỗ trợ giải đáp thủ tục hành chính công. Kính mong Ông/Bà đặt câu hỏi liên quan đến thủ tục để được hỗ trợ chu đáo nhất.'\n";
 
   // Trả lời nhanh chuẩn xác bám sát số quầy và Bộ ngành
   function answerQuick(q) {
